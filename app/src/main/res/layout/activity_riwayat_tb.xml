@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RiwayatTbActivity"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/unit_pelayanan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Unit Pelayanan Kesehatan" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/kabkota"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/kab_kota" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tanggal :"
+                android:textSize="18sp"/>
+            <TextView
+                android:id="@+id/tanggalriwayattb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <TextView
+            android:layout_marginTop="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lembar Penilaian Riwayat TBC Anak"
+            android:textSize="20sp"/>
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/namaortuasuh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Nama Orant Tua / Pengasuh" />
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/namaAnak"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Nama Anak" />
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/usiaAnak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Usia Anak" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/jumlahAnak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:hint="Jumlah Anak Lain" />
+
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/alamatdesa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Alamat Desa / Kecamatan " />
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kontak TB"
+            android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spkontak"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
+
+
+        <TextView
+            android:layout_marginTop="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Berat Badan 3 bulan Terakhir 0-59 Bulan"
+            android:textSize="19sp"/>
+        <Spinner
+            android:id="@+id/spberat59"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></Spinner>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Berat Badan 3 bulan Terakhir 6-14 Tahun"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spberat14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Demam"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spdemam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batuk"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spbatuk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pembesaran Kelenjar limfie"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/sppembesarankelenjar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pembengkakan Tulang"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/sppembekakan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"></Spinner>
+
+            <Button
+                android:id="@+id/submitrwyt"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:text="SUMBIT"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

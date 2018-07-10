@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Form15Activity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/unit_pelayanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Unit Pelayanan Kesehatan" />
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/kabkota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/kab_kota" />
+
+            <TextView
+                android:id="@+id/datepick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="3dp"
+                android:layout_weight="2"
+                android:hint="@string/tanggal_wawancara"
+                android:textSize="19sp" />
+
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="IDENTITAS KONTAK"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/unit_pelayanan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Unit Pelayanan Kesehatan" />
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/kabkota"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/kab_kota" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/nama"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/nama_lengkap" />
+            <TextView
+                android:id="@+id/tgllhr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@id/spgender"
+                android:layout_weight="4"
+                android:hint="@string/pilih_tanggal"
+                android:textSize="18sp" />
+
+            <Spinner
+                android:id="@+id/spgender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="RIWAYAT KONTAK TB"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/kontakserumah"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="Kontak Serumah : "
+                    android:textSize="20sp"/>
+                <Spinner
+                    android:layout_toRightOf="@id/kontakserumah"
+                    android:id="@+id/spks"
+                    android:layout_alignBaseline="@id/kontakserumah"
+                    android:drawSelectorOnTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/kontakerat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kontak Erat : "
+                    android:textSize="20sp"/>
+                <Spinner
+                    android:layout_toRightOf="@id/kontakerat"
+                    android:id="@+id/spke"
+                    android:drawSelectorOnTop="true"
+                    android:layout_alignBaseline="@id/kontakerat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    />
+            </RelativeLayout>
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="GEJALA KHAS TB"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <CheckBox
+                android:id="@+id/batuk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Batuk" />
+            <CheckBox
+                android:id="@+id/demam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Demam" />
+            <CheckBox
+                android:id="@+id/beratBadanTurun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Berat Badan Turun" />
+            <CheckBox
+                android:id="@+id/lesu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Lesu" />
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <CheckBox
+                    android:id="@+id/lainnyacb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+                <EditText
+                    android:layout_alignBaseline="@id/kontakerat"
+                    android:layout_toRightOf="@id/lainnyacb"
+                    android:id="@+id/lainnyatx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:hint="Lain-lain ,sebutkan"/>
+
+            </RelativeLayout>
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="PEMERIKSAAN PENUNJANG"
+                android:textSize="20sp"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="UJI TUBERKULIN"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/uttid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tidak Dilakukan"/>
+                    <RadioButton
+                        android:id="@+id/utdil"
+                        android:layout_toRightOf="@id/uttid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dilakukan"/>
+                </RadioGroup>
+
+            <TextView
+                android:id="@+id/tglstk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@id/spgender"
+                android:layout_weight="4"
+                android:hint="Tanggal Penyuntikan"
+                android:textSize="18sp" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:id="@+id/tglbc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_toRightOf="@id/spgender"
+                android:layout_weight="4"
+                android:hint="Tanggal Baca"
+                android:textSize="18sp" />
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Diameter Indurasi (mm)"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="RONTGEN DADA"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/rdtid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tidak Dilakukan"/>
+                    <RadioButton
+                        android:id="@+id/rddil"
+                        android:layout_toRightOf="@id/rdtid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dilakukan"/>
+                </RadioGroup>
+            </RelativeLayout>
+                <EditText
+                    android:id="@+id/hslrd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="HASIL:"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="BAKTERIOLOGIS"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <RadioGroup
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                    <RadioButton
+                        android:id="@+id/bktid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tidak Dilakukan"/>
+                    <RadioButton
+                        android:id="@+id/bkdil"
+                        android:layout_toRightOf="@id/bktid"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dilakukan"/>
+            </RadioGroup>
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="HASIL AKHIR"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <CheckBox
+                android:id="@+id/batuk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sakit TB" />
+            <CheckBox
+                android:id="@+id/demam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Infeksi Laten TB" />
+            <CheckBox
+                android:id="@+id/beratBadanTurun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Tidak ada bukti sakit dan infeksi" />
+
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="FAKTOR RISIKO"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/statushiv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="Status HIV "
+                    android:textSize="20sp"/>
+                <Spinner
+                    android:layout_toRightOf="@id/statushiv"
+                    android:id="@+id/sphiv"
+                    android:layout_alignBaseline="@id/statushiv"
+                    android:drawSelectorOnTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/resikolain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="Risiko Lain"
+                    android:textSize="20sp"/>
+                <Spinner
+                    android:layout_toRightOf="@id/resikolain"
+                    android:id="@+id/sprl"
+                    android:layout_alignBaseline="@id/resikolain"
+                    android:drawSelectorOnTop="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </RelativeLayout>
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="Lainnya(Sebutkan)"/>
+
+            <TextView
+                android:layout_marginTop="40dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="TINDAK LANJUT"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="10dp"/>
+            <CheckBox
+                android:id="@+id/batuk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="OAT" />
+            <CheckBox
+                android:id="@+id/demam"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="PP INH" />
+            <CheckBox
+                android:id="@+id/beratBadanTurun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Evaluasi Persitensi Gejala" />
+            <CheckBox
+                android:id="@+id/lesu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Observasi Timbulnya Gejala" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Submit"
+                android:textColor="@android:color/white"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"/>
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+
+
+</LinearLayout>

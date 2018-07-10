@@ -1,0 +1,78 @@
+<resources>
+    <string name="app_name">SMART TB</string>
+
+    <!-- LOGIN -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">SIGN IN</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email completions."</string>
+    <string name="or">- OR -</string>
+    <string name="fblogin">SIGN IN WITH FACEBOOK</string>
+    <string name="gglogin">SIGN IN WITH GOOGLE</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="konfirmasi_password">Konfirmasi Password</string>
+    <string name="pilih_tanggal">Pilih tanggal lahir</string>
+    <string name="automatic_login">Automatic Login</string>
+    <string name="tanggal_wawancara">Tanggal Wawancara</string>
+    <string name="nik">NIK</string>
+    <string name="triwulan_wawancara">Triwulan Wawancara</string>
+    <string name="unit_pelayanan_kesehatan">Unit Pelayanan Kesehatan</string>
+    <string name="nama_lengkap">Nama Lengkap</string>
+    <string name="kab_kota">Kab/Kota</string>
+    <string-array name="gender">
+        <item>Jenis Kelamin</item>
+        <item>L</item>
+        <item>P</item>
+    </string-array>
+    <string-array name="typelogin">
+        <item>Pilihan Login</item>
+        <item>Kader</item>
+        <item>Nakes</item>
+    </string-array>
+    <string-array name="yn">
+        <item>Tidak</item>
+        <item>Ya</item>
+    </string-array>
+    <string name="title_activity_maps_activity">Map</string>
+    <string name="PROFIL">PROFIL</string>
+    <string name="kasustb">KASUS TB</string>
+    <string name="inverstigasi">INVERSTIGASI</string>
+    <string name="notifikasi">NOTIFIKASI</string>
+    <string name="GPS">GPS</string>
+    <string name="poin">POIN</string>
+    <string name="skoringtb">SKORING TB</string>
+    <string-array name="HIV">
+        <item>Positif</item>
+        <item>Negatif</item>
+        <item>Tidak diperiksa</item>
+    </string-array>
+    <string-array name="resikolain">
+        <item>Gizi Buruk</item>
+        <item>DM</item>
+        <item>Keganasan</item>
+    </string-array>
+    <string-array name="hasilakhirkontak">
+        <item>Sakit TB</item>
+        <item>Infeksi laten TB</item>
+        <item>Tidak Ada Bukti</item>
+    </string-array>
+    <string-array name="tindaklanjutkontak">
+        <item>OAT</item>
+        <item>PP INH</item>
+        <item>Observasi Timbulnya Gejala</item>
+        <item>Evaluasi Presisten si Gejala</item>
+    </string-array>
+    <string name="hasilppinh">
+        <item>Pengobatan Lengkap</item>
+        <item>Putus Berobat</item>
+        <item>Meninggal</item>
+        <item>Gagal</item>
+    </string>
+
+
+</resources>
