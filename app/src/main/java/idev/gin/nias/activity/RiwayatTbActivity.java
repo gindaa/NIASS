@@ -1,4 +1,4 @@
-package idev.gin.nias;
+package idev.gin.nias.activity;
 
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import idev.gin.nias.R;
 import idev.gin.nias.data.model.POST_RIWAYAT;
 import idev.gin.nias.data.remote.APIServiceRiwayat;
 import idev.gin.nias.data.remote.ApiUtils;

@@ -1,13 +1,15 @@
-package idev.gin.nias;
+package idev.gin.nias.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ScoringActivity extends AppCompatActivity {
+import idev.gin.nias.R;
+
+public class NotifikasiActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scoring);
+        setContentView(R.layout.activity_notifikasi);
     }
 }

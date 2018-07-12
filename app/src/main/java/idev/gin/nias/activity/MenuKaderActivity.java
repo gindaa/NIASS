@@ -1,4 +1,4 @@
-package idev.gin.nias;
+package idev.gin.nias.activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -6,34 +6,55 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MenuNakesActivity extends AppCompatActivity {
+import idev.gin.nias.R;
+
+public class MenuKaderActivity extends AppCompatActivity {
 
     private Button btnprofil;
-    private Button btnotifikasi;
-    private Button skoringtb;
     private Button btnkasustb;
+    private Button btinvestigasi;
+    private Button btnotifikasi;
+    private Button btgps;
     private Button btpoin;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_nakes);
         Bundle extras = getIntent().getExtras();
         final String emailpass = extras.getString("email");
         final String tokenpass = extras.getString("token");
 
-        Button btnprofil =  (Button)(findViewById(R.id.btnprofilnks));
-        Button btnotifikasi =  (Button)(findViewById(R.id.btnnotifnks));
-        Button skoringtb =  (Button)(findViewById(R.id.btnskrnks));
-        Button btnkasustb =  (Button)(findViewById(R.id.btnkasusnks));
-        Button btpoin =  (Button)(findViewById(R.id.btnpoinnks));
+        Button btnprofil = (Button)findViewById(R.id.btnprofilkdr);
+        Button btnkasustb = (Button)findViewById(R.id.btnkasuskdr);
+        Button btinvestigasi = (Button)findViewById(R.id.btninveskdr);
+        Button btnotifikasi = (Button)(findViewById(R.id.btnnotifkdr));
+        Button btgps = (Button)(findViewById(R.id.btngpskdr));
+        Button btpoin = (Button)(findViewById(R.id.btnpoinkdr));
 
 
         btnprofil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,ProfileAcivity.class);
+                Intent intent = new Intent(MenuKaderActivity.this,ProfileAcivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
+
+        btnkasustb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,KasusTbActivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
+        btinvestigasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,RiwayatTbActivity.class);
                 intent.putExtra("email",emailpass);
                 intent.putExtra("token",tokenpass);
                 startActivity(intent);
@@ -42,25 +63,16 @@ public class MenuNakesActivity extends AppCompatActivity {
         btnotifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,NotifikasiActivity.class);
+                Intent intent = new Intent(MenuKaderActivity.this,NotifikasiActivity.class);
                 intent.putExtra("email",emailpass);
                 intent.putExtra("token",tokenpass);
                 startActivity(intent);
             }
         });
-        skoringtb.setOnClickListener(new View.OnClickListener() {
+        btgps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,ScoringActivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
-                startActivity(intent);
-            }
-        });
-        btnkasustb.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,KasusTbActivity.class);
+                Intent intent = new Intent(MenuKaderActivity.this,MapsActivity.class);
                 intent.putExtra("email",emailpass);
                 intent.putExtra("token",tokenpass);
                 startActivity(intent);
@@ -69,11 +81,13 @@ public class MenuNakesActivity extends AppCompatActivity {
         btpoin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,PoinActivity.class);
+                Intent intent = new Intent(MenuKaderActivity.this,PoinActivity.class);
                 intent.putExtra("email",emailpass);
                 intent.putExtra("token",tokenpass);
                 startActivity(intent);
             }
         });
+
+
     }
 }

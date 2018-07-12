@@ -1,4 +1,4 @@
-package idev.gin.nias;
+package idev.gin.nias.activity;
 
 import android.app.DatePickerDialog;
 import android.graphics.Color;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.Calendar;
 
+import idev.gin.nias.R;
 import idev.gin.nias.data.model.POST_KONTAK;
 import idev.gin.nias.data.remote.APIServiceKontak;
 import idev.gin.nias.data.remote.ApiUtils;

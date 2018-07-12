@@ -15,9 +15,10 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:name=".utils.FastAndroidNetworking"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,16 +27,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SignUpActivity"
+            android:name=".activity.SignUpActivity"
             android:label="SIGN UP" />
         <activity
-            android:name=".Form15Activity"
+            android:name=".activity.Form15Activity"
             android:label="FORM 15" />
         <activity
-            android:name=".MenuKaderActivity"
+            android:name=".activity.MenuKaderActivity"
             android:label="MENU KADER" />
         <activity
-            android:name=".MenuNakesActivity"
+            android:name=".activity.MenuNakesActivity"
             android:label="MENU NAKES" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -50,27 +51,27 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".activity.MapsActivity"
             android:label="@string/title_activity_maps_activity" />
         <activity
-            android:name=".ScoringActivity"
+            android:name=".activity.ScoringActivity"
             android:label="SCORING" />
         <activity
-            android:name=".Form16Activity"
+            android:name=".activity.Form16Activity"
             android:label="REGISTRASI KONTAK TUBERKOLOSIS" />
         <activity
-            android:name=".KasusTbActivity"
+            android:name=".activity.KasusTbActivity"
             android:label="KASUS TB" />
         <activity
-            android:name=".NotifikasiActivity"
+            android:name=".activity.NotifikasiActivity"
             android:label="NOTIFIKASI" />
         <activity
-            android:name=".PoinActivity"
+            android:name=".activity.PoinActivity"
             android:label="POIN" />
         <activity
-            android:name=".ProfileAcivity"
+            android:name=".activity.ProfileAcivity"
             android:label="PROFILE" />
-        <activity android:name=".RiwayatTbActivity"></activity>
+        <activity android:name=".activity.RiwayatTbActivity"></activity>
     </application>
 
 </manifest>

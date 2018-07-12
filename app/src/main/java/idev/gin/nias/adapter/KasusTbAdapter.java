@@ -1,4 +1,4 @@
-package idev.gin.nias;
+package idev.gin.nias.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+
+import idev.gin.nias.KasusClass;
+import idev.gin.nias.R;
 
 public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.tbViewHolder> {
 

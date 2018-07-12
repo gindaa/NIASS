@@ -1,4 +1,4 @@
-package idev.gin.nias;
+package idev.gin.nias.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import idev.gin.nias.R;
 import idev.gin.nias.data.remote.APIServiceSignUp;
 import idev.gin.nias.data.remote.ApiUtils;
 import idev.gin.nias.data.model.POST_AKUN;

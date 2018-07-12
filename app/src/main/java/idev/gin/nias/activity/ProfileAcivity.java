@@ -1,10 +1,11 @@
-package idev.gin.nias;
+package idev.gin.nias.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import idev.gin.nias.R;
 import idev.gin.nias.data.model.POST_AKUN;
 import idev.gin.nias.data.remote.APIServiceSignUp;
 import retrofit2.Call;
