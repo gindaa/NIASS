@@ -58,6 +58,8 @@ public class LoginActivity extends AppCompatActivity {
      * Kalo bingung, dao dipisah aja setiap endpointnya
      * Dao masih kotlin, ubah aja ke java kl maum gua gada pojo converter
      *
+     * Login dikasih overlay item aga transparan, ga keliatan soalnya teksnya
+     *
      * Dokumentasi dan penggunaan FAN: https://github.com/amitshekhariitbhu/Fast-Android-Networking
      * Pake yang getAsObject jangan yang JSON, biar rapih dan ga bingung, tapi kalo mau juga gapapa.
      *
