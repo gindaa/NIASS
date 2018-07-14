@@ -22,8 +22,8 @@ public class MenuNakesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_nakes);
         Bundle extras = getIntent().getExtras();
-        final String emailpass = extras.getString("email");
-        final String tokenpass = extras.getString("token");
+        String emailpass = extras.getString("email");
+        String tokenpass = extras.getString("token");
 
         Button btnprofil =  (Button)(findViewById(R.id.btnprofilnks));
         Button btnotifikasi =  (Button)(findViewById(R.id.btnnotifnks));

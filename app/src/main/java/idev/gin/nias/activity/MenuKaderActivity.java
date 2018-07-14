@@ -34,61 +34,61 @@ public class MenuKaderActivity extends AppCompatActivity {
         Button btpoin = (Button)(findViewById(R.id.btnpoinkdr));
 
 
-//        btnprofil.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MenuKaderActivity.this,ProfileAcivity.class);
-//                intent.putExtra("email",emailpass);
-//                intent.putExtra("token",tokenpass);
-//                startActivity(intent);
-//            }
-//        });
-//
-//        btnkasustb.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MenuKaderActivity.this,KasusTbActivity.class);
-//                intent.putExtra("email",emailpass);
-//                intent.putExtra("token",tokenpass);
-//                startActivity(intent);
-//            }
-//        });
-//        btinvestigasi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MenuKaderActivity.this,RiwayatTbActivity.class);
-//                intent.putExtra("email",emailpass);
-//                intent.putExtra("token",tokenpass);
-//                startActivity(intent);
-//            }
-//        });
-//        btnotifikasi.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MenuKaderActivity.this,NotifikasiActivity.class);
-//                intent.putExtra("email",emailpass);
-//                intent.putExtra("token",tokenpass);
-//                startActivity(intent);
-//            }
-//        });
-//        btgps.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MenuKaderActivity.this,MapsActivity.class);
-//                intent.putExtra("email",emailpass);
-//                intent.putExtra("token",tokenpass);
-//                startActivity(intent);
-//            }
-//        });
-//        btpoin.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(MenuKaderActivity.this,PoinActivity.class);
-//                intent.putExtra("email",emailpass);
-//                intent.putExtra("token",tokenpass);
-//                startActivity(intent);
-//            }
-//        });
+        btnprofil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,ProfileAcivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
+
+        btnkasustb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,KasusTbActivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
+        btinvestigasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,RiwayatTbActivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
+        btnotifikasi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,NotifikasiActivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
+        btgps.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,MapsActivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
+        btpoin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MenuKaderActivity.this,PoinActivity.class);
+                intent.putExtra("email",emailpass);
+                intent.putExtra("token",tokenpass);
+                startActivity(intent);
+            }
+        });
 
 
     }

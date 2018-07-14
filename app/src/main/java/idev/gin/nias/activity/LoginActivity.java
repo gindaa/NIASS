@@ -31,9 +31,6 @@ import com.androidnetworking.interfaces.ParsedRequestListener;
 import idev.gin.nias.R;
 import idev.gin.nias.dao.AkunidDao;
 import idev.gin.nias.dao.LoginDao;
-import idev.gin.nias.data.model.LoginTokenCall;
-
-import idev.gin.nias.data.model.Login;
 import idev.gin.nias.data.remote.APIServiceLogin;
 import idev.gin.nias.utils.CONSTANT;
 import retrofit2.Call;
@@ -96,12 +93,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = mEmailView.getText().toString();
                 String password = mPasswordView.getText().toString();
-                Toast.makeText(getApplicationContext(), "Login Clicked", Toast.LENGTH_LONG).show();
                 login(email, password);
             }
         });
@@ -121,7 +117,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(LoginDao response) {
                         String token = response.getToken();
-                        getAkunId(email, token);
+                        getAkunId(email, response.getToken());
+                        Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -146,41 +143,17 @@ public class LoginActivity extends AppCompatActivity {
 
                         // Cek kondisi login berhasil
                         Intent i;
-                        if (role.toUpperCase().contains("KADER")){
+                        if (role.toUpperCase().contains("KADER")) {
                             i = new Intent(LoginActivity.this, MenuKaderActivity.class);
-                        } else if (role.toUpperCase().contains("NAKES")){
+                        } else if (role.toUpperCase().contains("NAKES")) {
                             i = new Intent(LoginActivity.this, MenuNakesActivity.class);
                         } else {
                             return;
                         }
                         i.putExtra("email", email);
                         i.putExtra("token", token);
-                        Log.i("xxx", "belum startactivity");
                         startActivity(i);
-                        Log.i("xxx", "Sudah startactivity");
-
-
-//                        if (role.contains("Kader")) {
-//                            Toast.makeText(getApplicationContext(), "KADER", Toast.LENGTH_LONG).show();
-//                            startkader();
-//                        } else if (role.contains("Nakes")) {
-//                            Toast.makeText(getApplicationContext(), "NAKES", Toast.LENGTH_LONG).show();
-//                            startnakes();
-//
-//                        } else {
-//                            Toast.makeText(getApplicationContext(), "Role not found", Toast.LENGTH_LONG).show();
-//                        }
                     }
-
-//                    private void startkader() {
-//                        Intent intent = new Intent(LoginActivity.this, MenuKaderActivity.class);
-//                        startActivity(intent);
-//                    }
-//
-//                    private void startnakes() {
-//                        Intent intent = new Intent(LoginActivity.this, MenuNakesActivity.class);
-//                        startActivity(intent);
-//                    }
 
                     @Override
                     public void onError(ANError anError) {
