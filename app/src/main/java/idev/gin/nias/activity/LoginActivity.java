@@ -31,9 +31,6 @@ import com.androidnetworking.interfaces.ParsedRequestListener;
 import idev.gin.nias.R;
 import idev.gin.nias.dao.AkunidDao;
 import idev.gin.nias.dao.LoginDao;
-import idev.gin.nias.data.model.LoginTokenCall;
-
-import idev.gin.nias.data.model.Login;
 import idev.gin.nias.data.remote.APIServiceLogin;
 import idev.gin.nias.utils.CONSTANT;
 import retrofit2.Call;
@@ -97,12 +94,11 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        mEmailSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String email = mEmailView.getText().toString();
                 String password = mPasswordView.getText().toString();
-                Toast.makeText(getApplicationContext(), "Login Clicked", Toast.LENGTH_LONG).show();
                 login(email, password);
             }
         });
@@ -123,6 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(LoginDao response) {
                         String token = response.getToken();
                         getAkunId(email, response.getToken());
+                        Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -144,13 +141,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(AkunidDao response) {
                         String role = response.getResult().get(0).getRole();
                         Log.i("role",role);
-                        if(role.contains("Kader")){
+                        if(role.toLowerCase().contains("Kader")){
                             Toast.makeText(getApplicationContext(), "KADER", Toast.LENGTH_LONG).show();
                                 startkader();
                             }
-                            else if(role.contains("Nakes")) {
+                            else if(role.toLowerCase().contains("Nakes")) {
                             Toast.makeText(getApplicationContext(), "NAKES", Toast.LENGTH_LONG).show();
-                            startnakes();
+                                startnakes();
 
                             }
                             else {
@@ -160,11 +157,15 @@ public class LoginActivity extends AppCompatActivity {
 
                     private void startkader() {
                         Intent intent = new Intent(LoginActivity.this,MenuKaderActivity.class);
+                        intent.putExtra("token" , token);
+                        intent.putExtra("email", email);
                         startActivity(intent);
                     }
 
                     private void startnakes() {
                         Intent intent = new Intent(LoginActivity.this,MenuNakesActivity.class);
+                        intent.putExtra("token" , token);
+                        intent.putExtra("email", email);
                         startActivity(intent);
                     }
 

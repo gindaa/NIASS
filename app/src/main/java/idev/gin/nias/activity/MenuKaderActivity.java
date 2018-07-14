@@ -21,8 +21,8 @@ public class MenuKaderActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle extras = getIntent().getExtras();
-        final String emailpass = extras.getString("email");
-        final String tokenpass = extras.getString("token");
+        String emailpass = extras.getString("email");
+        String tokenpass = extras.getString("token");
 
         Button btnprofil = (Button)findViewById(R.id.btnprofilkdr);
         Button btnkasustb = (Button)findViewById(R.id.btnkasuskdr);
