@@ -6,7 +6,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import idev.gin.nias.R;
-import idev.gin.nias.data.model.POST_AKUN;
+import idev.gin.nias.dao.POST_AKUN;
 import idev.gin.nias.data.remote.APIServiceSignUp;
 import retrofit2.Call;
 import retrofit2.Callback;

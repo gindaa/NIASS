@@ -19,7 +19,7 @@ import android.widget.TextView;
 import java.util.Calendar;
 
 import idev.gin.nias.R;
-import idev.gin.nias.data.model.POST_KONTAK;
+import idev.gin.nias.dao.POST_KONTAK;
 import idev.gin.nias.data.remote.APIServiceKontak;
 import idev.gin.nias.data.remote.ApiUtils;
 import retrofit2.Call;

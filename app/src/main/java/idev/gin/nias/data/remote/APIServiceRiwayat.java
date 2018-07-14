@@ -1,6 +1,6 @@
 package idev.gin.nias.data.remote;
 
-import idev.gin.nias.data.model.POST_RIWAYAT;
+import idev.gin.nias.dao.POST_RIWAYAT;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;

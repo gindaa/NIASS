@@ -16,7 +16,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import idev.gin.nias.R;
-import idev.gin.nias.data.model.POST_RIWAYAT;
+import idev.gin.nias.dao.POST_RIWAYAT;
 import idev.gin.nias.data.remote.APIServiceRiwayat;
 import idev.gin.nias.data.remote.ApiUtils;
 import retrofit2.Call;

@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -101,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 String email = mEmailView.getText().toString();
                 String password = mPasswordView.getText().toString();
+                Toast.makeText(getApplicationContext(), "Login Clicked", Toast.LENGTH_LONG).show();
                 login(email, password);
             }
         });
@@ -119,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                 .getAsObject(LoginDao.class, new ParsedRequestListener<LoginDao>() {
                     @Override
                     public void onResponse(LoginDao response) {
-                        Log.i("xxx", "" + response.getToken());
+                        String token = response.getToken();
                         getAkunId(email, response.getToken());
                     }
 
@@ -141,7 +143,29 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(AkunidDao response) {
                         String role = response.getResult().get(0).getRole();
-                        Log.i("xxx", role);
+                        Log.i("role",role);
+                        if(role.contains("Kader")){
+                            Toast.makeText(getApplicationContext(), "KADER", Toast.LENGTH_LONG).show();
+                                startkader();
+                            }
+                            else if(role.contains("Nakes")) {
+                            Toast.makeText(getApplicationContext(), "NAKES", Toast.LENGTH_LONG).show();
+                            startnakes();
+
+                            }
+                            else {
+                            Toast.makeText(getApplicationContext(), "Role not found", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    private void startkader() {
+                        Intent intent = new Intent(LoginActivity.this,MenuKaderActivity.class);
+                        startActivity(intent);
+                    }
+
+                    private void startnakes() {
+                        Intent intent = new Intent(LoginActivity.this,MenuNakesActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override
@@ -163,50 +187,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // Store values at the time of the login attempt.
-        final String email = mEmailView.getText().toString();
+        String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
-        Login login = new Login(mEmailView.getText().toString(), mPasswordView.getText().toString());
-        APIServiceLogin loginAPI = retrofit.create(APIServiceLogin.class);
-        Call<LoginTokenCall> call = loginAPI.login(login);
-        call.enqueue(new Callback<LoginTokenCall>() {
-            @Override
-            public void onResponse(Call<LoginTokenCall> call, Response<LoginTokenCall> response) {
-                if (response.isSuccessful())
-                    Toast.makeText(LoginActivity.this, "Login Berhasil " + response.body().getToken(), Toast.LENGTH_LONG).show();
-                tokens = response.body().getToken();
-                Intent intent = new Intent(LoginActivity.this, MenuKaderActivity.class);
-                intent.putExtra("email", response.body().getToken());
-                intent.putExtra("token", tokens);
-                startActivity(intent);
-//                    SharedPreferences preferences = getSharedPreferences("auth",MODE_PRIVATE);
-//                    preferences.edit().putString("email","email").commit();
-//                    preferences.edit().putString("token",tokens).commit();
-//                    APIServiceSignUp loginrole = retrofit.create(APIServiceSignUp.class);
-//                    Call<POST_AKUN> calls = loginrole.getAkun(tokens,email);
-//                    calls.enqueue(new Callback<POST_AKUN>() {
-//                        @Override
-//                        public void onResponse(Call<POST_AKUN> calls, Response<POST_AKUN> response) {
-//                            if(response.body().getRole() == "Kader"){
-//                                Intent intent = new Intent(LoginActivity.this,MenuKaderActivity.class);
-//                                startActivity(intent);
-//                            }
-//                            else if(response.body().getRole() == "Nakes") {
-//                                Intent intent = new Intent(LoginActivity.this,MenuNakesActivity.class);
-//                                startActivity(intent);
-//                            }
-//                        }
-//
-//                        @Override
-//                        public void onFailure(Call<POST_AKUN> call, Throwable t) {
-//                        }
-//                    });
-            }
 
-            @Override
-            public void onFailure(Call<LoginTokenCall> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "Login Error", Toast.LENGTH_LONG).show();
-            }
-        });
 
         boolean cancel = false;
         View focusView = null;

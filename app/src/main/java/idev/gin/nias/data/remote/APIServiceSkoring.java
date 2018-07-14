@@ -1,6 +1,6 @@
 package idev.gin.nias.data.remote;
 
-import idev.gin.nias.data.model.POST_SKORING;
+import idev.gin.nias.dao.POST_SKORING;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
