@@ -37,8 +37,8 @@
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="160dp"
-                android:layout_gravity="center"
-                android:src="@drawable/png" />
+                android:layout_gravity="center"/>
+                <!--android:src="@drawable/png" -->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
