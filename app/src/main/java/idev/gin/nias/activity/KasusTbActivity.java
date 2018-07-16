@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.ParsedRequestListener;
 import com.google.gson.JsonObject;
 
@@ -41,18 +42,21 @@ public class KasusTbActivity extends AppCompatActivity {
     private List<KasusClass> tbList;
     private KasusTbAdapter adapter;
 
+    String emailpass;
+    String tokenpass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_kasus_tb);
         Bundle extras = getIntent().getExtras();
-        String emailpass = extras.getString("email");
-        String tokenpass = extras.getString("token");
+        emailpass = extras.getString("email");
+        tokenpass = extras.getString("token");
 
         recyclerView = (RecyclerView) findViewById(R.id.reckasustb);
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         tbList = new ArrayList<>();
-        callkasustb(emailpass,tokenpass);
+        callkasustb();
 
         adapter = new KasusTbAdapter(this,tbList);
         recyclerView.setAdapter(adapter);
@@ -60,48 +64,51 @@ public class KasusTbActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 if(gridLayoutManager.findLastVisibleItemPosition() == tbList.size()-1){
-                    callkasustb(emailpass,tokenpass);
+                    callkasustb();
                 }
             }
         });
 
 }
 
-    private void callkasustb(String emailpass,String tokenpass) {
-//        AsyncTask<Integer,Void,Void> task = new AsyncTask<Integer, Void, Void>() {
-//            @Override
-//            protected Void doInBackground(Integer... integers) {
-
-                try{
+    private void callkasustb() {
                 AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
                         .addHeaders("Authorization", "bearer " + tokenpass)
                         .addHeaders("page","1")
-//                        .addHeaders("email", emailpass)
                         .setTag("Faskes")
                         .setPriority(Priority.MEDIUM)
                         .build()
+//                        .getAsJSONObject(new JSONObjectRequestListener() {
+//                            @Override
+//                            public void onResponse(JSONObject response) {
+//                                Log.i("xxx", response.toString());
+//                            }
                         .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
                             @Override
                             public void onResponse(FaskesDao response) {
+                                Log.i("xxx", "total :"+response);
 
-                                Log.i("isi",emailpass);
-                                Log.i("xxx", "total :"+response.getTotal());
-                                for (int i = 0; i < response.getTotal(); i++) {
+                                if (response.getResult().getPage().equals("0")) {
+                                    return;
+                                }
+
+                                Log.i("xxx", "total :"+response.getResult().getTotal());
+                                for (int i = 0; i < response.getResult().getData().size(); i++) {
                                     KasusClass isikasus = new KasusClass(
-                                            response.getData().get(i).getNo_registrasi_faskes().toString(),
-                                            response.getData().get(i).getNo_registrasi_tbkota().toString(),
-                                            response.getData().get(i).getProvinsi().toString(),
-                                            response.getData().get(i).getNo_registrasi_faskes().toString(),
-                                            response.getData().get(i).getNo_registrasi_tbkota().toString(),
-                                            response.getData().get(i).getNama_pasien().toString(),
-                                            response.getData().get(i).getNik().toString(),
-                                            response.getData().get(i).getJenis_kelamin().toString(),
-                                            response.getData().get(i).getUmur().toString(),
-                                            response.getData().get(i).getAlamat().toString(),
-                                            response.getData().get(i).getPerujuk().toString(),
-                                            response.getData().get(i).getTipe_diagnosis_tb().toString());
+                                            response.getResult().getData().get(i).getNo_registrasi_faskes().toString(),
+                                            response.getResult().getData().get(i).getNo_registrasi_tbkota().toString(),
+                                            response.getResult().getData().get(i).getProvinsi().toString(),
+                                            response.getResult().getData().get(i).getNo_registrasi_faskes().toString(),
+                                            response.getResult().getData().get(i).getNo_registrasi_tbkota().toString(),
+                                            response.getResult().getData().get(i).getNama_pasien().toString(),
+                                            response.getResult().getData().get(i).getNik().toString(),
+                                            response.getResult().getData().get(i).getJenis_kelamin().toString(),
+                                            response.getResult().getData().get(i).getUmur().toString(),
+                                            response.getResult().getData().get(i).getAlamat().toString(),
+                                            response.getResult().getData().get(i).getPerujuk().toString(),
+                                            response.getResult().getData().get(i).getTipe_diagnosis_tb().toString());
                                     tbList.add(isikasus);
-                                    Log.i("xxx",response.getData().get(i).getNo_registrasi_faskes());
+                                    Log.i("xxx",response.getResult().getData().get(i).getNo_registrasi_faskes());
                                 }
 
                             }
@@ -113,10 +120,10 @@ public class KasusTbActivity extends AppCompatActivity {
                             }
 
                         });
-
-            }catch (NullPointerException e) {
-                    e.printStackTrace();
-                }
-//            return null;
-        };
-    };
+//                            @Override
+//                            public void onError(ANError anError) {
+//
+//                            }
+//                        });
+        }
+    }
