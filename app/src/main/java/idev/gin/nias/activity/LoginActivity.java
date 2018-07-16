@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(R.drawable.bg);
+        //getWindow().setBackgroundDrawableResource(R.drawable.bg);
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mSignUpButton = (Button) findViewById(R.id.singup);
@@ -123,7 +123,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    public void getAkunId(String email, String token) {
+    public void getAkunId(final String email, final  String token) {
         AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
                 .addHeaders("Authorization", "bearer " + token)
                 .addHeaders("email", email)

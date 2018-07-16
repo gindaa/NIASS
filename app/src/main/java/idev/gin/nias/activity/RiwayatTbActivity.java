@@ -44,14 +44,17 @@ public class RiwayatTbActivity extends AppCompatActivity {
     private APIServiceRiwayat mApiServiceRiwayat;
     private static final String TAG = RiwayatTbActivity.class.getName();
     private TextView mResponseTv;
+    String tokenpass;
+    String emailpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riwayat_tb);
         Bundle extras = getIntent().getExtras();
-        String emailpass = extras.getString("email");
-        String tokenpass = extras.getString("token");
+        emailpass = extras.getString("email");
+        tokenpass = extras.getString("token");
+        Log.i("xxx", tokenpass);
         final TextInputEditText UnitPelayanan = (TextInputEditText)findViewById(R.id.unit_pelayanan);
         final TextInputEditText desak = (TextInputEditText) findViewById(R.id.kabkota);
         final TextView tanggalr = (TextView) findViewById(R.id.tanggalriwayattb);
@@ -110,6 +113,7 @@ public class RiwayatTbActivity extends AppCompatActivity {
                 }
             }
             private void sendriwayat(String namaKader,String desa,String tanggal,String namaOrangtua,String namaAnak,String usiaAnak,String jumlahAnak,String alamatDesa,String kontakTb,String berat59,String berat4,String demam,String batuk ,String kelenjar,String bengkak) {
+
                 AndroidNetworking.post(CONSTANT.BASE_URL + "penilaianriwayat")
                         .addHeaders("Authorization", "bearer " + tokenpass)
                         .addBodyParameter("nama_kader",namaKader)
@@ -127,16 +131,17 @@ public class RiwayatTbActivity extends AppCompatActivity {
                         .addBodyParameter("batuk",batuk)
                         .addBodyParameter("pembesaran_kelenjar_limfie",kelenjar)
                         .addBodyParameter("pembesaran_tulang",bengkak)
-                        .addBodyParameter("fk_register","32")
+                        .addBodyParameter("fk_faskes","32")
                         .addBodyParameter("lat","1 ")
                         .addBodyParameter("long"," 139 ")
                         .setTag("riwayat")
                         .setPriority(Priority.MEDIUM)
                         .build()
-                        .getAsObject(PostRiwayatDao.class, new ParsedRequestListener() {
+                        .getAsObject(PostRiwayatDao.class, new ParsedRequestListener<PostRiwayatDao>() {
                             @Override
-                            public void onResponse(Object response) {
+                            public void onResponse(PostRiwayatDao response) {
                                 Log.i("xxx" , response.toString());
+                                Log.i("xxx" , response.getStatus());
                                 Toast.makeText(getApplicationContext(), "Riwayat TB Berhasil diinput "+response.toString(), Toast.LENGTH_LONG).show();
                             }
 
@@ -146,6 +151,7 @@ public class RiwayatTbActivity extends AppCompatActivity {
 
                             }
                         });
+
 //                mApiServiceRiwayat
 //                        .savePost(unitPelayanan,kabupaten,tanggalRegis,nik,nama,resisten,alamat,namaKontak,umurKontak,spGender,alamatKontak,hasilAkhir,tindakLanjut,tanggalPpInh,hasilPpInh)
 //                        .request().header("Authorization","bearer" + tokenpass)
