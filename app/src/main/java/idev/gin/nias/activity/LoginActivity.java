@@ -4,7 +4,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.AsyncTask;
@@ -15,7 +14,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -31,11 +29,7 @@ import com.androidnetworking.interfaces.ParsedRequestListener;
 import idev.gin.nias.R;
 import idev.gin.nias.dao.AkunidDao;
 import idev.gin.nias.dao.LoginDao;
-import idev.gin.nias.data.remote.APIServiceLogin;
 import idev.gin.nias.utils.CONSTANT;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 import static idev.gin.nias.data.remote.RetrofitClient.retrofit;
 
@@ -141,11 +135,11 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(AkunidDao response) {
                         String role = response.getResult().get(0).getRole();
                         Log.i("role",role);
-                        if(role.toLowerCase().contains("Kader")){
+                        if(role.toLowerCase().contains("kader")){
                             Toast.makeText(getApplicationContext(), "KADER", Toast.LENGTH_LONG).show();
                                 startkader();
                             }
-                            else if(role.toLowerCase().contains("Nakes")) {
+                            else if(role.toLowerCase().contains("nakes")) {
                             Toast.makeText(getApplicationContext(), "NAKES", Toast.LENGTH_LONG).show();
                                 startnakes();
 
@@ -283,7 +277,6 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            APIServiceLogin loginAPI = retrofit.create(APIServiceLogin.class);
 
             try {
                 // Simulate network access.

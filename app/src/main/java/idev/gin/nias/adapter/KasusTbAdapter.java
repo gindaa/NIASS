@@ -1,6 +1,7 @@
 package idev.gin.nias.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,63 +9,83 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
-
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
+import idev.gin.nias.activity.KasusTbActivity;
 
-public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.tbViewHolder> {
+public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHolder> {
 
-    Context context;
-    List<KasusClass> listKasusClassTB;
-    tbClickListener listener;
+    private Context context;
+    private List<KasusClass> listKasusClassTB;
 
-    public KasusTbAdapter(Context context, List<KasusClass> listKasusClassTB, tbClickListener listener) {
+
+
+
+    public KasusTbAdapter(Context context, List<KasusClass> listKasusClassTB) {
         this.context = context;
         this.listKasusClassTB = listKasusClassTB;
-        this.listener = listener;
     }
 
     @Override
-    public tbViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View root = LayoutInflater.from(context).inflate(R.layout.card_kasustb,parent,false);
-        return new tbViewHolder(root);
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_kasustb,parent,false);
+        return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(tbViewHolder holder, int position) {
-            KasusClass mkasustb = listKasusClassTB.get(position);
-            holder.namatb.setText(mkasustb.getmTextNama());
-            holder.noregtb.setText(mkasustb.getmTextregis());
-            holder.jktb.setText(mkasustb.getmTextjk());
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        holder.namaFaskes.setText(listKasusClassTB.get(position).getmTextnamafaskes());
+        holder.kabKota.setText(listKasusClassTB.get(position).getmTextKota());
+        holder.namaProvinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
+        holder.noReg.setText(listKasusClassTB.get(position).getmTextregis());
+        holder.noRegTb.setText(listKasusClassTB.get(position).getmTextregisTbKota());
+        holder.namaPasien.setText(listKasusClassTB.get(position).getmTextNamaPasien());
+        holder.Nik.setText(listKasusClassTB.get(position).getmTextNik());
+        holder.Jk.setText(listKasusClassTB.get(position).getMtextjk());
+        holder.Umur.setText(listKasusClassTB.get(position).getmTextUmur());
+        holder.Alamat.setText(listKasusClassTB.get(position).getmTextAlamat());
+        holder.dirujuk.setText(listKasusClassTB.get(position).getmTextRujuk());
+        holder.tipeDiagnosisTB.setText(listKasusClassTB.get(position).getmTextdiagnosistb());
 
-    };
+    }
 
     @Override
     public int getItemCount() {
-        //return listKasusClassTB;
-        return 1;
+        return listKasusClassTB.size();
     }
 
-    public class tbViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        public TextView namatb, noregtb ,jktb;
-        ;
+    public class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView namaFaskes;
+        public TextView kabKota;
+        public TextView namaProvinsi;
+        public TextView noReg;
+        public TextView noRegTb;
+        public TextView namaPasien;
+        public TextView Nik;
+        public TextView Jk;
+        public TextView Umur;
+        public TextView Alamat;
+        public TextView dirujuk;
+        public TextView tipeDiagnosisTB;
 
-        public tbViewHolder(View itemView) {
+        public ViewHolder(View itemView){
             super(itemView);
+            namaFaskes = (TextView) itemView.findViewById(R.id.namafaskeskasus);
+            kabKota = (TextView) itemView.findViewById(R.id.kabkotakasus);
+            namaProvinsi = (TextView) itemView.findViewById(R.id.namaprovinsikasus);
+            noReg = (TextView) itemView.findViewById(R.id.noregfaskeskasus);
+            noRegTb = (TextView) itemView.findViewById(R.id.noregtbkasus);
+            namaPasien = (TextView) itemView.findViewById(R.id.namapasienkasus);
+            Nik = (TextView) itemView.findViewById(R.id.nikkasus);
+            Jk = (TextView) itemView.findViewById(R.id.jeniskelaminkasus);
+            Umur = (TextView) itemView.findViewById(R.id.umurkasus);
+            Alamat = (TextView) itemView.findViewById(R.id.alamatkasus);
+            dirujuk = (TextView) itemView.findViewById(R.id.dirujukkasus);
+            tipeDiagnosisTB = (TextView) itemView.findViewById(R.id.tipediagnosiskasus);
 
-            namatb = itemView.findViewById(R.id.namapasien);
-            noregtb = itemView.findViewById(R.id.noregis);
-            jktb = itemView.findViewById(R.id.jk);
         }
 
-        @Override
-        public void onClick(View v) {
-            int position = getAdapterPosition();
-            listener.tbClicked(position);
-        }
-    }
 
-    public interface tbClickListener{
-        void tbClicked(int position);
+
     }
 }

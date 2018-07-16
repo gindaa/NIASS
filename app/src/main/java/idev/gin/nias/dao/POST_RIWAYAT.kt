@@ -68,6 +68,6 @@ class POST_RIWAYAT {
                 ", batuk='" + batuk +
                 ", pembesaranKelenjarLimfe='" + pembesaranKelenjarLimfe +
                 ", pembesaranTulang='" + pembesaranTulang +
-                '}'.toString()
+                '}'
     }
 }

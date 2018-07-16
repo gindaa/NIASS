@@ -73,6 +73,43 @@
         <item>Meninggal</item>
         <item>Gagal</item>
     </string>
+    <string-array name="kontak">
+        <item>Tidak jelas</item>
+        <item>Tidak ada</item>
+        <item>Ada , BTA(-)/ Tidak tahu</item>
+        <item>Ada , BTA(+)</item>
+    </string-array>
+    <string-array name="berat3">
+        <item> -  </item>>
+        <item>Naik</item>
+        <item>Tidak Naik</item>
+        <item>2 Kali naik Berturut(2T)</item>
+        <item>BGM</item>
+        <item>Tidak Tau</item>
+    </string-array>
+    <string-array name="berat6">
+        <item> -  </item>>
+        <item>Naik</item>
+        <item>Tidak Naik</item>
+        <item>2 Kali naik Berturut(2T)</item>
+        <item>Tidak Tau</item>
+    </string-array>
+    <string-array name="demam">
+        <item>Tidak ada</item>
+        <item>Ada (>= 2 minggu tidak Sembuh)</item>
+    </string-array>
+    <string-array name="batuk">
+        <item>Tidak ada</item>
+        <item>Ada (>= 2 minggu)</item>
+    </string-array>
+    <string-array name="pembesaran">
+        <item>Tidak ada</item>
+        <item>Ada dileher /ketiak/lipat paha</item>
+    </string-array>
+    <string-array name="tulang">
+        <item>Tidak ada</item>
+        <item>Ada : sendi panggul/lutut</item>
+    </string-array>
 
 
 </resources>

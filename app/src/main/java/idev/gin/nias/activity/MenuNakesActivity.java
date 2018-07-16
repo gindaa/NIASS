@@ -3,6 +3,7 @@ package idev.gin.nias.activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -22,8 +23,8 @@ public class MenuNakesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_nakes);
         Bundle extras = getIntent().getExtras();
-        String emailpass = extras.getString("email");
-        String tokenpass = extras.getString("token");
+        String emailpassnakes = extras.getString("email");
+        String tokenpassnakes = extras.getString("token");
 
         Button btnprofil =  (Button)(findViewById(R.id.btnprofilnks));
         Button btnotifikasi =  (Button)(findViewById(R.id.btnnotifnks));
@@ -36,8 +37,8 @@ public class MenuNakesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuNakesActivity.this,ProfileAcivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
+                intent.putExtra("email",emailpassnakes);
+                intent.putExtra("token",tokenpassnakes);
                 startActivity(intent);
             }
         });
@@ -45,8 +46,8 @@ public class MenuNakesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuNakesActivity.this,NotifikasiActivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
+                intent.putExtra("email",emailpassnakes);
+                intent.putExtra("token",tokenpassnakes);
                 startActivity(intent);
             }
         });
@@ -54,8 +55,10 @@ public class MenuNakesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuNakesActivity.this,ScoringActivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
+                intent.putExtra("email",emailpassnakes);
+                intent.putExtra("token",tokenpassnakes);
+                Log.i("xxx",emailpassnakes);
+                Log.i("token",tokenpassnakes);
                 startActivity(intent);
             }
         });
@@ -63,8 +66,8 @@ public class MenuNakesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuNakesActivity.this,KasusTbActivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
+                intent.putExtra("email",emailpassnakes);
+                intent.putExtra("token",tokenpassnakes);
                 startActivity(intent);
             }
         });
@@ -72,8 +75,8 @@ public class MenuNakesActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuNakesActivity.this,PoinActivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
+                intent.putExtra("email",emailpassnakes);
+                intent.putExtra("token",tokenpassnakes);
                 startActivity(intent);
             }
         });

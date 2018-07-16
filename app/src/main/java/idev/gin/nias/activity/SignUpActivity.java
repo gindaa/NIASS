@@ -20,7 +20,7 @@ import android.widget.Toast;
 import idev.gin.nias.R;
 import idev.gin.nias.data.remote.APIServiceSignUp;
 import idev.gin.nias.data.remote.ApiUtils;
-import idev.gin.nias.dao.POST_AKUN;
+import idev.gin.nias.dao.SignupDao;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -83,9 +83,10 @@ public class SignUpActivity extends AppCompatActivity {
             }
 
             private void sendPost(String email, String nama, String gender, String tempatLahir, String tanggalLahir, String noHp, String role, String password) {
-                mAPIServiceRegis.savePost(email, nama, gender, tempatLahir, tanggalLahir, noHp, role, password).enqueue(new Callback<POST_AKUN>() {
+                mAPIServiceRegis.savePost(email, nama, gender, tempatLahir, tanggalLahir, noHp, role, password)
+                        .enqueue(new Callback<SignupDao>() {
                     @Override
-                    public void onResponse(Call<POST_AKUN> call, Response<POST_AKUN> response) {
+                    public void onResponse(Call<SignupDao> call, Response<SignupDao> response) {
                         if (response.isSuccessful()) {
                             Intent intant = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intant);
@@ -94,7 +95,7 @@ public class SignUpActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<POST_AKUN> call, Throwable t) {
+                    public void onFailure(Call<SignupDao> call, Throwable t) {
                         Toast.makeText(SignUpActivity.this, "Sign up Errorr", Toast.LENGTH_LONG).show();
                     }
                 });

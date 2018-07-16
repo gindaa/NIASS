@@ -30,7 +30,4 @@ public class ApiUtils {
 
         return RetrofitClient.getClient(BASE_URL).create(APIServiceSkoring.class);
     }
-    public static APIServiceLogin getApiLogin(){
-        return RetrofitClient.getClient(BASE_URL).create(APIServiceLogin.class);
-    }
 }

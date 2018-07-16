@@ -4,6 +4,7 @@ import idev.gin.nias.dao.POST_RIWAYAT;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.Header;
 
 public interface APIServiceRiwayat {
     @retrofit2.http.POST("/riwayat")

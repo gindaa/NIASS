@@ -20,6 +20,7 @@ public class MenuKaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_menu_kader);
         Bundle extras = getIntent().getExtras();
         String emailpass = extras.getString("email");
         String tokenpass = extras.getString("token");

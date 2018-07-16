@@ -3,7 +3,7 @@ package idev.gin.nias.dao
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-class POST_AKUN {
+class SignupDao {
 
     @SerializedName("id")
     @Expose

@@ -1,13 +1,22 @@
 package idev.gin.nias.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.ParsedRequestListener;
+
 import idev.gin.nias.R;
-import idev.gin.nias.dao.POST_AKUN;
+import idev.gin.nias.dao.AkunidDao;
+import idev.gin.nias.dao.SignupDao;
 import idev.gin.nias.data.remote.APIServiceSignUp;
+import idev.gin.nias.utils.CONSTANT;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,32 +41,30 @@ public class ProfileAcivity extends AppCompatActivity {
         final TextView hptv = (TextView) findViewById(R.id.hpprofile);
         final TextView roletv = (TextView) findViewById(R.id.jobprofile);
 
-        APIServiceSignUp profileAPI = retrofit.create(APIServiceSignUp.class);
-        Call<POST_AKUN> call = profileAPI.getAkun(tokenpass,emailpass);
-        call.enqueue(new Callback<POST_AKUN>() {
-            @Override
-            public void onResponse(Call<POST_AKUN> call, Response<POST_AKUN> response) {
-                namatv.setText(response.body().getNama());
-                emailtv.setText(response.body().getEmail());
-                jktv.setText((response.body().getJenisKelamin()));
-                tltv.setText(response.body().getTanggalLahir());
-                tptlhrtv.setText(response.body().getTempatLahir());
-                hptv.setText(response.body().getNoHp());
-                roletv.setText(response.body().getRole());
-            }
+            AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
+                    .addHeaders("Authorization", "bearer " + tokenpass)
+                    .addHeaders("email", emailpass)
+                    .setTag("test")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsObject(AkunidDao.class, new ParsedRequestListener<AkunidDao>() {
+                        @Override
+                        public void onResponse(AkunidDao response) {
+                            namatv.setText(response.getResult().get(0).getNama());
+                            emailtv.setText(response.getResult().get(0).getEmail());
+                            jktv.setText(response.getResult().get(0).getJenis_kelamin());
+                            tltv.setText(response.getResult().get(0).getTanggal_lahir());
+                            tptlhrtv.setText(response.getResult().get(0).getTempat_lahir());
+                            hptv.setText(response.getResult().get(0).getNo_hp());
+                            roletv.setText(response.getResult().get(0).getRole());
 
-            @Override
-            public void onFailure(Call<POST_AKUN> call, Throwable t) {
-                Toast.makeText(ProfileAcivity.this,"Cek koneksi anda",Toast.LENGTH_LONG).show();
+                        }
 
-            }
-        });
-
-
-
-
-
-
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                        }
+                    });
+    }
 
     }
-}

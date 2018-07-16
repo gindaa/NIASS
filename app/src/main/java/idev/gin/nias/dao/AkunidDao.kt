@@ -2,10 +2,10 @@ package idev.gin.nias.dao
 
 data class AkunidDao(
         val status: String,
-        val result: List<Result>
+        val result: List<ResultAkun>
 )
 
-data class Result(
+data class ResultAkun(
         val id: Int,
         val email: String,
         val nama: String,
