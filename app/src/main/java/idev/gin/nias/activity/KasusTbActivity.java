@@ -93,13 +93,14 @@ public class KasusTbActivity extends AppCompatActivity {
                                             response.getResult().getData().get(i).getTipe_diagnosis_tb());
                                     tbList.add(isikasus);
                                 }
+                                adapter.notifyDataSetChanged();
+
 
                             }
 
                             @Override
                             public void onError(ANError anError) {
                                 Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
-                                adapter.notifyDataSetChanged();
                             }
 
                         });
