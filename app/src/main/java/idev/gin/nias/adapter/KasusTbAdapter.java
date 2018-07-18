@@ -1,14 +1,13 @@
 package idev.gin.nias.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.List;
+import java.util.ArrayList;
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
 import idev.gin.nias.activity.KasusTbActivity;
@@ -16,24 +15,25 @@ import idev.gin.nias.activity.KasusTbActivity;
 public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHolder> {
 
     private Context context;
-    private List<KasusClass> listKasusClassTB;
+    private ArrayList<KasusClass> listKasusClassTB;
 
 
 
 
-    public KasusTbAdapter(Context context, List<KasusClass> listKasusClassTB) {
+    public KasusTbAdapter(Context context, ArrayList<KasusClass> listKasusClassTB) {
         this.context = context;
         this.listKasusClassTB = listKasusClassTB;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_kasustb,parent,false);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View itemView =  layoutInflater.inflate(R.layout.card_kasustb,parent,false);
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, int position) {
         holder.namaFaskes.setText(listKasusClassTB.get(position).getmTextnamafaskes());
         holder.kabKota.setText(listKasusClassTB.get(position).getmTextKota());
         holder.namaProvinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
@@ -51,7 +51,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return listKasusClassTB.size();
+        return (listKasusClassTB != null) ? listKasusClassTB.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

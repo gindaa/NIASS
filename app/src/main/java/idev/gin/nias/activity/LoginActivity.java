@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getWindow().setBackgroundDrawableResource(R.drawable.bg);
+        getWindow().setBackgroundDrawableResource(R.drawable.bg);
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mSignUpButton = (Button) findViewById(R.id.singup);
@@ -228,7 +228,6 @@ public class LoginActivity extends AppCompatActivity {
     /**
      * Shows the progress UI and hides the login form.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in

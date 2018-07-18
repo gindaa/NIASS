@@ -54,7 +54,7 @@ public class MenuNakesActivity extends AppCompatActivity {
         skoringtb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,ScoringActivity.class);
+                Intent intent = new Intent(MenuNakesActivity.this,Form16Activity.class);
                 intent.putExtra("email",emailpassnakes);
                 intent.putExtra("token",tokenpassnakes);
                 Log.i("xxx",emailpassnakes);

@@ -1,11 +1,6 @@
 package idev.gin.nias.activity;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -36,10 +31,8 @@ import idev.gin.nias.utils.CONSTANT;
 
 public class KasusTbActivity extends AppCompatActivity {
 
-    private Context context;
     private RecyclerView recyclerView;
-    private GridLayoutManager gridLayoutManager;
-    private List<KasusClass> tbList;
+    private ArrayList<KasusClass> tbList;
     private KasusTbAdapter adapter;
 
     String emailpass;
@@ -54,20 +47,12 @@ public class KasusTbActivity extends AppCompatActivity {
         tokenpass = extras.getString("token");
 
         recyclerView = (RecyclerView) findViewById(R.id.reckasustb);
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        recyclerView.setLayoutManager(new  LinearLayoutManager(this));
+        recyclerView.setHasFixedSize(true);
         tbList = new ArrayList<>();
-        callkasustb();
-
         adapter = new KasusTbAdapter(this,tbList);
         recyclerView.setAdapter(adapter);
-        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                if(gridLayoutManager.findLastVisibleItemPosition() == tbList.size()-1){
-                    callkasustb();
-                }
-            }
-        });
+        callkasustb();
 
 }
 
@@ -86,29 +71,27 @@ public class KasusTbActivity extends AppCompatActivity {
                         .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
                             @Override
                             public void onResponse(FaskesDao response) {
-                                Log.i("xxx", "total :"+response);
-
                                 if (response.getResult().getPage().equals("0")) {
                                     return;
                                 }
-
                                 Log.i("xxx", "total :"+response.getResult().getTotal());
+                                Log.i("isi",response.getResult().getData().get(1).getNo_registrasi_faskes());
+                                Log.i("long",String.valueOf(response.getResult().getData().size()));
                                 for (int i = 0; i < response.getResult().getData().size(); i++) {
                                     KasusClass isikasus = new KasusClass(
-                                            response.getResult().getData().get(i).getNo_registrasi_faskes().toString(),
-                                            response.getResult().getData().get(i).getNo_registrasi_tbkota().toString(),
-                                            response.getResult().getData().get(i).getProvinsi().toString(),
-                                            response.getResult().getData().get(i).getNo_registrasi_faskes().toString(),
-                                            response.getResult().getData().get(i).getNo_registrasi_tbkota().toString(),
-                                            response.getResult().getData().get(i).getNama_pasien().toString(),
-                                            response.getResult().getData().get(i).getNik().toString(),
-                                            response.getResult().getData().get(i).getJenis_kelamin().toString(),
-                                            response.getResult().getData().get(i).getUmur().toString(),
-                                            response.getResult().getData().get(i).getAlamat().toString(),
-                                            response.getResult().getData().get(i).getPerujuk().toString(),
-                                            response.getResult().getData().get(i).getTipe_diagnosis_tb().toString());
+                                            response.getResult().getData().get(i).getNo_registrasi_faskes(),
+                                            response.getResult().getData().get(i).getNo_registrasi_tbkota(),
+                                            response.getResult().getData().get(i).getProvinsi(),
+                                            response.getResult().getData().get(i).getNo_registrasi_faskes(),
+                                            response.getResult().getData().get(i).getNo_registrasi_tbkota(),
+                                            response.getResult().getData().get(i).getNama_pasien(),
+                                            response.getResult().getData().get(i).getNik(),
+                                            response.getResult().getData().get(i).getJenis_kelamin(),
+                                            response.getResult().getData().get(i).getUmur(),
+                                            response.getResult().getData().get(i).getAlamat(),
+                                            response.getResult().getData().get(i).getPerujuk(),
+                                            response.getResult().getData().get(i).getTipe_diagnosis_tb());
                                     tbList.add(isikasus);
-                                    Log.i("xxx",response.getResult().getData().get(i).getNo_registrasi_faskes());
                                 }
 
                             }
@@ -120,10 +103,5 @@ public class KasusTbActivity extends AppCompatActivity {
                             }
 
                         });
-//                            @Override
-//                            public void onError(ANError anError) {
-//
-//                            }
-//                        });
         }
     }

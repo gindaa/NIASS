@@ -15,13 +15,24 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.ParsedRequestListener;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import idev.gin.nias.R;
 import idev.gin.nias.dao.POST_KONTAK;
+import idev.gin.nias.dao.PostPelacakanDao;
+import idev.gin.nias.dao.PostRiwayatDao;
 import idev.gin.nias.data.remote.APIServiceKontak;
 import idev.gin.nias.data.remote.ApiUtils;
+import idev.gin.nias.utils.CONSTANT;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,22 +43,27 @@ public class Form16Activity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private APIServiceKontak mAPIServiceKontak;
     private TextView mResponseTv;
+    private String emailpassnakes;
+    private String tokenpassnakes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_16);
+        Bundle extras = getIntent().getExtras();
+        emailpassnakes = extras.getString("email");
+        tokenpassnakes = extras.getString("token");
         final TextInputEditText unitPelayananEt = (TextInputEditText) findViewById(R.id.unit_pelayanan);
-        final TextInputEditText kabupatenEt = (TextInputEditText) findViewById(R.id.kabkota);
-        final TextView tanggalEt = (TextView) findViewById(R.id.tanggalregis);
-        final TextInputEditText nikEt = (TextInputEditText) findViewById(R.id.nikKontak);
-        final TextInputEditText namaEt = (TextInputEditText) findViewById(R.id.nama);
+        final TextInputEditText kabupatenEt = (TextInputEditText) findViewById(R.id.kabkotar);
+        final TextView tanggalEt = (TextView) findViewById(R.id.tanggalregisf);
+        final TextInputEditText nikEt = (TextInputEditText) findViewById(R.id.nikKontakr);
+        final TextInputEditText namaEt = (TextInputEditText) findViewById(R.id.namakk);
         final TextInputEditText resistanEt= (TextInputEditText) findViewById(R.id.sensitifResistan);
-        final TextInputEditText alamatEt = (TextInputEditText) findViewById(R.id.alamat);
-        final TextInputEditText namaKontakEt = (TextInputEditText) findViewById(R.id.namaKontak);
-        final TextInputEditText umurKontakEt = (TextInputEditText) findViewById(R.id.usiaAnak);
-        final Spinner spgender = (Spinner) findViewById(R.id.spgender);
-        final TextInputEditText alamatKontakEt = (TextInputEditText) findViewById(R.id.alamatKontak);
+        final TextInputEditText alamatEt = (TextInputEditText) findViewById(R.id.alamatxx);
+        final TextInputEditText namaKontakEt = (TextInputEditText) findViewById(R.id.namaKontakx);
+        final TextInputEditText umurKontakEt = (TextInputEditText) findViewById(R.id.umurx);
+        final Spinner spgender = (Spinner) findViewById(R.id.spgender2);
+        final TextInputEditText alamatKontakEt = (TextInputEditText) findViewById(R.id.alamatKontakx);
         final Spinner hasilAkhirsp = (Spinner) findViewById(R.id.sphasilakhir);
         final Spinner tindaklanjutsp = (Spinner) findViewById(R.id.sptindaklanjut);
         final TextView tanggalPpInh = (TextView) findViewById(R.id.tanggalppinh);
@@ -97,40 +113,69 @@ public class Form16Activity extends AppCompatActivity {
                 }
             }
             private void sendPost(String unitPelayanan,String kabupaten,String tanggalRegis,String nik,String nama,String resisten,String alamat,String namaKontak,String umurKontak,String spGender,String alamatKontak,String hasilAkhir,String tindakLanjut,String tanggalPpInh,String hasilPpInh,String lokasi) {
-                mAPIServiceKontak.savePost(unitPelayanan,kabupaten,tanggalRegis,nik,nama,resisten,alamat,namaKontak,umurKontak,spGender,alamatKontak,hasilAkhir,tindakLanjut,tanggalPpInh,hasilPpInh,lokasi).enqueue(new Callback<POST_KONTAK>() {
-                    @Override
-                    public void onResponse(Call<POST_KONTAK> call, Response<POST_KONTAK> response) {
+                AndroidNetworking.post(CONSTANT.BASE_URL + "pelacakan")
+                        .addHeaders("Authorization", "bearer " + tokenpassnakes)
+                        .addBodyParameter("unit_pelayanan",unitPelayanan)
+                        .addBodyParameter("kabupaten",kabupaten)
+                        .addBodyParameter("tanggal_wawancara",tanggalRegis)
+                        .addBodyParameter("nik",nik)
+                        .addBodyParameter("nama",nama)
+                        .addBodyParameter("resisten",resisten)
+                        .addBodyParameter("alamat",alamat)
+                        .addBodyParameter("nama_kontak",namaKontak)
+                        .addBodyParameter("umurkontak_l",umurKontak)
+                        .addBodyParameter("umurKontak_p",umurKontak)
+                        .addBodyParameter("alamat_kontak",alamatKontak)
+                        .addBodyParameter("hasil_akhir",hasilAkhir)
+                        .addBodyParameter("tindak_lanjut",tindakLanjut)
+                        .addBodyParameter("tanggalmulai",tanggalPpInh)
+                        .addBodyParameter("hasil_pp_inh",hasilPpInh)
+                        .addBodyParameter("lokasi","lokasi sekarang")
+                        .addBodyParameter("fk_faskes","32")
+                        .setTag("pelacakan")
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .getAsObject(PostPelacakanDao.class, new ParsedRequestListener<PostPelacakanDao>() {
+                            @Override
+                            public void onResponse(PostPelacakanDao response) {
+                                Log.i("xxx" , response.toString());
+                                Log.i("xxx" , response.getStatus());
+                                Toast.makeText(getApplicationContext(), "Pelacakan Berhasil diinput "+response.toString(), Toast.LENGTH_LONG).show();
+                            }
 
-                        if(response.isSuccessful()) {
-                            showResponse(response.body().toString());
-                            Log.i(TAG, "post submitted to API." + response.body().toString());
-                        }
-                    }
+                            @Override
+                            public void onError(ANError anError) {
+                                Toast.makeText(getApplicationContext(), "Input Failed: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
 
-                    public void showResponse(String response) {
-                        if(mResponseTv.getVisibility() == View.GONE) {
-                            mResponseTv.setVisibility(View.VISIBLE);
-                        }
-                        mResponseTv.setText(response);
-                    }
-
-                    @Override
-                    public void onFailure(Call<POST_KONTAK> call, Throwable t) {
-                        Log.e(TAG, "Unable to submit post to API.");
-                    }
-                });
+                            }
+                        });
             }
         });
 
 
 
-        Spinner spGender = (Spinner) findViewById(R.id.spgender);
+        Spinner spGendera = (Spinner) findViewById(R.id.spgender2);
         ArrayAdapter<String> adapterid = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.gender));
         adapterid.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spGender.setAdapter((adapterid));
+        spGendera.setAdapter(adapterid);
+
+        Spinner spAkhir = (Spinner) findViewById(R.id.sphasilakhir);
+        ArrayAdapter<String> adapterha = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.hasilakhirkontak));
+        adapterha.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spAkhir.setAdapter(adapterha);
+
+        Spinner sprtl = (Spinner) findViewById(R.id.sptindaklanjut);
+        ArrayAdapter<String> adaptertl = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.tindaklanjutkontak));
+        adaptertl.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sprtl.setAdapter(adaptertl);
+
+        Spinner spPpinh = (Spinner) findViewById(R.id.spppinh);
+        ArrayAdapter<String> adapterpp = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.hasilppinh));
+        adapterpp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spPpinh.setAdapter(adapterpp);
 
 
-        mDisplayDate = (TextView) findViewById(R.id.datepick);
+        mDisplayDate = (TextView) findViewById(R.id.tanggalppinh);
         mDisplayDate.setPaintFlags(mDisplayDate.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         mDisplayDate.setOnClickListener(new View.OnClickListener() {
@@ -155,8 +200,12 @@ public class Form16Activity extends AppCompatActivity {
                 month = month + 1;
                 Log.d(TAG, "onDateSet: date "+ day + "/" + month + "/" + year);
                 String date = day +"/"+ month+ "/" + year;
-                mDisplayDate.setText(date);
+                tanggalPpInh.setText(date);
             }
         };
+        Date c = Calendar.getInstance().getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
+        String tanggalriwayat = df.format(c);
+        tanggalEt.setText(tanggalriwayat);
     }
 }

@@ -67,12 +67,12 @@
         <item>Observasi Timbulnya Gejala</item>
         <item>Evaluasi Presisten si Gejala</item>
     </string-array>
-    <string name="hasilppinh">
+    <string-array name="hasilppinh">
         <item>Pengobatan Lengkap</item>
         <item>Putus Berobat</item>
         <item>Meninggal</item>
         <item>Gagal</item>
-    </string>
+    </string-array>
     <string-array name="kontak">
         <item>Tidak jelas</item>
         <item>Tidak ada</item>

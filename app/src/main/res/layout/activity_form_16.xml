@@ -32,7 +32,7 @@
                 tools:layout_editor_absoluteY="279dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/kabkota"
+                    android:id="@+id/kabkotar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Kab / Kota" />
@@ -44,13 +44,22 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tanggalregis"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="3dp"
                     android:layout_marginTop="10dp"
                     android:layout_weight="2"
-                    android:hint="Pilih Tanggal"
+                    android:hint="Tanggal : "
+                    android:textSize="19sp" />
+
+                <TextView
+                    android:id="@+id/tanggalregisf"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="2"
+                    android:hint=" - "
                     android:textSize="19sp" />
             </LinearLayout>
             <android.support.design.widget.TextInputLayout
@@ -76,7 +85,7 @@
                 tools:layout_editor_absoluteY="279dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/nikKontak"
+                    android:id="@+id/nikKontakr"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="NIK Kontak" />
@@ -95,7 +104,7 @@
                 tools:layout_editor_absoluteY="279dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/nama"
+                    android:id="@+id/namakk"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nama" />
@@ -119,7 +128,7 @@
                 tools:layout_editor_absoluteY="279dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/alamat"
+                    android:id="@+id/alamatxx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Alamat" />
@@ -133,7 +142,7 @@
                 tools:layout_editor_absoluteY="279dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/namaKontak"
+                    android:id="@+id/namaKontakx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nama Kontak" />
@@ -152,7 +161,7 @@
                 tools:layout_editor_absoluteY="279dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/umur"
+                    android:id="@+id/umurx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Umur" />
@@ -166,7 +175,7 @@
                 tools:layout_editor_absoluteY="279dp">
 
                 <android.support.design.widget.TextInputEditText
-                    android:id="@+id/alamatKontak"
+                    android:id="@+id/alamatKontakx"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Alamat Kontak" />
