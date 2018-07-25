@@ -2,14 +2,11 @@ package idev.gin.nias.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -30,8 +27,6 @@ import idev.gin.nias.R;
 import idev.gin.nias.dao.AkunidDao;
 import idev.gin.nias.dao.LoginDao;
 import idev.gin.nias.utils.CONSTANT;
-
-import static idev.gin.nias.data.remote.RetrofitClient.retrofit;
 
 /**
  * A login screen that offers login via email/password.
@@ -61,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setBackgroundDrawableResource(R.drawable.bg);
+        //getWindow().setBackgroundDrawableResource(R.drawable.bg);
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mSignUpButton = (Button) findViewById(R.id.singup);
