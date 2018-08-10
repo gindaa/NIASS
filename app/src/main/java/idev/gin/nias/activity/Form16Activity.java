@@ -27,6 +27,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import idev.gin.nias.R;
+import idev.gin.nias.dao.AddPoinDao;
 import idev.gin.nias.dao.POST_KONTAK;
 import idev.gin.nias.dao.PostPelacakanDao;
 import idev.gin.nias.dao.PostRiwayatDao;
@@ -141,6 +142,25 @@ public class Form16Activity extends AppCompatActivity {
                                 Log.i("xxx" , response.toString());
                                 Log.i("xxx" , response.getStatus());
                                 Toast.makeText(getApplicationContext(), "Pelacakan Berhasil diinput "+response.toString(), Toast.LENGTH_LONG).show();
+                                AndroidNetworking.post(CONSTANT.BASE_URL + "adduserspoint")
+                                        .addHeaders("Authorization", "bearer " + tokenpassnakes)
+                                        .addHeaders("email", emailpassnakes)
+                                        .setTag("addpoint")
+                                        .setPriority(Priority.MEDIUM)
+                                        .build()
+                                        .getAsObject(AddPoinDao.class, new ParsedRequestListener() {
+                                            @Override
+                                            public void onResponse(Object response) {
+                                                Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
+
+                                            }
+
+                                            @Override
+                                            public void onError(ANError anError) {
+                                                Toast.makeText(getApplicationContext(), "Poin gagal Ditambah" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+
+                                            }
+                                        });
                             }
 
                             @Override

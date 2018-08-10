@@ -294,19 +294,19 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"/>
             <CheckBox
-                android:id="@+id/batuk"
+                android:id="@+id/sakittb"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Sakit TB" />
             <CheckBox
-                android:id="@+id/demam"
+                android:id="@+id/infeksilaten"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Infeksi Laten TB" />
             <CheckBox
-                android:id="@+id/beratBadanTurun"
+                android:id="@+id/tidakadabukti"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -352,7 +352,6 @@
                 <Spinner
                     android:layout_toRightOf="@id/resikolain"
                     android:id="@+id/sprl"
-                    android:layout_alignBaseline="@id/resikolain"
                     android:drawSelectorOnTop="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -372,25 +371,24 @@
                 android:textStyle="bold"
                 android:layout_marginBottom="10dp"/>
             <CheckBox
-                android:id="@+id/batuk"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="OAT" />
             <CheckBox
-                android:id="@+id/demam"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="PP INH" />
             <CheckBox
-                android:id="@+id/beratBadanTurun"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Evaluasi Persitensi Gejala" />
             <CheckBox
-                android:id="@+id/lesu"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

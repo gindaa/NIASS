@@ -1,5 +1,8 @@
 package idev.gin.nias.activity;
 
+import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +22,13 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.ParsedRequestListener;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.Places;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.gson.JsonObject;
 
 import org.json.JSONObject;
@@ -29,6 +39,8 @@ import java.util.Date;
 
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
+import idev.gin.nias.dao.AddPoinDao;
+import idev.gin.nias.dao.AkunidDao;
 import idev.gin.nias.dao.POST_RIWAYAT;
 import idev.gin.nias.dao.PoinDao;
 import idev.gin.nias.dao.PostRiwayatDao;
@@ -39,18 +51,49 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RiwayatTbActivity extends AppCompatActivity {
+public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
     private APIServiceRiwayat mApiServiceRiwayat;
+    private int PLACE_PICKER_REQUEST = 1;
     private static final String TAG = RiwayatTbActivity.class.getName();
     private TextView mResponseTv;
     String tokenpass;
     String emailpass;
+    String latitude;
+    String longitude;
+    private GoogleApiClient mGoogleApiClient;
+    private Button btmap;
+    private TextView tvMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riwayat_tb);
+        mGoogleApiClient = new GoogleApiClient
+                .Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .enableAutoManage(this, this)
+                .build();
+
+        Button mBtMap = (Button)findViewById(R.id.selectmap);
+        tvMap = findViewById(R.id.lokasitv);
+        mBtMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                try {
+                    startActivityForResult(builder.build(RiwayatTbActivity.this), PLACE_PICKER_REQUEST);
+                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+
+
+
+
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
@@ -73,6 +116,24 @@ public class RiwayatTbActivity extends AppCompatActivity {
 
         Button submitriwayat = (Button) findViewById(R.id.submitrwyt);
         mApiServiceRiwayat = ApiUtils.getAPIRiwayat();
+
+        AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
+                .addHeaders("Authorization", "bearer " + tokenpass)
+                .addHeaders("email", emailpass)
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsObject(AkunidDao.class, new ParsedRequestListener<AkunidDao>() {
+                    @Override
+                    public void onResponse(AkunidDao response) {
+                        UnitPelayanan.setText(response.getResult().get(0).getNama());
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                    }
+                });
 
         submitriwayat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,8 +193,8 @@ public class RiwayatTbActivity extends AppCompatActivity {
                         .addBodyParameter("pembesaran_kelenjar_limfie",kelenjar)
                         .addBodyParameter("pembesaran_tulang",bengkak)
                         .addBodyParameter("fk_faskes","32")
-                        .addBodyParameter("lat","1 ")
-                        .addBodyParameter("long"," 139 ")
+                        .addBodyParameter("lat",latitude)
+                        .addBodyParameter("long",longitude)
                         .setTag("riwayat")
                         .setPriority(Priority.MEDIUM)
                         .build()
@@ -143,6 +204,26 @@ public class RiwayatTbActivity extends AppCompatActivity {
                                 Log.i("xxx" , response.toString());
                                 Log.i("xxx" , response.getStatus());
                                 Toast.makeText(getApplicationContext(), "Riwayat TB Berhasil diinput "+response.toString(), Toast.LENGTH_LONG).show();
+//                                addpoin();
+                                    AndroidNetworking.post(CONSTANT.BASE_URL + "adduserspoint")
+                                            .addHeaders("Authorization", "bearer " + tokenpass)
+                                            .addHeaders("email", emailpass)
+                                            .setTag("addpoint")
+                                            .setPriority(Priority.MEDIUM)
+                                            .build()
+                                            .getAsObject(AddPoinDao.class, new ParsedRequestListener() {
+                                                @Override
+                                                public void onResponse(Object response) {
+                                                    Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
+
+                                                }
+
+                                                @Override
+                                                public void onError(ANError anError) {
+                                                    Toast.makeText(getApplicationContext(), "Poin gagal Ditambah" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+
+                                                }
+                                            });
                             }
 
                             @Override
@@ -220,4 +301,42 @@ public class RiwayatTbActivity extends AppCompatActivity {
         adapter7.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sptulang.setAdapter((adapter7));
     }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Snackbar.make(btmap, connectionResult.getErrorMessage() + "", Snackbar.LENGTH_LONG).show();
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == PLACE_PICKER_REQUEST) {
+            if (resultCode == RESULT_OK) {
+                Place place = PlacePicker.getPlace(data, this);
+                StringBuilder stBuilder = new StringBuilder();
+                String placename = String.format("%s", place.getName());
+                latitude = String.valueOf(place.getLatLng().latitude);
+                longitude = String.valueOf(place.getLatLng().longitude);
+                String address = String.format("%s", place.getAddress());
+                stBuilder.append("Latitude: ");
+                stBuilder.append(latitude);
+                stBuilder.append("\n");
+                stBuilder.append("Logitude: ");
+                stBuilder.append(longitude);
+                stBuilder.append("\n");
+                stBuilder.append("Address: ");
+                stBuilder.append(address);
+                tvMap.setText(stBuilder.toString());
+}
+        }
+    }
+
 }

@@ -101,6 +101,11 @@ public class MapsActivity extends AppCompatActivity implements GoogleApiClient.O
                 stBuilder.append("Address: ");
                 stBuilder.append(address);
                 tvPlaceDetails.setText(stBuilder.toString());
+//                Intent intent = new Intent(MapsActivity.this,RiwayatTbActivity.class);
+//                intent.putExtra("lat",latitude);
+//                intent.putExtra("long",longitude);
+//                startActivity(intent);
+
             }
         }
     }
