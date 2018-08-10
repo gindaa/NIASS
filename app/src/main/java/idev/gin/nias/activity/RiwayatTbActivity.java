@@ -59,6 +59,7 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
     private TextView mResponseTv;
     String tokenpass;
     String emailpass;
+    String idkasus;
     String latitude;
     String longitude;
     private GoogleApiClient mGoogleApiClient;
@@ -97,6 +98,7 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
+        idkasus = extras.getString("idkasus");
         Log.i("xxx", tokenpass);
         final TextInputEditText UnitPelayanan = (TextInputEditText)findViewById(R.id.unit_pelayanan);
         final TextInputEditText desak = (TextInputEditText) findViewById(R.id.kabkota);

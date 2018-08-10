@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
@@ -37,6 +39,8 @@ public class KasusTbActivity extends AppCompatActivity {
 
     String emailpass;
     String tokenpass;
+    String selectedid;
+    Button btidkasus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +50,14 @@ public class KasusTbActivity extends AppCompatActivity {
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
 
+        Button btidkasus = (Button)findViewById(R.id.btgetidkasus);
+        btidkasus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
         recyclerView = (RecyclerView) findViewById(R.id.reckasustb);
         recyclerView.setLayoutManager(new  LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -54,7 +66,10 @@ public class KasusTbActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         callkasustb();
 
+
+
 }
+
 
     private void callkasustb() {
                 AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
@@ -74,11 +89,9 @@ public class KasusTbActivity extends AppCompatActivity {
                                 if (response.getResult().getPage().equals("0")) {
                                     return;
                                 }
-                                Log.i("xxx", "total :"+response.getResult().getTotal());
-                                Log.i("isi",response.getResult().getData().get(1).getNo_registrasi_faskes());
-                                Log.i("long",String.valueOf(response.getResult().getData().size()));
                                 for (int i = 0; i < response.getResult().getData().size(); i++) {
                                     KasusClass isikasus = new KasusClass(
+                                            response.getResult().getData().get(i).getId(),
                                             response.getResult().getData().get(i).getNo_registrasi_faskes(),
                                             response.getResult().getData().get(i).getNo_registrasi_tbkota(),
                                             response.getResult().getData().get(i).getProvinsi(),

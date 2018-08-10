@@ -1,6 +1,7 @@
 package idev.gin.nias;
 
 public class KasusClass {
+    private String idKasus;
     private String mTextnamafaskes;
     private String mTextKota;
     private String mTextProvinsi;
@@ -59,9 +60,11 @@ public class KasusClass {
         return mTextregisTbKota;
     }
 
-    public String getmTextdiagnosistb() {
-        return mTextdiagnosistb;
-    }
+    public String getmTextdiagnosistb() { return mTextdiagnosistb; }
+    public String getIdKasus() { return idKasus; }
+
+    public void setIdKasus(String idKasus) { this.idKasus = idKasus; }
+
 
     public void setmTextnamafaskes(String mTextnamafaskes) {
         this.mTextnamafaskes = mTextnamafaskes;
@@ -111,7 +114,8 @@ public class KasusClass {
         this.mTextdiagnosistb = mTextdiagnosistb;
     }
 
-    public KasusClass(String mTextnamafaskes, String mTextKota, String mTextProvinsi, String mTextregis, String mTextregiskota, String mTextNamaPasien, String mTextNik, String mtextjk, String mTextUmur, String mTextAlamat, String mTextRujuk, String mTextdiagnosistb) {
+    public KasusClass(String idKasus, String mTextnamafaskes, String mTextKota, String mTextProvinsi, String mTextregis, String mTextregiskota, String mTextNamaPasien, String mTextNik, String mtextjk, String mTextUmur, String mTextAlamat, String mTextRujuk, String mTextdiagnosistb) {
+        this.idKasus= idKasus;
         this.mTextnamafaskes = mTextnamafaskes;
         this.mTextKota = mTextKota;
         this.mTextProvinsi = mTextProvinsi;

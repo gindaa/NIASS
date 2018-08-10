@@ -1,11 +1,14 @@
 package idev.gin.nias.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import idev.gin.nias.KasusClass;
@@ -34,6 +37,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        holder.idKasus.setText(listKasusClassTB.get(position).getIdKasus());
         holder.namaFaskes.setText(listKasusClassTB.get(position).getmTextnamafaskes());
         holder.kabKota.setText(listKasusClassTB.get(position).getmTextKota());
         holder.namaProvinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
@@ -46,6 +50,12 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         holder.Alamat.setText(listKasusClassTB.get(position).getmTextAlamat());
         holder.dirujuk.setText(listKasusClassTB.get(position).getmTextRujuk());
         holder.tipeDiagnosisTB.setText(listKasusClassTB.get(position).getmTextdiagnosistb());
+        holder.btIdkasus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Anda Ingin menginvestigasi id no:"+position, Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 
@@ -55,6 +65,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+        public TextView idKasus;
         public TextView namaFaskes;
         public TextView kabKota;
         public TextView namaProvinsi;
@@ -67,9 +78,11 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         public TextView Alamat;
         public TextView dirujuk;
         public TextView tipeDiagnosisTB;
+        public Button btIdkasus;
 
         public ViewHolder(View itemView){
             super(itemView);
+            idKasus = (TextView) itemView.findViewById(R.id.idkasus);
             namaFaskes = (TextView) itemView.findViewById(R.id.namafaskeskasus);
             kabKota = (TextView) itemView.findViewById(R.id.kabkotakasus);
             namaProvinsi = (TextView) itemView.findViewById(R.id.namaprovinsikasus);
@@ -82,6 +95,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
             Alamat = (TextView) itemView.findViewById(R.id.alamatkasus);
             dirujuk = (TextView) itemView.findViewById(R.id.dirujukkasus);
             tipeDiagnosisTB = (TextView) itemView.findViewById(R.id.tipediagnosiskasus);
+            btIdkasus = (Button) itemView.findViewById(R.id.btgetidkasus);
 
         }
 

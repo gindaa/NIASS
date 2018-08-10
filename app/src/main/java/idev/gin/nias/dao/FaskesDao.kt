@@ -17,7 +17,7 @@ data class Result(
 )
 
 data class Data(
-        val id: Int,
+        val id: String,
         val tanggal: String,
         val nama_faskes: String,
         val kabupaten: String,
