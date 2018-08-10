@@ -53,8 +53,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         holder.btIdkasus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Anda Ingin menginvestigasi id no:"+position, Toast.LENGTH_LONG).show();
-                
+                Toast.makeText(context, "Anda Ingin menginvestigasi No:"+position, Toast.LENGTH_LONG).show();
             }
         });
 
