@@ -50,13 +50,13 @@ public class KasusTbActivity extends AppCompatActivity {
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
 
-        Button btidkasus = (Button)findViewById(R.id.btgetidkasus);
-        btidkasus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
+//        Button btidkasus = (Button)findViewById(R.id.btgetidkasus);
+//        btidkasus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_LONG).show();
+//            }
+//        });
 
         recyclerView = (RecyclerView) findViewById(R.id.reckasustb);
         recyclerView.setLayoutManager(new  LinearLayoutManager(this));
