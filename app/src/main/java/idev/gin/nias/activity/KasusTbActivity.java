@@ -1,4 +1,5 @@
 package idev.gin.nias.activity;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,6 +34,7 @@ import idev.gin.nias.utils.CONSTANT;
 
 public class KasusTbActivity extends AppCompatActivity {
 
+    private SharedPreferences sharedPref;
     private RecyclerView recyclerView;
     private ArrayList<KasusClass> tbList;
     private KasusTbAdapter adapter;
@@ -50,11 +52,13 @@ public class KasusTbActivity extends AppCompatActivity {
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
 
+
 //        Button btidkasus = (Button)findViewById(R.id.btgetidkasus);
 //        btidkasus.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_LONG).show();
+//                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefs",MODE_PRIVATE);
+//                Toast.makeText(getApplicationContext(), "Id kasus adalah di activity :" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
 //            }
 //        });
 

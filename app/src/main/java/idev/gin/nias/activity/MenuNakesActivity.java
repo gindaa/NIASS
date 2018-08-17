@@ -1,6 +1,7 @@
 package idev.gin.nias.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import idev.gin.nias.R;
 
 public class MenuNakesActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPref;
     private Button btnprofil;
     private Button btnotifikasi;
     private Button skoringtb;
@@ -25,6 +27,10 @@ public class MenuNakesActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String emailpassnakes = extras.getString("email");
         String tokenpassnakes = extras.getString("token");
+        SharedPreferences.Editor edit = sharedPref.edit();
+        edit.putString("email", emailpassnakes);
+        edit.putString("token", tokenpassnakes);
+        edit.apply();
 
         Button btnprofil =  (Button)(findViewById(R.id.btnprofilnks));
         Button btnotifikasi =  (Button)(findViewById(R.id.btnnotifnks));

@@ -99,7 +99,7 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
         idkasus = extras.getString("idkasus");
-        Log.i("xxx", tokenpass);
+
         final TextInputEditText UnitPelayanan = (TextInputEditText)findViewById(R.id.unit_pelayanan);
         final TextInputEditText desak = (TextInputEditText) findViewById(R.id.kabkota);
         final TextView tanggalr = (TextView) findViewById(R.id.tanggalriwayattb);
@@ -174,6 +174,50 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                 {
                     sendriwayat(namaKader,desa,tanggal,nama_orangtua,nama_anak,usia_anak,jumlah_anak,alamat_desa,kontak_tb,Berat59,Berat14,Demam,Batuk,Kelenjar,Pembengkakan);
                 }
+                getAkunId(emailpass,tokenpass);
+            }
+            public void getAkunId(final String email, final  String token) {
+                AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
+                        .addHeaders("Authorization", "bearer " + token)
+                        .addHeaders("email", email)
+                        .setTag("test")
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .getAsObject(AkunidDao.class, new ParsedRequestListener<AkunidDao>() {
+                            @Override
+                            public void onResponse(AkunidDao response) {
+                                String role = response.getResult().get(0).getRole();
+                                Log.i("role",role);
+                                if(role.toLowerCase().contains("kader")){
+                                    startkader();
+                                }
+                                else if(role.toLowerCase().contains("nakes")) {
+                                    startnakes();
+                                }
+                                else {
+                                    Toast.makeText(getApplicationContext(), "Role not found", Toast.LENGTH_LONG).show();
+                                }
+                            }
+
+                            private void startkader() {
+                                Intent intent = new Intent(RiwayatTbActivity.this,MenuKaderActivity.class);
+                                intent.putExtra("token" , token);
+                                intent.putExtra("email", email);
+                                startActivity(intent);
+                            }
+
+                            private void startnakes() {
+                                Intent intent = new Intent(RiwayatTbActivity.this,MenuNakesActivity.class);
+                                intent.putExtra("token" , token);
+                                intent.putExtra("email", email);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onError(ANError anError) {
+                                Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                            }
+                        });
             }
             private void sendriwayat(String namaKader,String desa,String tanggal,String namaOrangtua,String namaAnak,String usiaAnak,String jumlahAnak,String alamatDesa,String kontakTb,String berat59,String berat4,String demam,String batuk ,String kelenjar,String bengkak) {
 
@@ -194,7 +238,7 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                         .addBodyParameter("batuk",batuk)
                         .addBodyParameter("pembesaran_kelenjar_limfie",kelenjar)
                         .addBodyParameter("pembesaran_tulang",bengkak)
-                        .addBodyParameter("fk_faskes","32")
+                        .addBodyParameter("fk_faskes",idkasus)
                         .addBodyParameter("lat",latitude)
                         .addBodyParameter("long",longitude)
                         .setTag("riwayat")

@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
 import idev.gin.nias.activity.KasusTbActivity;
+import idev.gin.nias.activity.RiwayatTbActivity;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHolder> {
 
@@ -24,10 +27,11 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
     private ArrayList<KasusClass> listKasusClassTB;
     private String idkasustb;
 
+
     public KasusTbAdapter(Context context, ArrayList<KasusClass> listKasusClassTB) {
         this.context = context;
         this.listKasusClassTB = listKasusClassTB;
-        sharedPref = context.getSharedPreferences("MyPrefs", Context.MODE_PRIVATE);
+        sharedPref = context.getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
 
     @Override
@@ -42,9 +46,6 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
 
         // We need an editor object to make changes
         holder.idKasus.setText(listKasusClassTB.get(position).getIdKasus());
-//        SharedPreferences.Editor edit = sharedPref.edit();
-//        edit.putString("idKasus", listKasusClassTB.get(position).getIdKasus());
-//        edit.apply();
         holder.namaFaskes.setText(listKasusClassTB.get(position).getmTextnamafaskes());
         holder.kabKota.setText(listKasusClassTB.get(position).getmTextKota());
         holder.namaProvinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
@@ -62,8 +63,17 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
             public void onClick(View v) {
                 idkasustb = listKasusClassTB.get(position).getIdKasus();
                 String idKasus = sharedPref.getString("idKasus", "kosong");
-//                Toast.makeText(context, "Anda Ingin menginvestigasi No:" + position, Toast.LENGTH_LONG).show();
-                Toast.makeText(context, "ID KASUS:" + idkasustb, Toast.LENGTH_LONG).show();
+//                Toast.makeText(context, "ID KASUS:" + idkasustb, Toast.LENGTH_LONG).show();
+                SharedPreferences pref = context.getSharedPreferences("MyPrefs",MODE_PRIVATE);
+                SharedPreferences.Editor edit = sharedPref.edit();
+                edit.putString("idKasus", listKasusClassTB.get(position).getIdKasus());
+                edit.apply();
+                Toast.makeText(context, "ID KASUS Adalah:" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, RiwayatTbActivity.class);
+                intent.putExtra("email",pref.getString("email", "email"));
+                intent.putExtra("token",pref.getString("token", "email"));
+                intent.putExtra("idKasus" , idKasus);
+                context.startActivity(intent);
             }
         });
 

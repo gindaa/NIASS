@@ -1,6 +1,7 @@
 package idev.gin.nias.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ public class MenuKaderActivity extends AppCompatActivity {
     private Button btnotifikasi;
     private Button btgps;
     private Button btpoin;
+    SharedPreferences sharedPref;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +26,11 @@ public class MenuKaderActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String emailpass = extras.getString("email");
         String tokenpass = extras.getString("token");
+        sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPref.edit();
+        edit.putString("email", emailpass);
+        edit.putString("token", tokenpass);
+        edit.apply();
 
         Button btnprofil = (Button)findViewById(R.id.btnprofilkdr);
         Button btnkasustb = (Button)findViewById(R.id.btnkasuskdr);
