@@ -132,7 +132,7 @@ public class Form16Activity extends AppCompatActivity {
                         .addBodyParameter("tanggalmulai",tanggalPpInh)
                         .addBodyParameter("hasil_pp_inh",hasilPpInh)
                         .addBodyParameter("lokasi","lokasi sekarang")
-                        .addBodyParameter("fk_faskes","32")
+                        .addBodyParameter("fk_faskes","idKasus")
                         .setTag("pelacakan")
                         .setPriority(Priority.MEDIUM)
                         .build()

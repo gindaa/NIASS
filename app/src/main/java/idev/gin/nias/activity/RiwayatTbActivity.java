@@ -98,7 +98,7 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
-        idkasus = extras.getString("idkasus");
+        idkasus = extras.getString("idKasus");
 
         final TextInputEditText UnitPelayanan = (TextInputEditText)findViewById(R.id.unit_pelayanan);
         final TextInputEditText desak = (TextInputEditText) findViewById(R.id.kabkota);
@@ -238,19 +238,16 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                         .addBodyParameter("batuk",batuk)
                         .addBodyParameter("pembesaran_kelenjar_limfie",kelenjar)
                         .addBodyParameter("pembesaran_tulang",bengkak)
-                        .addBodyParameter("fk_faskes",idkasus)
                         .addBodyParameter("lat",latitude)
                         .addBodyParameter("long",longitude)
+                        .addBodyParameter("fk_faskes",idkasus)
                         .setTag("riwayat")
                         .setPriority(Priority.MEDIUM)
                         .build()
                         .getAsObject(PostRiwayatDao.class, new ParsedRequestListener<PostRiwayatDao>() {
                             @Override
                             public void onResponse(PostRiwayatDao response) {
-                                Log.i("xxx" , response.toString());
-                                Log.i("xxx" , response.getStatus());
-                                Toast.makeText(getApplicationContext(), "Riwayat TB Berhasil diinput "+response.toString(), Toast.LENGTH_LONG).show();
-//                                addpoin();
+                                Toast.makeText(getApplicationContext(), "Riwayat TB Berhasil diinput"+response.toString(), Toast.LENGTH_LONG).show();
                                     AndroidNetworking.post(CONSTANT.BASE_URL + "adduserspoint")
                                             .addHeaders("Authorization", "bearer " + tokenpass)
                                             .addHeaders("email", emailpass)
@@ -383,6 +380,10 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                 tvMap.setText(stBuilder.toString());
 }
         }
+    }
+
+    public void setKeterangan(){
+
     }
 
 }
