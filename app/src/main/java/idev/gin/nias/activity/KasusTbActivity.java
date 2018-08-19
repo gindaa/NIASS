@@ -28,6 +28,7 @@ import java.util.List;
 
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
+import idev.gin.nias.adapter.KasusTbAdapter;
 import idev.gin.nias.adapter.NotifikasiNakesAdapter;
 import idev.gin.nias.dao.FaskesDao;
 import idev.gin.nias.utils.CONSTANT;
@@ -37,7 +38,7 @@ public class KasusTbActivity extends AppCompatActivity {
     private SharedPreferences sharedPref;
     private RecyclerView recyclerView;
     private ArrayList<KasusClass> tbList;
-    private NotifikasiNakesAdapter adapter;
+    private KasusTbAdapter adapter;
 
     String emailpass;
     String tokenpass;
@@ -66,7 +67,7 @@ public class KasusTbActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new  LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         tbList = new ArrayList<>();
-        adapter = new NotifikasiNakesAdapter(this,tbList);
+        adapter = new KasusTbAdapter(this,tbList);
         recyclerView.setAdapter(adapter);
         callkasustb();
 

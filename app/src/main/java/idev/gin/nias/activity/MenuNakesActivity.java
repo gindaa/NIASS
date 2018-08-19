@@ -27,6 +27,7 @@ public class MenuNakesActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String emailpassnakes = extras.getString("email");
         String tokenpassnakes = extras.getString("token");
+        sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPref.edit();
         edit.putString("email", emailpassnakes);
         edit.putString("token", tokenpassnakes);

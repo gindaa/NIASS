@@ -172,4 +172,3 @@ public class KasusDetailClass {
         this.mTextdiagnosistb = mTextdiagnosistb;
     }
     }
-}

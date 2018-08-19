@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import idev.gin.nias.KasusClass;
+import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
 import idev.gin.nias.adapter.NotifikasiNakesAdapter;
 import idev.gin.nias.dao.FaskesDao;
@@ -36,7 +37,7 @@ public class NotifikasiActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private RecyclerView recyclerView;
-    private ArrayList<KasusClass> tbList;
+    private ArrayList<KasusDetailClass> tbList;
     private NotifikasiNakesAdapter adapter;
 
     String emailpass;
@@ -60,7 +61,7 @@ public class NotifikasiActivity extends AppCompatActivity {
 //            }
 //        });
 
-        recyclerView = (RecyclerView) findViewById(R.id.reckasustb);
+        recyclerView = (RecyclerView) findViewById(R.id.recnotifikasi);
         recyclerView.setLayoutManager(new  LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
         tbList = new ArrayList<>();
@@ -92,11 +93,16 @@ public class NotifikasiActivity extends AppCompatActivity {
                             return;
                         }
                         for (int i = 0; i < response.getResult().getData().size(); i++) {
-                            KasusClass isikasus = new KasusClass(
+                            KasusDetailClass isikasus = new KasusDetailClass(
                                     response.getResult().getData().get(i).getId(),
                                     response.getResult().getData().get(i).getNo_registrasi_faskes(),
-                                    response.getResult().getData().get(i).getNo_registrasi_tbkota(),
+                                    response.getResult().getData().get(i).getAlamat(),
+                                    response.getResult().getData().get(i).getRtrw(),
+                                    response.getResult().getData().get(i).getKelurahan(),
+                                    response.getResult().getData().get(i).getKecamatan(),
+                                    response.getResult().getData().get(i).getKabupaten(),
                                     response.getResult().getData().get(i).getProvinsi(),
+                                    response.getResult().getData().get(i).getNo_registrasi_tbkota(),
                                     response.getResult().getData().get(i).getNo_registrasi_faskes(),
                                     response.getResult().getData().get(i).getNo_registrasi_tbkota(),
                                     response.getResult().getData().get(i).getNama_pasien(),
