@@ -110,6 +110,31 @@
         <item>Tidak ada</item>
         <item>Ada : sendi panggul/lutut</item>
     </string-array>
+    <string-array name="tuberkulin">
+        <item>Negatif</item>
+        <item>Positif</item>
+    </string-array>
+    <string-array name="toraks">
+        <item>Normal</item>
+        <item>Gambaran Sugestif</item>
+    </string-array>
+    <string-array name="bbgizi">
+        <item> - </item>
+        <item>BB/TB&lt;90% atau BB/U&lt;80%</item>
+        <item>Klinis gizi buruk</item>
+    </string-array>
+    <string-array name="minggu">
+        <item> tidak ada </item>
+        <item> >= 2 Minggu</item>
+    </string-array>
+    <string-array name="tulangsc">
+        <item>Tidak ada</item>
+        <item>Ada pembengkakan</item>
+    </string-array>
+    <string-array name="pembengkakansc">
+        <item>Tidak ada</item>
+        <item>Lebih dari 1 cm</item>
+    </string-array>
 
 
 </resources>

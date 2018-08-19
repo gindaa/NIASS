@@ -1,6 +1,7 @@
 package idev.gin.nias.activity;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.ColorDrawable;
@@ -46,6 +47,7 @@ public class Form16Activity extends AppCompatActivity {
     private TextView mResponseTv;
     private String emailpassnakes;
     private String tokenpassnakes;
+    private String idKasus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class Form16Activity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         emailpassnakes = extras.getString("email");
         tokenpassnakes = extras.getString("token");
+        idKasus = extras.getString("idKasus");
         final TextInputEditText unitPelayananEt = (TextInputEditText) findViewById(R.id.unit_pelayanan);
         final TextInputEditText kabupatenEt = (TextInputEditText) findViewById(R.id.kabkotar);
         final TextView tanggalEt = (TextView) findViewById(R.id.tanggalregisf);
@@ -114,7 +117,7 @@ public class Form16Activity extends AppCompatActivity {
                 }
             }
             private void sendPost(String unitPelayanan,String kabupaten,String tanggalRegis,String nik,String nama,String resisten,String alamat,String namaKontak,String umurKontak,String spGender,String alamatKontak,String hasilAkhir,String tindakLanjut,String tanggalPpInh,String hasilPpInh,String lokasi) {
-                AndroidNetworking.post(CONSTANT.BASE_URL + "pelacakan")
+                AndroidNetworking.post(CONSTANT.BASE_URL + "kontak")
                         .addHeaders("Authorization", "bearer " + tokenpassnakes)
                         .addBodyParameter("unit_pelayanan",unitPelayanan)
                         .addBodyParameter("kabupaten",kabupaten)
@@ -132,35 +135,19 @@ public class Form16Activity extends AppCompatActivity {
                         .addBodyParameter("tanggalmulai",tanggalPpInh)
                         .addBodyParameter("hasil_pp_inh",hasilPpInh)
                         .addBodyParameter("lokasi","lokasi sekarang")
-                        .addBodyParameter("fk_faskes","idKasus")
+                        .addBodyParameter("fk_faskes",idKasus)
                         .setTag("pelacakan")
                         .setPriority(Priority.MEDIUM)
                         .build()
                         .getAsObject(PostPelacakanDao.class, new ParsedRequestListener<PostPelacakanDao>() {
                             @Override
                             public void onResponse(PostPelacakanDao response) {
-                                Log.i("xxx" , response.toString());
-                                Log.i("xxx" , response.getStatus());
-                                Toast.makeText(getApplicationContext(), "Pelacakan Berhasil diinput "+response.toString(), Toast.LENGTH_LONG).show();
-                                AndroidNetworking.post(CONSTANT.BASE_URL + "adduserspoint")
-                                        .addHeaders("Authorization", "bearer " + tokenpassnakes)
-                                        .addHeaders("email", emailpassnakes)
-                                        .setTag("addpoint")
-                                        .setPriority(Priority.MEDIUM)
-                                        .build()
-                                        .getAsObject(AddPoinDao.class, new ParsedRequestListener() {
-                                            @Override
-                                            public void onResponse(Object response) {
-                                                Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
-
-                                            }
-
-                                            @Override
-                                            public void onError(ANError anError) {
-                                                Toast.makeText(getApplicationContext(), "Poin gagal Ditambah" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
-
-                                            }
-                                        });
+                                Toast.makeText(getApplicationContext(), "Menuju Skoring "+response.toString(), Toast.LENGTH_LONG).show();
+                                Intent intent = new Intent(Form16Activity.this,ScoringActivity.class);
+                                intent.putExtra("email",emailpassnakes);
+                                intent.putExtra("token",tokenpassnakes);
+                                intent.putExtra("idKasus",idKasus);
+                                startActivity(intent);
                             }
 
                             @Override

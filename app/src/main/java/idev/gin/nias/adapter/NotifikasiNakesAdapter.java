@@ -15,8 +15,10 @@ import java.util.ArrayList;
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
+import idev.gin.nias.activity.Form16Activity;
 import idev.gin.nias.activity.KasusTbActivity;
 import idev.gin.nias.activity.RiwayatTbActivity;
+import idev.gin.nias.activity.ScoringActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -72,7 +74,7 @@ public class NotifikasiNakesAdapter extends RecyclerView.Adapter<NotifikasiNakes
                 edit.putString("idKasus", listKasusClassTB.get(position).getIdKasus());
                 edit.apply();
                 Toast.makeText(context, "ID KASUS Adalah:" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, RiwayatTbActivity.class);
+                Intent intent = new Intent(context, Form16Activity.class);
                 intent.putExtra("email",pref.getString("email", "email"));
                 intent.putExtra("token",pref.getString("token", "email"));
                 intent.putExtra("idKasus" , idKasus);
