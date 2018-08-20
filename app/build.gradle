@@ -41,4 +41,5 @@ dependencies {
     implementation 'com.amitshekhar.android:android-networking:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.google.android.gms:play-services:12.0.1'
+    implementation 'com.github.tosslife:pullloadview:1.1.0'
 }

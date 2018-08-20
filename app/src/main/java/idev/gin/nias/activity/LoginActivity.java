@@ -3,6 +3,7 @@ package idev.gin.nias.activity;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     private View mLoginFormView;
     public Button mSignUpButton;
     private String tokens;
+    SharedPreferences sharedPref;
 
     /**
      * Kalo bingung, dao dipisah aja setiap endpointnya
@@ -132,10 +134,18 @@ public class LoginActivity extends AppCompatActivity {
                         Log.i("role",role);
                         if(role.toLowerCase().contains("kader")){
                             Toast.makeText(getApplicationContext(), "KADER", Toast.LENGTH_LONG).show();
+                            sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor edit = sharedPref.edit();
+                            edit.putString("role", role);
+                            edit.apply();
                                 startkader();
                             }
                             else if(role.toLowerCase().contains("nakes")) {
                             Toast.makeText(getApplicationContext(), "NAKES", Toast.LENGTH_LONG).show();
+                            sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor edit = sharedPref.edit();
+                            edit.putString("role", role);
+                            edit.apply();
                                 startnakes();
 
                             }

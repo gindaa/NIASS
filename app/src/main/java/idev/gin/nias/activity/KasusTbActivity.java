@@ -32,6 +32,7 @@ import idev.gin.nias.adapter.KasusTbAdapter;
 import idev.gin.nias.adapter.NotifikasiNakesAdapter;
 import idev.gin.nias.dao.FaskesDao;
 import idev.gin.nias.utils.CONSTANT;
+import idev.gin.nias.utils.EndlessRecyclerViewScrollListener;
 
 public class KasusTbActivity extends AppCompatActivity {
 
@@ -39,6 +40,7 @@ public class KasusTbActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<KasusClass> tbList;
     private KasusTbAdapter adapter;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     String emailpass;
     String tokenpass;
@@ -63,37 +65,39 @@ public class KasusTbActivity extends AppCompatActivity {
 //            }
 //        });
 
-        recyclerView = (RecyclerView) findViewById(R.id.reckasustb);
-        recyclerView.setLayoutManager(new  LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+
+        RecyclerView rvitem = (RecyclerView) findViewById(R.id.reckasustb);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         tbList = new ArrayList<>();
         adapter = new KasusTbAdapter(this,tbList);
-        recyclerView.setAdapter(adapter);
-        callkasustb();
+        rvitem.setAdapter(adapter);
+        rvitem.setLayoutManager(new  LinearLayoutManager(this));
+        rvitem.addOnScrollListener(scrollListener);
+//        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager){
+//            @Override
+//            public void onLoadMore(int page, int totalItemsCount ,RecyclerView view) {
+//                callkasustb(page);
+//            }
+//        };
 
-
-
+        callkasustb(1);
 }
 
 
-    private void callkasustb() {
+    private void callkasustb(int page) {
+        String textpage = Integer.toString(page);
                 AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
                         .addHeaders("Authorization", "bearer " + tokenpass)
-                        .addHeaders("page","1")
+                        .addHeaders("page",textpage)
                         .setTag("Faskes")
                         .setPriority(Priority.MEDIUM)
                         .build()
-//                        .getAsJSONObject(new JSONObjectRequestListener() {
-//                            @Override
-//                            public void onResponse(JSONObject response) {
-//                                Log.i("xxx", response.toString());
-//                            }
                         .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
                             @Override
                             public void onResponse(FaskesDao response) {
-                                if (response.getResult().getPage().equals("0")) {
-                                    return;
-                                }
+//                                if (response.getResult().getPage().equals("0")) {
+//                                    return;
+//                                }
                                 for (int i = 0; i < response.getResult().getData().size(); i++) {
                                     KasusClass isikasus = new KasusClass(
                                             response.getResult().getData().get(i).getId(),

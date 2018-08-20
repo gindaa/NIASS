@@ -1,5 +1,6 @@
 package idev.gin.nias.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.androidnetworking.interfaces.ParsedRequestListener;
 
 import idev.gin.nias.R;
 import idev.gin.nias.dao.AddPoinDao;
+import idev.gin.nias.dao.SkoringDao;
 import idev.gin.nias.utils.CONSTANT;
 
 public class ScoringActivity extends AppCompatActivity {
@@ -89,24 +91,56 @@ public class ScoringActivity extends AppCompatActivity {
         kirimsc.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AndroidNetworking.post(CONSTANT.BASE_URL + "adduserspoint")
+                AndroidNetworking.post(CONSTANT.BASE_URL + "skoringtb")
                         .addHeaders("Authorization", "bearer " + tokenpass)
-                        .addHeaders("email", emailpass)
-                        .setTag("addpoint")
+                        .addBodyParameter("kontak_tb",kontak.getSelectedItem().toString())
+                        .addBodyParameter("uji_tuberkulin",tuberkulin.getSelectedItem().toString())
+                        .addBodyParameter("berat_badan",berat.getSelectedItem().toString())
+                        .addBodyParameter("demam",demam.getSelectedItem().toString())
+                        .addBodyParameter("batuk_kronik",batuk.getSelectedItem().toString())
+                        .addBodyParameter("pembesaran_kelenjar",kelenjar.getSelectedItem().toString())
+                        .addBodyParameter("pembengkakan_tulang",tulang.getSelectedItem().toString())
+                        .addBodyParameter("foto_toraks",toraks.getSelectedItem().toString())
+                        .addBodyParameter("fk_faskes",idkasus)
+                        .setTag("SkoringTB")
                         .setPriority(Priority.MEDIUM)
                         .build()
-                        .getAsObject(AddPoinDao.class, new ParsedRequestListener() {
+                        .getAsObject(SkoringDao.class, new ParsedRequestListener<SkoringDao>() {
                             @Override
-                            public void onResponse(Object response) {
-                                Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
+                            public void onResponse(SkoringDao response) {
+                                Toast.makeText(getApplicationContext(), "Skoring Berhasil"+response.toString(), Toast.LENGTH_LONG).show();
+                                AndroidNetworking.post(CONSTANT.BASE_URL + "adduserspoint")
+                                        .addHeaders("Authorization", "bearer " + tokenpass)
+                                        .addHeaders("email", emailpass)
+                                        .setTag("addpoint")
+                                        .setPriority(Priority.MEDIUM)
+                                        .build()
+                                        .getAsObject(AddPoinDao.class, new ParsedRequestListener() {
+                                            @Override
+                                            public void onResponse(Object response) {
+                                                Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
+                                                Intent intent = new Intent(ScoringActivity.this,MenuNakesActivity.class);
+                                                intent.putExtra("token" , tokenpass);
+                                                intent.putExtra("email", emailpass);
+                                                startActivity(intent);
+                                            }
+
+                                            @Override
+                                            public void onError(ANError anError) {
+                                                Toast.makeText(getApplicationContext(), "Poin gagal Ditambah" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+
+                                            }
+                                        });
+
                             }
 
                             @Override
                             public void onError(ANError anError) {
-                                Toast.makeText(getApplicationContext(), "Poin gagal Ditambah" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                                Toast.makeText(getApplicationContext(), "Input Failed: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
 
                             }
                         });
+
             }
         });
 

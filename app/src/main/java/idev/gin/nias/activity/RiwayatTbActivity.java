@@ -258,6 +258,8 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                                                 @Override
                                                 public void onResponse(Object response) {
                                                     Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
+                                                    Intent intent = new Intent(RiwayatTbActivity.this,MenuKaderActivity.class);
+                                                    startActivity(intent);
 
                                                 }
 
