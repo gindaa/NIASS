@@ -135,6 +135,45 @@
         <item>Tidak ada</item>
         <item>Lebih dari 1 cm</item>
     </string-array>
+    <string-array name="kecamatan">
+        <item>Fanayama</item>
+        <item>Maniamolo</item>
+    </string-array>
+    <string-array name="fanayama">
+        <item>Bawomataluo</item>
+        <item>Hilisalawa</item>
+        <item>Orahili Fau</item>
+        <item>Eho Orahili Fau</item>
+        <item>Orahili Gito</item>
+        <item>Lahusa Fau</item>
+        <item>Siwalawa</item>
+        <item>Siliwulawa</item>
+        <item>Hilikaramaha</item>
+        <item>Hilifarokhalawa</item>
+        <item>Onohondro</item>
+        <item>Hilinawalo Fau</item>
+        <item>Ete Batu</item>
+        <item>Bawofanayama</item>
+        <item>Bawonahono</item>
+        <item>Hilizihono</item>
+        <item>Hiliofonaluo</item>
+    </string-array>
+    <string-array name="miniamolo">
+        <item>Hilisimaetano</item>
+        <item>Idala Jaya</item>
+        <item>Hilifalawu</item>
+        <item>Hiliaurifa</item>
+        <item>Soto'o</item>
+        <item>Bonia</item>
+        <item>Ndraso Maenamolo</item>
+        <item>Pekan So'onogeu</item>
+        <item>Samadaya</item>
+        <item>Bawohosi</item>
+        <item>Bawogosali</item>
+        <item>Bawosaodano</item>
+        <item>Eho</item>
+        <item>Faomasi</item>
+    </string-array>
 
 
 </resources>

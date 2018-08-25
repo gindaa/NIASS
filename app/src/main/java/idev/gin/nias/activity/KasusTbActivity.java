@@ -32,18 +32,21 @@ import idev.gin.nias.adapter.KasusTbAdapter;
 import idev.gin.nias.adapter.NotifikasiNakesAdapter;
 import idev.gin.nias.dao.FaskesDao;
 import idev.gin.nias.utils.CONSTANT;
-import idev.gin.nias.utils.EndlessRecyclerViewScrollListener;
+import idev.gin.nias.utils.EndlessRecyclerOnScrollListener;
+
 
 public class KasusTbActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private RecyclerView recyclerView;
+    private int mLoadedItems = 10;
     private ArrayList<KasusClass> tbList;
     private KasusTbAdapter adapter;
-    private EndlessRecyclerViewScrollListener scrollListener;
+    private EndlessRecyclerOnScrollListener scrollListener;
 
     String emailpass;
     String tokenpass;
+    int pages;
     String selectedid;
     Button btidkasus;
 
@@ -55,49 +58,50 @@ public class KasusTbActivity extends AppCompatActivity {
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
 
-
-//        Button btidkasus = (Button)findViewById(R.id.btgetidkasus);
-//        btidkasus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefs",MODE_PRIVATE);
-//                Toast.makeText(getApplicationContext(), "Id kasus adalah di activity :" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
-//            }
-//        });
-
-
-        RecyclerView rvitem = (RecyclerView) findViewById(R.id.reckasustb);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tbList = new ArrayList<>();
         adapter = new KasusTbAdapter(this,tbList);
+        RecyclerView rvitem = (RecyclerView) findViewById(R.id.reckasustb);
         rvitem.setAdapter(adapter);
         rvitem.setLayoutManager(new  LinearLayoutManager(this));
-        rvitem.addOnScrollListener(scrollListener);
-//        scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager){
+        callkasustb("1");
+
+
+        String pagenumber = Integer.toString(pages);
+        rvitem.addOnScrollListener(scrollData(pagenumber));
+//        scrollListener = new EndlessRecyclerOnScrollListener(linearLayoutManager){
 //            @Override
-//            public void onLoadMore(int page, int totalItemsCount ,RecyclerView view) {
-//                callkasustb(page);
+//            public void onLoadMore() {
+//                callkasustb(2);
 //            }
 //        };
 
-        callkasustb(1);
+
+//        callkasustb(1);
 }
 
+    private EndlessRecyclerOnScrollListener scrollData(String page){
+        return new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                callkasustb(page);
 
-    private void callkasustb(int page) {
-        String textpage = Integer.toString(page);
+            }
+        };
+    }
+
+    private void callkasustb(String page) {
+//        String textpage = Integer.toString(page);
                 AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
                         .addHeaders("Authorization", "bearer " + tokenpass)
-                        .addHeaders("page",textpage)
+                        .addHeaders("page",page)
                         .setTag("Faskes")
                         .setPriority(Priority.MEDIUM)
                         .build()
                         .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
                             @Override
                             public void onResponse(FaskesDao response) {
-//                                if (response.getResult().getPage().equals("0")) {
-//                                    return;
-//                                }
                                 for (int i = 0; i < response.getResult().getData().size(); i++) {
                                     KasusClass isikasus = new KasusClass(
                                             response.getResult().getData().get(i).getId(),

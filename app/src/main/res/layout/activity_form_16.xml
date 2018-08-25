@@ -23,7 +23,8 @@
                     android:id="@+id/unit_pelayanan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Unit Pelayanan Kesehatan" />
+                    android:hint="Unit Pelayanan Kesehatan"
+                    android:editable="false"/>
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="368dp"
@@ -35,7 +36,8 @@
                     android:id="@+id/kabkotar"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Kab / Kota" />
+                    android:hint="Kab / Kota"
+                    android:editable="false"/>
             </android.support.design.widget.TextInputLayout>
 
             <LinearLayout

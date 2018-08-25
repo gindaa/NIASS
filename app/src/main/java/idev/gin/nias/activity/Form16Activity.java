@@ -27,8 +27,12 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
 import idev.gin.nias.dao.AddPoinDao;
+import idev.gin.nias.dao.AkunidDao;
+import idev.gin.nias.dao.FaskesDao;
+import idev.gin.nias.dao.FaskesIdDao;
 import idev.gin.nias.dao.POST_KONTAK;
 import idev.gin.nias.dao.PostPelacakanDao;
 import idev.gin.nias.dao.PostRiwayatDao;
@@ -75,6 +79,43 @@ public class Form16Activity extends AppCompatActivity {
 
         Button submitfaskes = (Button) findViewById(R.id.submitfaskes);
         mAPIServiceKontak = ApiUtils.getAPIKontak();
+        AndroidNetworking.get(CONSTANT.BASE_URL + "faskesid")
+                .addHeaders("Authorization", "bearer " + tokenpassnakes)
+                .addHeaders("id",idKasus)
+                .setTag("Faskesid")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsObject(FaskesIdDao.class, new ParsedRequestListener<FaskesIdDao>() {
+                    @Override
+                    public void onResponse(FaskesIdDao response) {
+                        kabupatenEt.setText(response.getResult().get(0).getKabupaten());
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                    }
+
+                });
+        AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
+                .addHeaders("Authorization", "bearer " + tokenpassnakes)
+                .addHeaders("email", emailpassnakes)
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsObject(AkunidDao.class, new ParsedRequestListener<AkunidDao>() {
+                    @Override
+                    public void onResponse(AkunidDao response) {
+                        unitPelayananEt.setText(response.getResult().get(0).getNama());
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
+
 
         submitfaskes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,5 +255,9 @@ public class Form16Activity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String tanggalriwayat = df.format(c);
         tanggalEt.setText(tanggalriwayat);
+
+
     }
+
+
 }
