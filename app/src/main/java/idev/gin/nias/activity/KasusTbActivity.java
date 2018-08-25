@@ -1,4 +1,5 @@
 package idev.gin.nias.activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,16 +40,15 @@ public class KasusTbActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private RecyclerView recyclerView;
-    private int mLoadedItems = 10;
     private ArrayList<KasusClass> tbList;
     private KasusTbAdapter adapter;
     private EndlessRecyclerOnScrollListener scrollListener;
-
+    public int pages;
+    public int lastpages;
     String emailpass;
     String tokenpass;
-    int pages;
-    String selectedid;
-    Button btidkasus;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,25 @@ public class KasusTbActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
+        AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
+                .addHeaders("Authorization", "bearer " + tokenpass)
+                .addHeaders("page", "1")
+                .setTag("Faskes")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
+                    @Override
+                    public void onResponse(FaskesDao response) {
+                        lastpages = response.getResult().getLastPage();
+                        Log.i("halakhirlastt",Integer.toString(lastpages));
 
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(), "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                    }
+                });
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tbList = new ArrayList<>();
@@ -66,69 +84,61 @@ public class KasusTbActivity extends AppCompatActivity {
         rvitem.setAdapter(adapter);
         rvitem.setLayoutManager(new  LinearLayoutManager(this));
         callkasustb("1");
-
-
-        String pagenumber = Integer.toString(pages);
-        rvitem.addOnScrollListener(scrollData(pagenumber));
-//        scrollListener = new EndlessRecyclerOnScrollListener(linearLayoutManager){
-//            @Override
-//            public void onLoadMore() {
-//                callkasustb(2);
-//            }
-//        };
-
-
-//        callkasustb(1);
+        rvitem.addOnScrollListener(scrollData(pages));
 }
 
-    private EndlessRecyclerOnScrollListener scrollData(String page){
+    private EndlessRecyclerOnScrollListener scrollData(int pagesi){
         return new EndlessRecyclerOnScrollListener() {
             @Override
             public void onLoadMore() {
-                callkasustb(page);
-
+                Log.i("halaman",Integer.toString(pagesi));
+                Log.i("halakhir",Integer.toString(lastpages));
+                    String pagesstr = Integer.toString(pagesi);
+                    callkasustb(pagesstr);
             }
         };
     }
 
     private void callkasustb(String page) {
-//        String textpage = Integer.toString(page);
-                AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
-                        .addHeaders("Authorization", "bearer " + tokenpass)
-                        .addHeaders("page",page)
-                        .setTag("Faskes")
-                        .setPriority(Priority.MEDIUM)
-                        .build()
-                        .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
-                            @Override
-                            public void onResponse(FaskesDao response) {
-                                for (int i = 0; i < response.getResult().getData().size(); i++) {
-                                    KasusClass isikasus = new KasusClass(
-                                            response.getResult().getData().get(i).getId(),
-                                            response.getResult().getData().get(i).getNo_registrasi_faskes(),
-                                            response.getResult().getData().get(i).getNo_registrasi_tbkota(),
-                                            response.getResult().getData().get(i).getProvinsi(),
-                                            response.getResult().getData().get(i).getNo_registrasi_faskes(),
-                                            response.getResult().getData().get(i).getNo_registrasi_tbkota(),
-                                            response.getResult().getData().get(i).getNama_pasien(),
-                                            response.getResult().getData().get(i).getNik(),
-                                            response.getResult().getData().get(i).getJenis_kelamin(),
-                                            response.getResult().getData().get(i).getUmur(),
-                                            response.getResult().getData().get(i).getAlamat(),
-                                            response.getResult().getData().get(i).getPerujuk(),
-                                            response.getResult().getData().get(i).getTipe_diagnosis_tb());
-                                    tbList.add(isikasus);
-                                }
-                                adapter.notifyDataSetChanged();
-
+        pages = pages + 1;
+        String pagestr = Integer.toString(pages);
+        AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
+                    .addHeaders("Authorization", "bearer " + tokenpass)
+                    .addHeaders("page", pagestr)
+                    .setTag("Faskes")
+                    .setPriority(Priority.MEDIUM)
+                    .build()
+                    .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
+                        @Override
+                        public void onResponse(FaskesDao response) {
+                            for (int i = 0; i < response.getResult().getData().size(); i++) {
+                                KasusClass isikasus = new KasusClass(
+                                        response.getResult().getData().get(i).getId(),
+                                        response.getResult().getData().get(i).getNo_registrasi_faskes(),
+                                        response.getResult().getData().get(i).getNo_registrasi_tbkota(),
+                                        response.getResult().getData().get(i).getProvinsi(),
+                                        response.getResult().getData().get(i).getNo_registrasi_faskes(),
+                                        response.getResult().getData().get(i).getNo_registrasi_tbkota(),
+                                        response.getResult().getData().get(i).getNama_pasien(),
+                                        response.getResult().getData().get(i).getNik(),
+                                        response.getResult().getData().get(i).getJenis_kelamin(),
+                                        response.getResult().getData().get(i).getUmur(),
+                                        response.getResult().getData().get(i).getAlamat(),
+                                        response.getResult().getData().get(i).getPerujuk(),
+                                        response.getResult().getData().get(i).getTipe_diagnosis_tb());
+                                tbList.add(isikasus);
 
                             }
+                            lastpages = response.getResult().getLastPage();
+                            adapter.notifyDataSetChanged();
+                        }
 
-                            @Override
-                            public void onError(ANError anError) {
-                                Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
-                            }
+                        @Override
+                        public void onError(ANError anError) {
+                            Toast.makeText(getApplicationContext(), "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                        }
 
-                        });
-        }
+                    });
+//        } else Toast.makeText(getApplicationContext(), "Last Page", Toast.LENGTH_LONG).show();
     }
+}

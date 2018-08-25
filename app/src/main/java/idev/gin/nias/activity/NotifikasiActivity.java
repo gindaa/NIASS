@@ -29,9 +29,11 @@ import java.util.List;
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
+import idev.gin.nias.adapter.KasusTbAdapter;
 import idev.gin.nias.adapter.NotifikasiNakesAdapter;
 import idev.gin.nias.dao.FaskesDao;
 import idev.gin.nias.utils.CONSTANT;
+import idev.gin.nias.utils.EndlessRecyclerOnScrollListener;
 
 public class NotifikasiActivity extends AppCompatActivity {
 
@@ -39,7 +41,8 @@ public class NotifikasiActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<KasusDetailClass> tbList;
     private NotifikasiNakesAdapter adapter;
-
+    int lastpages;
+    public int pages;
     String emailpass;
     String tokenpass;
 
@@ -50,42 +53,61 @@ public class NotifikasiActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
+        AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
+                .addHeaders("Authorization", "bearer " + tokenpass)
+                .addHeaders("page", "1")
+                .setTag("Faskes")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
+                    @Override
+                    public void onResponse(FaskesDao response) {
+                        lastpages = response.getResult().getLastPage();
+                        Log.i("halakhirlastt",Integer.toString(lastpages));
 
+                    }
 
-//        Button btidkasus = (Button)findViewById(R.id.btgetidkasus);
-//        btidkasus.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPrefs",MODE_PRIVATE);
-//                Toast.makeText(getApplicationContext(), "Id kasus adalah di activity :" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
-//            }
-//        });
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(), "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                    }
+                });
 
-        recyclerView = (RecyclerView) findViewById(R.id.recnotifikasi);
-        recyclerView.setLayoutManager(new  LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tbList = new ArrayList<>();
         adapter = new NotifikasiNakesAdapter(this,tbList);
-        recyclerView.setAdapter(adapter);
-        callkasustb();
+        RecyclerView rvsitem = (RecyclerView) findViewById(R.id.recnotifikasi);
+        rvsitem.setAdapter(adapter);
+        rvsitem.setLayoutManager(new  LinearLayoutManager(this));
+        callkasustb("1");
+        rvsitem.addOnScrollListener(scrollData(pages));
 
 
 
     }
+    private EndlessRecyclerOnScrollListener scrollData(int pagesi){
+        return new EndlessRecyclerOnScrollListener() {
+            @Override
+            public void onLoadMore() {
+                Log.i("halaman",Integer.toString(pagesi));
+                Log.i("halakhir",Integer.toString(lastpages));
+                String pagesstr = Integer.toString(pagesi);
+                callkasustb(pagesstr);
+            }
+        };
+    }
 
 
-    private void callkasustb() {
+    private void callkasustb(String page) {
+        pages = pages + 1;
+        String pagestr = Integer.toString(pages);
         AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
                 .addHeaders("Authorization", "bearer " + tokenpass)
-                .addHeaders("page","1")
+                .addHeaders("page",pagestr)
                 .setTag("Faskes")
                 .setPriority(Priority.MEDIUM)
                 .build()
-//                        .getAsJSONObject(new JSONObjectRequestListener() {
-//                            @Override
-//                            public void onResponse(JSONObject response) {
-//                                Log.i("xxx", response.toString());
-//                            }
                 .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
                     @Override
                     public void onResponse(FaskesDao response) {
@@ -115,8 +137,6 @@ public class NotifikasiActivity extends AppCompatActivity {
                             tbList.add(isikasus);
                         }
                         adapter.notifyDataSetChanged();
-
-
                     }
 
                     @Override
