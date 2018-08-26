@@ -2,6 +2,7 @@ package idev.gin.nias.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -42,6 +43,7 @@ public class LoginActivity extends AppCompatActivity {
     public Button mSignUpButton;
     private String tokens;
     SharedPreferences sharedPref;
+    String emaildefault;
 
     /**
      * Kalo bingung, dao dipisah aja setiap endpointnya

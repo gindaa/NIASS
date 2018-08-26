@@ -41,6 +41,7 @@ import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
 import idev.gin.nias.dao.AddPoinDao;
 import idev.gin.nias.dao.AkunidDao;
+import idev.gin.nias.dao.FaskesIdDao;
 import idev.gin.nias.dao.POST_RIWAYAT;
 import idev.gin.nias.dao.PoinDao;
 import idev.gin.nias.dao.PostRiwayatDao;
@@ -91,10 +92,6 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
             }
         });
 
-
-
-
-
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
@@ -118,6 +115,24 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
 
         Button submitriwayat = (Button) findViewById(R.id.submitrwyt);
         mApiServiceRiwayat = ApiUtils.getAPIRiwayat();
+        AndroidNetworking.get(CONSTANT.BASE_URL + "faskesid")
+                .addHeaders("Authorization", "bearer " + tokenpass)
+                .addHeaders("id",idkasus)
+                .setTag("Faskesid")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsObject(FaskesIdDao.class, new ParsedRequestListener<FaskesIdDao>() {
+                    @Override
+                    public void onResponse(FaskesIdDao response) {
+                        desak.setText(response.getResult().get(0 ).getKabupaten());
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                    }
+
+                });
 
         AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
                 .addHeaders("Authorization", "bearer " + tokenpass)

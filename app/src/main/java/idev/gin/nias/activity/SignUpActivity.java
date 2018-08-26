@@ -2,6 +2,7 @@ package idev.gin.nias.activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.TextInputEditText;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -35,6 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TextView mResponseTv;
     private APIServiceSignUp mAPIServiceRegis;
+    SharedPreferences sharedPref;
 
 
     @Override
@@ -51,10 +54,33 @@ public class SignUpActivity extends AppCompatActivity {
         final Spinner roleSp = (Spinner) findViewById(R.id.pilihlogin);
         final TextInputEditText passwordEt = (TextInputEditText) findViewById(R.id.password);
         final TextInputEditText kPasswordEt = (TextInputEditText) findViewById(R.id.konf_password);
+        final Spinner spKecamatan = (Spinner) findViewById(R.id.spkecamatan);
+        final Spinner spKelurahan = (Spinner) findViewById(R.id.spkelurahan);
         String response;
+        ArrayAdapter<String> adapterfana = new ArrayAdapter<String>(SignUpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.fanayama));
+        adapterfana.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adaptermin = new ArrayAdapter<String>(SignUpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.miniamolo));
+        adaptermin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         Button submitBtn = (Button) findViewById(R.id.btnSignup);
         mAPIServiceRegis = ApiUtils.getAPIRegis();
+
+        spKecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String kecamatan = spKecamatan.getSelectedItem().toString().toLowerCase();
+                if (kecamatan.equals("fanayama")){
+                    spKelurahan.setAdapter(adapterfana);
+                }
+                else if(kecamatan.equals("maniamolo")){
+                    spKelurahan.setAdapter(adaptermin);
+                }
+        }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,6 +117,11 @@ public class SignUpActivity extends AppCompatActivity {
                             Intent intant = new Intent(SignUpActivity.this, LoginActivity.class);
                             startActivity(intant);
                             Toast.makeText(SignUpActivity.this, "Sign up Berhasil", Toast.LENGTH_LONG).show();
+                            sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+                            SharedPreferences.Editor edit = sharedPref.edit();
+                            edit.putString("email", email);
+                            edit.apply();
+
                         }
                     }
 
@@ -139,5 +170,15 @@ public class SignUpActivity extends AppCompatActivity {
                 mDisplayDate.setText(date);
             }
         };
+
+        Spinner spkecamatan = (Spinner) findViewById(R.id.spkecamatan);
+        ArrayAdapter<String> adapterkec = new ArrayAdapter<String>(SignUpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kecamatan));
+        adapterkec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spkecamatan.setAdapter((adapterkec));
+
+//        Spinner spkelurahan = (Spinner) findViewById(R.id.spkelurahan);
+//        ArrayAdapter<String> adapterkel = new ArrayAdapter<String>(SignUpActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.miniamolo));
+//        adapterkel.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//        spkelurahan.setAdapter((adapterkel));
     }
 }

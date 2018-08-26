@@ -40,7 +40,21 @@
                     android:hint="@string/nama_lengkap" />
             </android.support.design.widget.TextInputLayout>
 
+            <Spinner
+                android:id="@+id/spkecamatan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+            </Spinner>
+
+            <Spinner
+                android:id="@+id/spkelurahan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </Spinner>
+
             <RelativeLayout
+                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

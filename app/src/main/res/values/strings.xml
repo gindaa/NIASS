@@ -136,10 +136,12 @@
         <item>Lebih dari 1 cm</item>
     </string-array>
     <string-array name="kecamatan">
+        <item>Pilih Kecamatan</item>
         <item>Fanayama</item>
         <item>Maniamolo</item>
     </string-array>
     <string-array name="fanayama">
+        <item>Pilih Kelurahan</item>
         <item>Bawomataluo</item>
         <item>Hilisalawa</item>
         <item>Orahili Fau</item>
@@ -159,6 +161,7 @@
         <item>Hiliofonaluo</item>
     </string-array>
     <string-array name="miniamolo">
+        <item>Pilih Kelurahan</item>
         <item>Hilisimaetano</item>
         <item>Idala Jaya</item>
         <item>Hilifalawu</item>
