@@ -189,50 +189,6 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                 {
                     sendriwayat(namaKader,desa,tanggal,nama_orangtua,nama_anak,usia_anak,jumlah_anak,alamat_desa,kontak_tb,Berat59,Berat14,Demam,Batuk,Kelenjar,Pembengkakan);
                 }
-                getAkunId(emailpass,tokenpass);
-            }
-            public void getAkunId(final String email, final  String token) {
-                AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
-                        .addHeaders("Authorization", "bearer " + token)
-                        .addHeaders("email", email)
-                        .setTag("test")
-                        .setPriority(Priority.MEDIUM)
-                        .build()
-                        .getAsObject(AkunidDao.class, new ParsedRequestListener<AkunidDao>() {
-                            @Override
-                            public void onResponse(AkunidDao response) {
-                                String role = response.getResult().get(0).getRole();
-                                Log.i("role",role);
-                                if(role.toLowerCase().contains("kader")){
-                                    startkader();
-                                }
-                                else if(role.toLowerCase().contains("nakes")) {
-                                    startnakes();
-                                }
-                                else {
-                                    Toast.makeText(getApplicationContext(), "Role not found", Toast.LENGTH_LONG).show();
-                                }
-                            }
-
-                            private void startkader() {
-                                Intent intent = new Intent(RiwayatTbActivity.this,MenuKaderActivity.class);
-                                intent.putExtra("token" , token);
-                                intent.putExtra("email", email);
-                                startActivity(intent);
-                            }
-
-                            private void startnakes() {
-                                Intent intent = new Intent(RiwayatTbActivity.this,MenuNakesActivity.class);
-                                intent.putExtra("token" , token);
-                                intent.putExtra("email", email);
-                                startActivity(intent);
-                            }
-
-                            @Override
-                            public void onError(ANError anError) {
-                                Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
-                            }
-                        });
             }
             private void sendriwayat(String namaKader,String desa,String tanggal,String namaOrangtua,String namaAnak,String usiaAnak,String jumlahAnak,String alamatDesa,String kontakTb,String berat59,String berat4,String demam,String batuk ,String kelenjar,String bengkak) {
 
@@ -245,13 +201,13 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                         .addBodyParameter("nama_anak",namaAnak)
                         .addBodyParameter("usia_anak",usiaAnak)
                         .addBodyParameter("jumlah_anak",jumlahAnak)
-                        .addBodyParameter("alamat_anak",alamatDesa)
+                        .addBodyParameter("alamat_desa",alamatDesa)
                         .addBodyParameter("kontak_tb",kontakTb)
                         .addBodyParameter("berat_badan_59bulan",berat59)
                         .addBodyParameter("berat_badan_14tahun",berat4)
                         .addBodyParameter("demam",demam)
                         .addBodyParameter("batuk",batuk)
-                        .addBodyParameter("pembesaran_kelenjar_limfie",kelenjar)
+                        .addBodyParameter("pembesaran_kelenjar_limfe",kelenjar)
                         .addBodyParameter("pembesaran_tulang",bengkak)
                         .addBodyParameter("lat",latitude)
                         .addBodyParameter("long",longitude)
@@ -274,6 +230,8 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                                                 public void onResponse(Object response) {
                                                     Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
                                                     Intent intent = new Intent(RiwayatTbActivity.this,MenuKaderActivity.class);
+                                                    intent.putExtra("token" , tokenpass);
+                                                    intent.putExtra("email", emailpass);
                                                     startActivity(intent);
 
                                                 }

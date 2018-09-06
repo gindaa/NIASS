@@ -19,10 +19,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.ParsedRequestListener;
+
 import idev.gin.nias.R;
+import idev.gin.nias.dao.AddPoinDao;
+import idev.gin.nias.dao.SkoringDao;
 import idev.gin.nias.data.remote.APIServiceSignUp;
 import idev.gin.nias.data.remote.ApiUtils;
 import idev.gin.nias.dao.SignupDao;
+import idev.gin.nias.utils.CONSTANT;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -51,6 +59,7 @@ public class SignUpActivity extends AppCompatActivity {
         final TextView tanggalLahirEt = (TextView) findViewById(R.id.datepick);
         final TextInputEditText tempatLahirEt = (TextInputEditText) findViewById(R.id.sgtptlhr);
         final TextInputEditText noHpEt = (TextInputEditText) findViewById(R.id.sgnhp);
+        final TextInputEditText alamatEt = (TextInputEditText) findViewById(R.id.alamatsu);
         final Spinner roleSp = (Spinner) findViewById(R.id.pilihlogin);
         final TextInputEditText passwordEt = (TextInputEditText) findViewById(R.id.password);
         final TextInputEditText kPasswordEt = (TextInputEditText) findViewById(R.id.konf_password);
@@ -85,52 +94,83 @@ public class SignUpActivity extends AppCompatActivity {
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = emailEt.getText().toString().trim();
-                String nama = namaEt.getText().toString().trim();
-                String gender = genderSp.getSelectedItem().toString().trim();
-                String tanggalLahir = tanggalLahirEt.getText().toString().trim();
-                String tempatLahir = tempatLahirEt.getText().toString().trim();
-                String noHp = noHpEt.getText().toString().trim();
-                String role = roleSp.getSelectedItem().toString().trim();
-                String password = passwordEt.getText().toString().trim();
+                AndroidNetworking.post(CONSTANT.BASE_URL + "register")
+                        .addBodyParameter("email",emailEt.getText().toString().trim())
+                        .addBodyParameter("nama",namaEt.getText().toString().trim())
+                        .addBodyParameter("jenis_kelamin",genderSp.getSelectedItem().toString())
+                        .addBodyParameter("tempat_lahir",tempatLahirEt.getText().toString().trim())
+                        .addBodyParameter("tanggal_lahir",tanggalLahirEt.getText().toString().trim())
+                        .addBodyParameter("no_hp",noHpEt.getText().toString().trim())
+                        .addBodyParameter("password",passwordEt.getText().toString().trim())
+                        .addBodyParameter("role",roleSp.getSelectedItem().toString())
+                        .addBodyParameter("alamat",alamatEt.getText().toString().trim())
+                        .addBodyParameter("kabupaten","Nias Selatan")
+                        .addBodyParameter("kecamatan",spKecamatan.getSelectedItem().toString())
+                        .addBodyParameter("kelurahan",spKelurahan.getSelectedItem().toString())
+                        .setTag("Register")
+                        .setPriority(Priority.MEDIUM)
+                        .build()
+                        .getAsObject(SignupDao.class, new ParsedRequestListener<SignupDao>() {
+                            @Override
+                            public void onResponse(SignupDao response) {
+                                Intent intant = new Intent(SignUpActivity.this, LoginActivity.class);
+                                startActivity(intant);
+                                Toast.makeText(SignUpActivity.this, "Sign up Berhasil", Toast.LENGTH_LONG).show();
+                            }
 
-                if (!TextUtils.isEmpty(nama) &&
-                        !TextUtils.isEmpty(email) &&
-                        !TextUtils.isEmpty(gender) &&
-                        !TextUtils.isEmpty(tanggalLahir) &&
-                        !TextUtils.isEmpty(tempatLahir) &&
-                        !TextUtils.isEmpty(noHp) &&
-                        !TextUtils.isEmpty(role) &&
-                        !TextUtils.isEmpty(password) &&
-                        (kPasswordEt) != (passwordEt)
-                        ) {
-                    sendPost(email, nama, gender, tempatLahir, tanggalLahir, noHp, password, role);
-                }
+                            @Override
+                            public void onError(ANError anError) {
+                                Toast.makeText(getApplicationContext(), "Input Failed: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+
+                            }
+                        });
             }
-
-            private void sendPost(String email, String nama, String gender, String tempatLahir, String tanggalLahir, String noHp, String role, String password) {
-                mAPIServiceRegis.savePost(email, nama, gender, tempatLahir, tanggalLahir, noHp, role, password)
-                        .enqueue(new Callback<SignupDao>() {
-                    @Override
-                    public void onResponse(Call<SignupDao> call, Response<SignupDao> response) {
-                        if (response.isSuccessful()) {
-                            Intent intant = new Intent(SignUpActivity.this, LoginActivity.class);
-                            startActivity(intant);
-                            Toast.makeText(SignUpActivity.this, "Sign up Berhasil", Toast.LENGTH_LONG).show();
-                            sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                            SharedPreferences.Editor edit = sharedPref.edit();
-                            edit.putString("email", email);
-                            edit.apply();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<SignupDao> call, Throwable t) {
-                        Toast.makeText(SignUpActivity.this, "Sign up Errorr", Toast.LENGTH_LONG).show();
-                    }
-                });
-            }
+//                String email = emailEt.getText().toString().trim();
+//                String nama = namaEt.getText().toString().trim();
+//                String gender = genderSp.getSelectedItem().toString().trim();
+//                String tanggalLahir = tanggalLahirEt.getText().toString().trim();
+//                String tempatLahir = tempatLahirEt.getText().toString().trim();
+//                String noHp = noHpEt.getText().toString().trim();
+//                String role = roleSp.getSelectedItem().toString().trim();
+//                String password = passwordEt.getText().toString().trim();
+//
+//                if (!TextUtils.isEmpty(nama) &&
+//                        !TextUtils.isEmpty(email) &&
+//                        !TextUtils.isEmpty(gender) &&
+//                        !TextUtils.isEmpty(tanggalLahir) &&
+//                        !TextUtils.isEmpty(tempatLahir) &&
+//                        !TextUtils.isEmpty(noHp) &&
+//                        !TextUtils.isEmpty(role) &&
+//                        !TextUtils.isEmpty(password) &&
+//                        (kPasswordEt) != (passwordEt)
+//                        ) {
+//                    sendPost(email, nama, gender, tempatLahir, tanggalLahir, noHp, password, role);
+//                }
+//            }
+//
+//            private void sendPost(String email, String nama, String gender, String tempatLahir, String tanggalLahir, String noHp, String role, String password) {
+//                mAPIServiceRegis.savePost(email, nama, gender, tempatLahir, tanggalLahir, noHp, role, password)
+//                        .enqueue(new Callback<SignupDao>() {
+//                    @Override
+//                    public void onResponse(Call<SignupDao> call, Response<SignupDao> response) {
+//                        if (response.isSuccessful()) {
+//                            Intent intant = new Intent(SignUpActivity.this, LoginActivity.class);
+//                            startActivity(intant);
+//                            Toast.makeText(SignUpActivity.this, "Sign up Berhasil", Toast.LENGTH_LONG).show();
+//                            sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
+//                            SharedPreferences.Editor edit = sharedPref.edit();
+//                            edit.putString("email", email);
+//                            edit.apply();
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<SignupDao> call, Throwable t) {
+//                        Toast.makeText(SignUpActivity.this, "Sign up Errorr", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//            }
         });
 
         Spinner spGender = (Spinner) findViewById(R.id.spgender);

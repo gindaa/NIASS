@@ -52,6 +52,17 @@
                 android:layout_height="wrap_content">
 
             </Spinner>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/alamatsu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Alamat" />
+            </android.support.design.widget.TextInputLayout>
+
 
             <RelativeLayout
                 android:layout_marginTop="4dp"
