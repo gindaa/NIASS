@@ -1,6 +1,4 @@
 package idev.gin.nias.adapter;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,60 +10,53 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.common.Priority;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.ParsedRequestListener;
-
 import java.util.ArrayList;
 
-import idev.gin.nias.KasusClass;
+import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
-import idev.gin.nias.activity.KasusTbActivity;
-import idev.gin.nias.activity.LoginActivity;
-import idev.gin.nias.activity.RiwayatTbActivity;
-import idev.gin.nias.activity.SignUpActivity;
-import idev.gin.nias.dao.SignupDao;
-import idev.gin.nias.utils.CONSTANT;
+import idev.gin.nias.activity.Form16Activity;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHolder> {
-
+public class NotifikasiKaderAdapter extends RecyclerView.Adapter<NotifikasiKaderAdapter.ViewHolder> {
     private Context context;
     SharedPreferences sharedPref;
-    private ArrayList<KasusClass> listKasusClassTB;
+    private ArrayList<KasusDetailClass> listKasusClassTB;
     private String idkasustb;
 
 
-    public KasusTbAdapter(Context context, ArrayList<KasusClass> listKasusClassTB) {
+    public NotifikasiKaderAdapter(Context context, ArrayList<KasusDetailClass> listKasusClassTB) {
         this.context = context;
         this.listKasusClassTB = listKasusClassTB;
         sharedPref = context.getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public NotifikasiKaderAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.card_kasustb, parent, false);
-        return new ViewHolder(itemView);
+        View itemView = layoutInflater.inflate(R.layout.card_notifikasi, parent, false);
+        return new NotifikasiKaderAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(NotifikasiKaderAdapter.ViewHolder holder, int position) {
 
-        // We need an editor object to make changes
         holder.idKasus.setText(listKasusClassTB.get(position).getIdKasus());
         holder.namaFaskes.setText(listKasusClassTB.get(position).getmTextnamafaskes());
-        holder.kabKota.setText(listKasusClassTB.get(position).getmTextKota());
-        holder.namaProvinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
+        holder.Alamat.setText(listKasusClassTB.get(position).getmTextAlamat());
+        holder.rtrw.setText(listKasusClassTB.get(position).getmTextrtrw());
+        holder.kelurahan.setText(listKasusClassTB.get(position).getmTextKelurahan());
+        holder.kecamatan.setText(listKasusClassTB.get(position).getmTextKecematan());
+        holder.kabupaten.setText(listKasusClassTB.get(position).getmTextKabupaten());
+        holder.provinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
+        holder.kota.setText(listKasusClassTB.get(position).getmTextKota());
         holder.noReg.setText(listKasusClassTB.get(position).getmTextregis());
         holder.noRegTb.setText(listKasusClassTB.get(position).getmTextregisTbKota());
         holder.namaPasien.setText(listKasusClassTB.get(position).getmTextNamaPasien());
         holder.Nik.setText(listKasusClassTB.get(position).getmTextNik());
         holder.Jk.setText(listKasusClassTB.get(position).getMtextjk());
         holder.Umur.setText(listKasusClassTB.get(position).getmTextUmur());
-        holder.Alamat.setText(listKasusClassTB.get(position).getmTextAlamat());
+
         holder.dirujuk.setText(listKasusClassTB.get(position).getmTextRujuk());
         holder.tipeDiagnosisTB.setText(listKasusClassTB.get(position).getmTextdiagnosistb());
         holder.btIdkasus.setOnClickListener(new View.OnClickListener() {
@@ -79,44 +70,11 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
                 edit.putString("idKasus", listKasusClassTB.get(position).getIdKasus());
                 edit.apply();
                 Toast.makeText(context, "ID KASUS Adalah:" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, RiwayatTbActivity.class);
+                Intent intent = new Intent(context, Form16Activity.class);
                 intent.putExtra("email",pref.getString("email", "email"));
                 intent.putExtra("token",pref.getString("token", "email"));
                 intent.putExtra("idKasus" , idKasus);
                 context.startActivity(intent);
-            }
-        });
-        holder.btSelesai.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences pref = context.getSharedPreferences("MyPrefs",MODE_PRIVATE);
-                String tokenpass = pref.getString("token", "token");
-                String emailpass = pref.getString("email", "mail");
-                idkasustb = listKasusClassTB.get(position).getIdKasus();
-                AndroidNetworking.put(CONSTANT.BASE_URL + "faskes")
-                        .addHeaders("Authorization", "bearer " + tokenpass)
-                        .addBodyParameter("id",idkasustb)
-                        .addBodyParameter("status","selesai")
-                        .setTag("setStatusSelesai")
-                        .setPriority(Priority.MEDIUM)
-                        .build()
-                        .getAsObject(SignupDao.class, new ParsedRequestListener<SignupDao>() {
-                            @Override
-                            public void onResponse(SignupDao response) {
-                                Toast.makeText(context, "Kasus TB Selesai", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent (context, KasusTbActivity.class);
-                                intent.putExtra("email",emailpass);
-                                intent.putExtra("token",tokenpass);
-                                ((Activity)context).finish();
-                                context.startActivity(intent);
-                            }
-
-                            @Override
-                            public void onError(ANError anError) {
-                                Toast.makeText(context, "Error :" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
-                            }
-                        });
-
             }
         });
 
@@ -130,8 +88,13 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView idKasus;
         public TextView namaFaskes;
-        public TextView kabKota;
-        public TextView namaProvinsi;
+        public TextView alamat;
+        public TextView rtrw;
+        public TextView kelurahan;
+        public TextView kecamatan;
+        public TextView kabupaten;
+        public TextView provinsi;
+        public TextView kota;
         public TextView noReg;
         public TextView noRegTb;
         public TextView namaPasien;
@@ -142,25 +105,27 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         public TextView dirujuk;
         public TextView tipeDiagnosisTB;
         public Button btIdkasus;
-        public Button btSelesai;
 
         public ViewHolder(View itemView) {
             super(itemView);
             idKasus = itemView.findViewById(R.id.idkasus);
             namaFaskes = itemView.findViewById(R.id.namafaskeskasus);
-            kabKota = itemView.findViewById(R.id.kabkotakasus);
-            namaProvinsi = itemView.findViewById(R.id.namaprovinsikasus);
+            Alamat = itemView.findViewById(R.id.alamatkasus);
+            rtrw = itemView.findViewById(R.id.rtrwnotif);
+            kelurahan = itemView.findViewById(R.id.kelurahannotif);
+            kecamatan = itemView.findViewById(R.id.kecamatannotif);
+            kabupaten = itemView.findViewById(R.id.kabupatennotif);
+            provinsi = itemView.findViewById(R.id.provinsiotif);
+            kota = itemView.findViewById(R.id.kotanotif);
             noReg = itemView.findViewById(R.id.noregfaskeskasus);
             noRegTb = itemView.findViewById(R.id.noregtbkasus);
             namaPasien = itemView.findViewById(R.id.namapasienkasus);
             Nik = itemView.findViewById(R.id.nikkasus);
             Jk = itemView.findViewById(R.id.jeniskelaminkasus);
             Umur = itemView.findViewById(R.id.umurkasus);
-            Alamat = itemView.findViewById(R.id.alamatkasus);
             dirujuk = itemView.findViewById(R.id.dirujukkasus);
             tipeDiagnosisTB = itemView.findViewById(R.id.tipediagnosiskasus);
             btIdkasus = itemView.findViewById(R.id.btgetidkasus);
-            btSelesai = itemView.findViewById(R.id.btselesai);
 
         }
 

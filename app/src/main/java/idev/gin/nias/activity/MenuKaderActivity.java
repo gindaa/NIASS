@@ -71,7 +71,7 @@ public class MenuKaderActivity extends AppCompatActivity {
         btnotifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuKaderActivity.this,NotifikasiActivity.class);
+                Intent intent = new Intent(MenuKaderActivity.this,NotifikasiNakesActivity.class);
                 intent.putExtra("email",emailpass);
                 intent.putExtra("token",tokenpass);
                 startActivity(intent);

@@ -1,41 +1,28 @@
 package idev.gin.nias.activity;
+
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.ParsedRequestListener;
-import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
-import idev.gin.nias.KasusClass;
 import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
-import idev.gin.nias.adapter.KasusTbAdapter;
 import idev.gin.nias.adapter.NotifikasiNakesAdapter;
 import idev.gin.nias.dao.FaskesDao;
 import idev.gin.nias.utils.CONSTANT;
 import idev.gin.nias.utils.EndlessRecyclerOnScrollListener;
 
-public class NotifikasiActivity extends AppCompatActivity {
+public class NotifikasiKaderActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private RecyclerView recyclerView;

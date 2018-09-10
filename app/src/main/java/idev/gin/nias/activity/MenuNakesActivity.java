@@ -52,7 +52,7 @@ public class MenuNakesActivity extends AppCompatActivity {
         btnotifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,NotifikasiActivity.class);
+                Intent intent = new Intent(MenuNakesActivity.this,NotifikasiNakesActivity.class);
                 intent.putExtra("email",emailpassnakes);
                 intent.putExtra("token",tokenpassnakes);
                 startActivity(intent);
@@ -72,7 +72,7 @@ public class MenuNakesActivity extends AppCompatActivity {
         btnkasustb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MenuNakesActivity.this,KasusTbActivity.class);
+                Intent intent = new Intent(MenuNakesActivity.this,KasusTbNakesActivity.class);
                 intent.putExtra("email",emailpassnakes);
                 intent.putExtra("token",tokenpassnakes);
                 startActivity(intent);

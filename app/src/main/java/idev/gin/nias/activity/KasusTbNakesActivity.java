@@ -1,47 +1,35 @@
 package idev.gin.nias.activity;
-import android.content.Intent;
+
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
 import com.androidnetworking.interfaces.ParsedRequestListener;
-import com.google.gson.JsonObject;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.List;
 
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
 import idev.gin.nias.adapter.KasusTbAdapter;
-import idev.gin.nias.adapter.NotifikasiNakesAdapter;
+import idev.gin.nias.adapter.KasusTbNakesAdapter;
 import idev.gin.nias.dao.FaskesDao;
 import idev.gin.nias.utils.CONSTANT;
 import idev.gin.nias.utils.EndlessRecyclerOnScrollListener;
 
 
-public class KasusTbActivity extends AppCompatActivity {
+public class KasusTbNakesActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private RecyclerView recyclerView;
     private ArrayList<KasusClass> tbList;
-    private KasusTbAdapter adapter;
+    private KasusTbNakesAdapter adapter;
     private EndlessRecyclerOnScrollListener scrollListener;
     public int pages;
     public int lastpages;
@@ -53,7 +41,7 @@ public class KasusTbActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_kasus_tb);
+        setContentView(R.layout.activity_kasus_tb_nakes);
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
@@ -79,8 +67,8 @@ public class KasusTbActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tbList = new ArrayList<>();
-        adapter = new KasusTbAdapter(this,tbList);
-        RecyclerView rvitem = (RecyclerView) findViewById(R.id.reckasustb);
+        adapter = new KasusTbNakesAdapter(this,tbList);
+        RecyclerView rvitem = (RecyclerView) findViewById(R.id.reckasustbnakes);
         rvitem.setAdapter(adapter);
         rvitem.setLayoutManager(new  LinearLayoutManager(this));
         callkasustb("1");

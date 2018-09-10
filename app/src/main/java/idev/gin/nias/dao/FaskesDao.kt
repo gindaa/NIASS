@@ -65,5 +65,6 @@ data class Data(
         val terapi_dm: String,
         val dipindah_ke_tb: String,
         val keterangan: String,
-        val lokasi: String
+        val lokasi: String,
+        val status : String
 )

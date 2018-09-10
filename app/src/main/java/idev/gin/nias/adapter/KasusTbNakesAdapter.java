@@ -22,15 +22,13 @@ import java.util.ArrayList;
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
 import idev.gin.nias.activity.KasusTbActivity;
-import idev.gin.nias.activity.LoginActivity;
 import idev.gin.nias.activity.RiwayatTbActivity;
-import idev.gin.nias.activity.SignUpActivity;
 import idev.gin.nias.dao.SignupDao;
 import idev.gin.nias.utils.CONSTANT;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHolder> {
+public class KasusTbNakesAdapter extends RecyclerView.Adapter<KasusTbNakesAdapter.ViewHolder> {
 
     private Context context;
     SharedPreferences sharedPref;
@@ -38,7 +36,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
     private String idkasustb;
 
 
-    public KasusTbAdapter(Context context, ArrayList<KasusClass> listKasusClassTB) {
+    public KasusTbNakesAdapter(Context context, ArrayList<KasusClass> listKasusClassTB) {
         this.context = context;
         this.listKasusClassTB = listKasusClassTB;
         sharedPref = context.getSharedPreferences("MyPrefs", MODE_PRIVATE);
@@ -47,7 +45,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.card_kasustb, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.card_kasustb_nakes, parent, false);
         return new ViewHolder(itemView);
     }
 
@@ -68,24 +66,24 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         holder.Alamat.setText(listKasusClassTB.get(position).getmTextAlamat());
         holder.dirujuk.setText(listKasusClassTB.get(position).getmTextRujuk());
         holder.tipeDiagnosisTB.setText(listKasusClassTB.get(position).getmTextdiagnosistb());
-        holder.btIdkasus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                idkasustb = listKasusClassTB.get(position).getIdKasus();
-                String idKasus = sharedPref.getString("idKasus", "kosong");
-//                Toast.makeText(context, "ID KASUS:" + idkasustb, Toast.LENGTH_LONG).show();
-                SharedPreferences pref = context.getSharedPreferences("MyPrefs",MODE_PRIVATE);
-                SharedPreferences.Editor edit = sharedPref.edit();
-                edit.putString("idKasus", listKasusClassTB.get(position).getIdKasus());
-                edit.apply();
-                Toast.makeText(context, "ID KASUS Adalah:" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, RiwayatTbActivity.class);
-                intent.putExtra("email",pref.getString("email", "email"));
-                intent.putExtra("token",pref.getString("token", "email"));
-                intent.putExtra("idKasus" , idKasus);
-                context.startActivity(intent);
-            }
-        });
+//        holder.btIdkasus.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                idkasustb = listKasusClassTB.get(position).getIdKasus();
+//                String idKasus = sharedPref.getString("idKasus", "kosong");
+////                Toast.makeText(context, "ID KASUS:" + idkasustb, Toast.LENGTH_LONG).show();
+//                SharedPreferences pref = context.getSharedPreferences("MyPrefs",MODE_PRIVATE);
+//                SharedPreferences.Editor edit = sharedPref.edit();
+//                edit.putString("idKasus", listKasusClassTB.get(position).getIdKasus());
+//                edit.apply();
+//                Toast.makeText(context, "ID KASUS Adalah:" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
+//                Intent intent = new Intent(context, RiwayatTbActivity.class);
+//                intent.putExtra("email",pref.getString("email", "email"));
+//                intent.putExtra("token",pref.getString("token", "email"));
+//                intent.putExtra("idKasus" , idKasus);
+//                context.startActivity(intent);
+//            }
+//        });
         holder.btSelesai.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +139,6 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         public TextView Alamat;
         public TextView dirujuk;
         public TextView tipeDiagnosisTB;
-        public Button btIdkasus;
         public Button btSelesai;
 
         public ViewHolder(View itemView) {
@@ -158,9 +155,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
             Umur = itemView.findViewById(R.id.umurkasus);
             Alamat = itemView.findViewById(R.id.alamatkasus);
             dirujuk = itemView.findViewById(R.id.dirujukkasus);
-            tipeDiagnosisTB = itemView.findViewById(R.id.tipediagnosiskasus);
-            btIdkasus = itemView.findViewById(R.id.btgetidkasus);
-            btSelesai = itemView.findViewById(R.id.btselesai);
+            tipeDiagnosisTB = itemView.findViewById(R.id.tipediagnosiskasus) btSelesai = itemView.findViewById(R.id.btselesai);
 
         }
 

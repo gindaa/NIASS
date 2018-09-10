@@ -64,7 +64,7 @@
             android:name=".activity.KasusTbActivity"
             android:label="KASUS TB" />
         <activity
-            android:name=".activity.NotifikasiActivity"
+            android:name=".activity.NotifikasiNakesActivity"
             android:label="NOTIFIKASI" />
         <activity
             android:name=".activity.PoinActivity"
@@ -73,6 +73,10 @@
             android:name=".activity.ProfileAcivity"
             android:label="PROFILE" />
         <activity android:name=".activity.RiwayatTbActivity"></activity>
+        <activity
+            android:name=".activity.ProfileAcivity"
+            android:label="PROFILE" />
+        <activity android:name=".activity.KasusTbNakesActivity"></activity>
     </application>
 
 </manifest>

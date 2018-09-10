@@ -102,8 +102,8 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         final TextView tanggalr = (TextView) findViewById(R.id.tanggalriwayattb);
         final TextInputEditText namaOrangTua = (TextInputEditText)findViewById(R.id.namaortuasuh);
         final TextInputEditText namaAnak = (TextInputEditText) findViewById(R.id.namaAnak);
-        final TextInputEditText usiaAnak= (TextInputEditText) findViewById(R.id.usiaAnak);
-        final TextInputEditText jumlahAnak = (TextInputEditText) findViewById(R.id.jumlahAnak);
+        final Spinner usiaAnak= (Spinner) findViewById(R.id.spusia);
+        final Spinner jumlahAnak = (Spinner) findViewById(R.id.spjumlahanak);
         final TextInputEditText alamatDesa =(TextInputEditText) findViewById(R.id.alamatdesa);
         final Spinner kontakTb = (Spinner) findViewById(R.id.spkontak);
         final Spinner berat59 = (Spinner) findViewById(R.id.spberat59);
@@ -160,8 +160,8 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                 String tanggal = tanggalr.getText().toString().trim();
                 String nama_orangtua = namaOrangTua.getText().toString().trim();
                 String nama_anak = namaAnak.getText().toString().trim();
-                String usia_anak = usiaAnak.getText().toString().trim();
-                String jumlah_anak = jumlahAnak.getText().toString().trim();
+                String usia_anak = usiaAnak.getSelectedItem().toString().trim();
+                String jumlah_anak = jumlahAnak.getSelectedItem().toString().trim();
                 String alamat_desa = alamatDesa.getText().toString().trim();
                 String kontak_tb = kontakTb.getSelectedItem().toString().trim();
                 String Berat59 = berat59.getSelectedItem().toString().trim();
@@ -318,6 +318,16 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         ArrayAdapter<String> adapter7 = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.tulang));
         adapter7.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sptulang.setAdapter((adapter7));
+
+        Spinner spusia = (Spinner) findViewById(R.id.spusia);
+        ArrayAdapter<String> adapterusia = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.usia));
+        adapterusia.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spusia.setAdapter((adapterusia));
+
+        Spinner spanaklain = (Spinner) findViewById(R.id.spjumlahanak);
+        ArrayAdapter<String> adapteranaklain = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.anaklains));
+        adapteranaklain.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spanaklain.setAdapter((adapteranaklain));
     }
     @Override
     protected void onStart() {
