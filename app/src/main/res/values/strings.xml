@@ -253,6 +253,12 @@
         <item>19</item>
         <item>20</item>
     </string-array>
+    <string-array name="provinsi">
+        <item>Sumatera Utara</item>
+    </string-array>
+    <string-array name="kab">
+        <item>Nias Selatan</item>
+    </string-array>
 
 
 

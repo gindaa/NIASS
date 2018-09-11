@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
@@ -112,6 +113,32 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         final Spinner batuk = (Spinner) findViewById(R.id.spbatuk);
         final Spinner kelenjarlimfie = (Spinner) findViewById(R.id.sppembesarankelenjar);
         final Spinner pembengkakan = (Spinner) findViewById(R.id.sppembekakan);
+        final Spinner provinsi = (Spinner) findViewById(R.id.spprovinsiriwayat);
+        final Spinner kabupaten = (Spinner) findViewById(R.id.spkabupatenriwayat);
+        final Spinner kelurahan = (Spinner) findViewById(R.id.spkelurahanriwayat);
+        final Spinner kecamatan = (Spinner) findViewById(R.id.spkecamatanriwayat);
+
+        ArrayAdapter<String> adapterfana = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.fanayama));
+        adapterfana.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adaptermin = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.miniamolo));
+        adaptermin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        kecamatan.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String kecamatans = kecamatan.getSelectedItem().toString().toLowerCase();
+                if (kecamatans.equals("fanayama")){
+                    kelurahan.setAdapter(adapterfana);
+                }
+                else if(kecamatans.equals("maniamolo")){
+                    kelurahan.setAdapter(adaptermin);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         Button submitriwayat = (Button) findViewById(R.id.submitrwyt);
         mApiServiceRiwayat = ApiUtils.getAPIRiwayat();
@@ -163,6 +190,10 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                 String usia_anak = usiaAnak.getSelectedItem().toString().trim();
                 String jumlah_anak = jumlahAnak.getSelectedItem().toString().trim();
                 String alamat_desa = alamatDesa.getText().toString().trim();
+                String provinsisp = provinsi.getSelectedItem().toString().trim();
+                String kabupatensp = kabupaten.getSelectedItem().toString().trim();
+                String kelurahansp = kelurahan.getSelectedItem().toString().trim();
+                String kecamatansp = kecamatan.getSelectedItem().toString().trim();
                 String kontak_tb = kontakTb.getSelectedItem().toString().trim();
                 String Berat59 = berat59.getSelectedItem().toString().trim();
                 String Berat14 = berat14.getSelectedItem().toString().trim();
@@ -187,10 +218,10 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                         !TextUtils.isEmpty(Kelenjar) &&
                         !TextUtils.isEmpty(Pembengkakan))
                 {
-                    sendriwayat(namaKader,desa,tanggal,nama_orangtua,nama_anak,usia_anak,jumlah_anak,alamat_desa,kontak_tb,Berat59,Berat14,Demam,Batuk,Kelenjar,Pembengkakan);
+                    sendriwayat(namaKader,desa,tanggal,nama_orangtua,nama_anak,usia_anak,jumlah_anak,alamat_desa,provinsisp,kabupatensp,kelurahansp,kecamatansp,kontak_tb,Berat59,Berat14,Demam,Batuk,Kelenjar,Pembengkakan);
                 }
             }
-            private void sendriwayat(String namaKader,String desa,String tanggal,String namaOrangtua,String namaAnak,String usiaAnak,String jumlahAnak,String alamatDesa,String kontakTb,String berat59,String berat4,String demam,String batuk ,String kelenjar,String bengkak) {
+            private void sendriwayat(String namaKader,String desa,String tanggal,String namaOrangtua,String namaAnak,String usiaAnak,String jumlahAnak,String alamatDesa,String provinsi,String kabupaten,String kelurahan, String kecamatan,String kontakTb,String berat59,String berat4,String demam,String batuk ,String kelenjar,String bengkak) {
 
                 AndroidNetworking.post(CONSTANT.BASE_URL + "penilaianriwayat")
                         .addHeaders("Authorization", "bearer " + tokenpass)
@@ -202,6 +233,10 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                         .addBodyParameter("usia_anak",usiaAnak)
                         .addBodyParameter("jumlah_anak",jumlahAnak)
                         .addBodyParameter("alamat_desa",alamatDesa)
+                        .addBodyParameter("kecamatan",kecamatan)
+                        .addBodyParameter("keluarahan",kelurahan)
+                        .addBodyParameter("kabupaten",kabupaten)
+                        .addBodyParameter("provinsi",provinsi)
                         .addBodyParameter("kontak_tb",kontakTb)
                         .addBodyParameter("berat_badan_59bulan",berat59)
                         .addBodyParameter("berat_badan_14tahun",berat4)
@@ -232,7 +267,9 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                                                     Intent intent = new Intent(RiwayatTbActivity.this,MenuKaderActivity.class);
                                                     intent.putExtra("token" , tokenpass);
                                                     intent.putExtra("email", emailpass);
+                                                    finish();
                                                     startActivity(intent);
+
 
                                                 }
 
@@ -328,6 +365,21 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         ArrayAdapter<String> adapteranaklain = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.anaklains));
         adapteranaklain.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spanaklain.setAdapter((adapteranaklain));
+
+        Spinner spprov = (Spinner) findViewById(R.id.spprovinsiriwayat);
+        ArrayAdapter<String> adaptereprov = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.provinsi));
+        adaptereprov.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spprov.setAdapter((adaptereprov));
+
+        Spinner spkab = (Spinner) findViewById(R.id.spkabupatenriwayat);
+        ArrayAdapter<String> adapterkab = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kab));
+        adapterkab.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spkab.setAdapter((adapterkab));
+
+        Spinner spkecamatan = (Spinner) findViewById(R.id.spkecamatanriwayat);
+        ArrayAdapter<String> adapterkec = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kecamatan));
+        adapterkec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spkecamatan.setAdapter((adapterkec));
     }
     @Override
     protected void onStart() {

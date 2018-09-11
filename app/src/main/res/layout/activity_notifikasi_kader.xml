@@ -9,9 +9,9 @@
 
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recnotifikasi"
+            android:id="@+id/recnotifikasikader"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scrollbars="vertical"
             card_view:cardUseCompatPadding="true" />
-    </LinearLayout>
+</LinearLayout>

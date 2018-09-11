@@ -67,16 +67,17 @@
             android:name=".activity.NotifikasiNakesActivity"
             android:label="NOTIFIKASI" />
         <activity
+            android:name=".activity.NotifikasiKaderActivity"
+            android:label="NOTIFIKASI" />
+        <activity
             android:name=".activity.PoinActivity"
             android:label="POIN" />
         <activity
             android:name=".activity.ProfileAcivity"
             android:label="PROFILE" />
         <activity android:name=".activity.RiwayatTbActivity"></activity>
-        <activity
-            android:name=".activity.ProfileAcivity"
-            android:label="PROFILE" />
         <activity android:name=".activity.KasusTbNakesActivity"></activity>
     </application>
+
 
 </manifest>

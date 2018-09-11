@@ -15,7 +15,7 @@ data class ResultDao(
 )
 
 data class DataDao(
-    val id: Int,
+    val id: String,
     val nama_kader: String,
     val desa: String,
     val tanggal: String,
@@ -24,6 +24,10 @@ data class DataDao(
     val usia_anak: Int,
     val jumlah_anak: Int,
     val alamat_desa: String,
+    val kecamatan: String,
+    val keluarahan: String,
+    val kabupaten: String,
+    val provinsi : String,
     val lat: String,
     val long: String,
     val kontak_tb: String,
@@ -33,5 +37,7 @@ data class DataDao(
     val batuk: String,
     val pembesaran_kelenjar_limfe: String,
     val pembesaran_tulang: String,
+    val status : String,
+    val postedby: String,
     val fk_faskes: Int
 )

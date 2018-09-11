@@ -52,6 +52,7 @@ public class Form16Activity extends AppCompatActivity {
     private String emailpassnakes;
     private String tokenpassnakes;
     private String idKasus;
+    private String fkFaskes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

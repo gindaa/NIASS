@@ -1,6 +1,7 @@
 package idev.gin.nias.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -118,7 +119,26 @@ public class ScoringActivity extends AppCompatActivity {
                                         .getAsObject(AddPoinDao.class, new ParsedRequestListener() {
                                             @Override
                                             public void onResponse(Object response) {
+                                                SharedPreferences pref = getSharedPreferences("MyPrefs",MODE_PRIVATE);
                                                 Toast.makeText(getApplicationContext(), "Poin Berhasil Ditambah "+response.toString(), Toast.LENGTH_LONG).show();
+                                                AndroidNetworking.put(CONSTANT.BASE_URL + "penilaianriwayat")
+                                                        .addHeaders("Authorization", "bearer " + tokenpass)
+                                                        .addBodyParameter("fk_faskes", pref.getString("idFaskes", "0"))
+                                                        .addBodyParameter("id",pref.getString("idKasus","0"))
+                                                        .addBodyParameter("status","nakesdone")
+                                                        .setTag("setstatus")
+                                                        .setPriority(Priority.MEDIUM)
+                                                        .build()
+                                                        .getAsObject(AddPoinDao.class, new ParsedRequestListener() {
+                                                            @Override
+                                                            public void onResponse(Object response) {
+                                                            }
+
+                                                            @Override
+                                                            public void onError(ANError anError) {
+                                                                Toast.makeText(getApplicationContext(), "Error Happen" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                                                            }
+                                                        });
                                                 Intent intent = new Intent(ScoringActivity.this,MenuNakesActivity.class);
                                                 intent.putExtra("token" , tokenpass);
                                                 intent.putExtra("email", emailpass);

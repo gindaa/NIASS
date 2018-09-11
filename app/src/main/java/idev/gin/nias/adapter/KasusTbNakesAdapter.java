@@ -20,6 +20,7 @@ import com.androidnetworking.interfaces.ParsedRequestListener;
 import java.util.ArrayList;
 
 import idev.gin.nias.KasusClass;
+import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
 import idev.gin.nias.activity.KasusTbActivity;
 import idev.gin.nias.activity.RiwayatTbActivity;
@@ -52,7 +53,6 @@ public class KasusTbNakesAdapter extends RecyclerView.Adapter<KasusTbNakesAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        // We need an editor object to make changes
         holder.idKasus.setText(listKasusClassTB.get(position).getIdKasus());
         holder.namaFaskes.setText(listKasusClassTB.get(position).getmTextnamafaskes());
         holder.kabKota.setText(listKasusClassTB.get(position).getmTextKota());
@@ -143,19 +143,20 @@ public class KasusTbNakesAdapter extends RecyclerView.Adapter<KasusTbNakesAdapte
 
         public ViewHolder(View itemView) {
             super(itemView);
-            idKasus = itemView.findViewById(R.id.idkasus);
-            namaFaskes = itemView.findViewById(R.id.namafaskeskasus);
-            kabKota = itemView.findViewById(R.id.kabkotakasus);
-            namaProvinsi = itemView.findViewById(R.id.namaprovinsikasus);
-            noReg = itemView.findViewById(R.id.noregfaskeskasus);
-            noRegTb = itemView.findViewById(R.id.noregtbkasus);
-            namaPasien = itemView.findViewById(R.id.namapasienkasus);
-            Nik = itemView.findViewById(R.id.nikkasus);
-            Jk = itemView.findViewById(R.id.jeniskelaminkasus);
-            Umur = itemView.findViewById(R.id.umurkasus);
-            Alamat = itemView.findViewById(R.id.alamatkasus);
-            dirujuk = itemView.findViewById(R.id.dirujukkasus);
-            tipeDiagnosisTB = itemView.findViewById(R.id.tipediagnosiskasus) btSelesai = itemView.findViewById(R.id.btselesai);
+            idKasus = itemView.findViewById(R.id.idkasusnakes);
+            namaFaskes = itemView.findViewById(R.id.namafaskeskasusnakes);
+            kabKota = itemView.findViewById(R.id.kabkotakasusnakes);
+            namaProvinsi = itemView.findViewById(R.id.namaprovinsikasusnakes);
+            noReg = itemView.findViewById(R.id.noregfaskeskasusnakes);
+            noRegTb = itemView.findViewById(R.id.noregtbkasusnakes);
+            namaPasien = itemView.findViewById(R.id.namapasienkasusnakes);
+            Nik = itemView.findViewById(R.id.nikkasusnakes);
+            Jk = itemView.findViewById(R.id.jeniskelaminkasusnakes);
+            Umur = itemView.findViewById(R.id.umurkasusnakes);
+            Alamat = itemView.findViewById(R.id.alamatkasusnakes);
+            dirujuk = itemView.findViewById(R.id.dirujukkasusnakes);
+            tipeDiagnosisTB = itemView.findViewById(R.id.tipediagnosiskasusnakes);
+            btSelesai = itemView.findViewById(R.id.btselesainakes);
 
         }
 

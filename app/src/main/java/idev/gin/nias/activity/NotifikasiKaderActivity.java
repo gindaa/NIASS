@@ -17,8 +17,11 @@ import java.util.ArrayList;
 
 import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
-import idev.gin.nias.adapter.NotifikasiNakesAdapter;
+import idev.gin.nias.RiwayatClass;
+import idev.gin.nias.RiwayatClassKader;
+import idev.gin.nias.adapter.NotifikasiKaderAdapter;
 import idev.gin.nias.dao.FaskesDao;
+import idev.gin.nias.dao.RiwayatDao;
 import idev.gin.nias.utils.CONSTANT;
 import idev.gin.nias.utils.EndlessRecyclerOnScrollListener;
 
@@ -26,8 +29,8 @@ public class NotifikasiKaderActivity extends AppCompatActivity {
 
     private SharedPreferences sharedPref;
     private RecyclerView recyclerView;
-    private ArrayList<KasusDetailClass> tbList;
-    private NotifikasiNakesAdapter adapter;
+    private ArrayList<RiwayatClassKader> tbList;
+    private NotifikasiKaderAdapter adapter;
     int lastpages;
     public int pages;
     String emailpass;
@@ -36,7 +39,7 @@ public class NotifikasiKaderActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifikasi);
+        setContentView(R.layout.activity_notifikasi_kader);
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
@@ -63,8 +66,8 @@ public class NotifikasiKaderActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         tbList = new ArrayList<>();
-        adapter = new NotifikasiNakesAdapter(this,tbList);
-        RecyclerView rvsitem = (RecyclerView) findViewById(R.id.recnotifikasi);
+        adapter = new NotifikasiKaderAdapter(this,tbList);
+        RecyclerView rvsitem = (RecyclerView) findViewById(R.id.recnotifikasikader);
         rvsitem.setAdapter(adapter);
         rvsitem.setLayoutManager(new  LinearLayoutManager(this));
         callkasustb("1");
@@ -89,39 +92,31 @@ public class NotifikasiKaderActivity extends AppCompatActivity {
     private void callkasustb(String page) {
         pages = pages + 1;
         String pagestr = Integer.toString(pages);
-        AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
+        AndroidNetworking.get(CONSTANT.BASE_URL + "penilaianriwayat")
                 .addHeaders("Authorization", "bearer " + tokenpass)
                 .addHeaders("page",pagestr)
                 .setTag("Faskes")
                 .setPriority(Priority.MEDIUM)
                 .build()
-                .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
+                .getAsObject(RiwayatDao.class, new ParsedRequestListener<RiwayatDao>() {
                     @Override
-                    public void onResponse(FaskesDao response) {
+                    public void onResponse(RiwayatDao response) {
                         if (response.getResult().getPage().equals("0")) {
                             return;
                         }
                         for (int i = 0; i < response.getResult().getData().size(); i++) {
-                            KasusDetailClass isikasus = new KasusDetailClass(
+                            RiwayatClassKader isikasus = new RiwayatClassKader(
                                     response.getResult().getData().get(i).getId(),
-                                    response.getResult().getData().get(i).getNo_registrasi_faskes(),
-                                    response.getResult().getData().get(i).getAlamat(),
-                                    response.getResult().getData().get(i).getRtrw(),
-                                    response.getResult().getData().get(i).getKelurahan(),
-                                    response.getResult().getData().get(i).getKecamatan(),
-                                    response.getResult().getData().get(i).getKabupaten(),
-                                    response.getResult().getData().get(i).getProvinsi(),
-                                    response.getResult().getData().get(i).getNo_registrasi_tbkota(),
-                                    response.getResult().getData().get(i).getNo_registrasi_faskes(),
-                                    response.getResult().getData().get(i).getNo_registrasi_tbkota(),
-                                    response.getResult().getData().get(i).getNama_pasien(),
-                                    response.getResult().getData().get(i).getNik(),
-                                    response.getResult().getData().get(i).getJenis_kelamin(),
-                                    response.getResult().getData().get(i).getUmur(),
-                                    response.getResult().getData().get(i).getAlamat(),
-                                    response.getResult().getData().get(i).getPerujuk(),
-                                    response.getResult().getData().get(i).getTipe_diagnosis_tb());
-                            tbList.add(isikasus);
+                                    response.getResult().getData().get(i).getNama_kader(),
+                                    response.getResult().getData().get(i).getDesa(),
+                                    response.getResult().getData().get(i).getTanggal(),
+                                    response.getResult().getData().get(i).getNama_orantua(),
+                                    response.getResult().getData().get(i).getNama_anak(),
+                                    response.getResult().getData().get(i).getUsia_anak(),
+                                    response.getResult().getData().get(i).getFk_faskes());
+                            if (response.getResult().getData().get(i).getStatus() == "nakesdone"){
+                                tbList.add(isikasus);
+                            }
                         }
                         adapter.notifyDataSetChanged();
                     }

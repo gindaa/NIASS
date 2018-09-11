@@ -64,8 +64,6 @@ public class MenuNakesActivity extends AppCompatActivity {
                 Intent intent = new Intent(MenuNakesActivity.this,ScoringActivity.class);
                 intent.putExtra("email",emailpassnakes);
                 intent.putExtra("token",tokenpassnakes);
-                Log.i("xxx",emailpassnakes);
-                Log.i("token",tokenpassnakes);
                 startActivity(intent);
             }
         });

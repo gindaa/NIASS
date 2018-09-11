@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
+import idev.gin.nias.RiwayatClass;
 import idev.gin.nias.activity.Form16Activity;
 import idev.gin.nias.activity.KasusTbActivity;
 import idev.gin.nias.activity.RiwayatTbActivity;
@@ -25,59 +26,57 @@ import static android.content.Context.MODE_PRIVATE;
 public class NotifikasiNakesAdapter extends RecyclerView.Adapter<NotifikasiNakesAdapter.ViewHolder> {
     private Context context;
     SharedPreferences sharedPref;
-    private ArrayList<KasusDetailClass> listKasusClassTB;
+    private ArrayList<RiwayatClass> listRiwayatTB;
     private String idkasustb;
 
 
-    public NotifikasiNakesAdapter(Context context, ArrayList<KasusDetailClass> listKasusClassTB) {
+    public NotifikasiNakesAdapter(Context context, ArrayList<RiwayatClass> listRiwayatTB) {
         this.context = context;
-        this.listKasusClassTB = listKasusClassTB;
+        this.listRiwayatTB = listRiwayatTB;
         sharedPref = context.getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
 
     @Override
     public NotifikasiNakesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View itemView = layoutInflater.inflate(R.layout.card_notifikasi, parent, false);
+        View itemView = layoutInflater.inflate(R.layout.card_notifikasi_nakes, parent, false);
         return new NotifikasiNakesAdapter.ViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(NotifikasiNakesAdapter.ViewHolder holder, int position) {
 
-        holder.idKasus.setText(listKasusClassTB.get(position).getIdKasus());
-        holder.namaFaskes.setText(listKasusClassTB.get(position).getmTextnamafaskes());
-        holder.Alamat.setText(listKasusClassTB.get(position).getmTextAlamat());
-        holder.rtrw.setText(listKasusClassTB.get(position).getmTextrtrw());
-        holder.kelurahan.setText(listKasusClassTB.get(position).getmTextKelurahan());
-        holder.kecamatan.setText(listKasusClassTB.get(position).getmTextKecematan());
-        holder.kabupaten.setText(listKasusClassTB.get(position).getmTextKabupaten());
-        holder.provinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
-        holder.kota.setText(listKasusClassTB.get(position).getmTextKota());
-        holder.noReg.setText(listKasusClassTB.get(position).getmTextregis());
-        holder.noRegTb.setText(listKasusClassTB.get(position).getmTextregisTbKota());
-        holder.namaPasien.setText(listKasusClassTB.get(position).getmTextNamaPasien());
-        holder.Nik.setText(listKasusClassTB.get(position).getmTextNik());
-        holder.Jk.setText(listKasusClassTB.get(position).getMtextjk());
-        holder.Umur.setText(listKasusClassTB.get(position).getmTextUmur());
-
-        holder.dirujuk.setText(listKasusClassTB.get(position).getmTextRujuk());
-        holder.tipeDiagnosisTB.setText(listKasusClassTB.get(position).getmTextdiagnosistb());
+        holder.idKasus.setText(listRiwayatTB.get(position).getIdriwayat());
+        holder.namaKader.setText(listRiwayatTB.get(position).getNamaKaderriwayat());
+        holder.desa.setText(listRiwayatTB.get(position).getDesariwayat());
+        holder.tanggal.setText(listRiwayatTB.get(position).getTanggalriwayat());
+        holder.namaOrangtua.setText(listRiwayatTB.get(position).getNamaOrangtuariwayat());
+        holder.namaAnaknakes.setText(listRiwayatTB.get(position).getNamaAnakriwayat());
+        holder.usiaAnak.setText(listRiwayatTB.get(position).getUsiaAnakriwayat().toString());
+        holder.jumlahAnak.setText(listRiwayatTB.get(position).getJumlahAnakriwayat().toString());
+        holder.alamatDesa.setText(listRiwayatTB.get(position).getAlamatDesariwayat());
+        holder.kelurahan.setText(listRiwayatTB.get(position).getKelurahanriwayat());
+        holder.kecamatan.setText(listRiwayatTB.get(position).getKecamatanriwayat());
+        holder.kabupaten.setText(listRiwayatTB.get(position).getKabupatenriwayat());
+        holder.provinsi.setText(listRiwayatTB.get(position).getProvinsiriwayat());
+        holder.idfaskes.setText((listRiwayatTB.get(position).getIdfaskes().toString()));
         holder.btIdkasus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                idkasustb = listKasusClassTB.get(position).getIdKasus();
+                idkasustb = listRiwayatTB.get(position).getIdriwayat();
                 String idKasus = sharedPref.getString("idKasus", "kosong");
 //                Toast.makeText(context, "ID KASUS:" + idkasustb, Toast.LENGTH_LONG).show();
                 SharedPreferences pref = context.getSharedPreferences("MyPrefs",MODE_PRIVATE);
                 SharedPreferences.Editor edit = sharedPref.edit();
-                edit.putString("idKasus", listKasusClassTB.get(position).getIdKasus());
+                edit.putString("idKasus", listRiwayatTB.get(position).getIdriwayat());
+                edit.putString("idFaskes",listRiwayatTB.get(position).getIdfaskes().toString());
                 edit.apply();
                 Toast.makeText(context, "ID KASUS Adalah:" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(context, Form16Activity.class);
                 intent.putExtra("email",pref.getString("email", "email"));
                 intent.putExtra("token",pref.getString("token", "email"));
                 intent.putExtra("idKasus" , idKasus);
+
                 context.startActivity(intent);
             }
         });
@@ -86,50 +85,43 @@ public class NotifikasiNakesAdapter extends RecyclerView.Adapter<NotifikasiNakes
 
     @Override
     public int getItemCount() {
-        return (listKasusClassTB != null) ? listKasusClassTB.size() : 0;
+        return (listRiwayatTB != null) ? listRiwayatTB.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public TextView idKasus;
-        public TextView namaFaskes;
-        public TextView alamat;
-        public TextView rtrw;
-        public TextView kelurahan;
+        public TextView namaKader;
+        public TextView desa;
+        public TextView tanggal;
+        public TextView namaOrangtua;
+        public TextView namaAnaknakes;
+        public TextView usiaAnak;
+        public TextView jumlahAnak;
+        public TextView alamatDesa;
         public TextView kecamatan;
+        public TextView kelurahan;
         public TextView kabupaten;
         public TextView provinsi;
-        public TextView kota;
-        public TextView noReg;
-        public TextView noRegTb;
-        public TextView namaPasien;
-        public TextView Nik;
-        public TextView Jk;
-        public TextView Umur;
-        public TextView Alamat;
-        public TextView dirujuk;
-        public TextView tipeDiagnosisTB;
+        public TextView idfaskes;
         public Button btIdkasus;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            idKasus = itemView.findViewById(R.id.idkasus);
-            namaFaskes = itemView.findViewById(R.id.namafaskeskasus);
-            Alamat = itemView.findViewById(R.id.alamatkasus);
-            rtrw = itemView.findViewById(R.id.rtrwnotif);
-            kelurahan = itemView.findViewById(R.id.kelurahannotif);
-            kecamatan = itemView.findViewById(R.id.kecamatannotif);
-            kabupaten = itemView.findViewById(R.id.kabupatennotif);
-            provinsi = itemView.findViewById(R.id.provinsiotif);
-            kota = itemView.findViewById(R.id.kotanotif);
-            noReg = itemView.findViewById(R.id.noregfaskeskasus);
-            noRegTb = itemView.findViewById(R.id.noregtbkasus);
-            namaPasien = itemView.findViewById(R.id.namapasienkasus);
-            Nik = itemView.findViewById(R.id.nikkasus);
-            Jk = itemView.findViewById(R.id.jeniskelaminkasus);
-            Umur = itemView.findViewById(R.id.umurkasus);
-            dirujuk = itemView.findViewById(R.id.dirujukkasus);
-            tipeDiagnosisTB = itemView.findViewById(R.id.tipediagnosiskasus);
-            btIdkasus = itemView.findViewById(R.id.btgetidkasus);
+            idKasus = itemView.findViewById(R.id.idkasusnotifnakes);
+            namaKader = itemView.findViewById(R.id.namakadernotifnakes);
+            desa = itemView.findViewById(R.id.namadesanotifnakes);
+            tanggal = itemView.findViewById(R.id.tanggalnotifnakes);
+            namaAnaknakes = itemView.findViewById(R.id.namaanaknotifnakes);
+            usiaAnak = itemView.findViewById(R.id.usiaanaknotifnakes);
+            jumlahAnak = itemView.findViewById(R.id.jumlahkasusnotifnakes);
+            alamatDesa = itemView.findViewById(R.id.alamatdesa);
+            namaOrangtua = itemView.findViewById(R.id.namaorangtuanotifnakes);
+            kelurahan = itemView.findViewById(R.id.kelurahannotifnakes);
+            kecamatan = itemView.findViewById(R.id.kecamatannotifnakes);
+            kabupaten = itemView.findViewById(R.id.kabupatennotifnakes);
+            provinsi = itemView.findViewById(R.id.provinsinotifnakes);
+            idfaskes = itemView.findViewById(R.id.idkasusfaskesnotifnakes);
+            btIdkasus = itemView.findViewById(R.id.btgetidkasusnotifnakes);
 
         }
 

@@ -126,7 +126,7 @@ public class KasusTbActivity extends AppCompatActivity {
                                         response.getResult().getData().get(i).getAlamat(),
                                         response.getResult().getData().get(i).getPerujuk(),
                                         response.getResult().getData().get(i).getTipe_diagnosis_tb());
-                                if (response.getResult().getData().get(i).getStatus() == null || response.getResult().getData().get(i).getStatus().toString().toLowerCase() == "aa"){
+                                if (response.getResult().getData().get(i).getStatus() == null){
                                     tbList.add(isikasus);
                                 }
                             }

@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:text="ID :"/>
             <TextView
-                android:id="@+id/idkasus"
+                android:id="@+id/idkasusnotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -35,9 +35,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nama Faskes :"/>
+                android:text="Nama Kader :"/>
             <TextView
-                android:id="@+id/namafaskeskasus"
+                android:id="@+id/namakadernotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -49,9 +49,9 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alamat : "/>
+                android:text="Desa : "/>
             <TextView
-                android:id="@+id/alamatnotif"
+                android:id="@+id/namadesanotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -63,9 +63,79 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="RT/RW :"/>
+                android:text="Tanggal"/>
             <TextView
-                android:id="@+id/rtrwnotif"
+                android:id="@+id/tanggalnotifnakes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Orang Tua :"/>
+            <TextView
+                android:id="@+id/namaorangtuanotifnakes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Anak : "/>
+            <TextView
+                android:id="@+id/namaanaknotifnakes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usia Anak : "/>
+            <TextView
+                android:id="@+id/usiaanaknotifnakes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumlah Anak : "/>
+            <TextView
+                android:id="@+id/jumlahkasusnotifnakes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="-"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alamat Desa : "/>
+            <TextView
+                android:id="@+id/alamatdesa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -79,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:text="Kelurahan :"/>
             <TextView
-                android:id="@+id/kelurahannotif"
+                android:id="@+id/kelurahannotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -93,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:text="Kecamatan :"/>
             <TextView
-                android:id="@+id/kecamatannotif"
+                android:id="@+id/kecamatannotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -107,7 +177,7 @@
                 android:layout_height="wrap_content"
                 android:text="Kabupaten :"/>
             <TextView
-                android:id="@+id/kabupatennotif"
+                android:id="@+id/kabupatennotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -121,7 +191,7 @@
                 android:layout_height="wrap_content"
                 android:text="Provinsi :"/>
             <TextView
-                android:id="@+id/provinsiotif"
+                android:id="@+id/provinsinotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
@@ -133,142 +203,16 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Kota : "/>
+                android:text="Id Kasus Faskes :"/>
             <TextView
-                android:id="@+id/kotanotif"
+                android:id="@+id/idkasusfaskesnotifnakes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="-"/>
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="No Registrasi Faskes : " />
-            <TextView
-                android:id="@+id/noregfaskeskasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="No Registrasi TB : "/>
-            <TextView
-                android:id="@+id/noregtbkasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nama Pasien : "/>
-            <TextView
-                android:id="@+id/namapasienkasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="NIK : "/>
-            <TextView
-                android:id="@+id/nikkasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Jenis Kelamin : "/>
-            <TextView
-                android:id="@+id/jeniskelaminkasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Umur :"/>
-            <TextView
-                android:id="@+id/umurkasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alamat Lengkap :"/>
-            <TextView
-                android:id="@+id/alamatkasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dirujuk Oleh : "/>
-            <TextView
-                android:id="@+id/dirujukkasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tipe Diagnosis TB : "/>
-            <TextView
-                android:id="@+id/tipediagnosiskasus"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="-"/>
-        </LinearLayout>
         <Button
-            android:id="@+id/btgetidkasus"
+            android:id="@+id/btgetidkasusnotifnakes"
             android:layout_marginTop="20dp"
             android:textColor="@android:color/white"
             android:background="@color/colorPrimary"
