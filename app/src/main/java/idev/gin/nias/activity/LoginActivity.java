@@ -2,6 +2,7 @@ package idev.gin.nias.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    private ProgressDialog mProgress;
     public Button mSignUpButton;
     SharedPreferences sharedPref;
 
@@ -47,9 +49,13 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setBackgroundDrawableResource(R.drawable.bg);
         setContentView(R.layout.activity_login);
         // Set up the login form.
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Loading..");
+        mProgress.setMessage("Mohon Tunggu...");
+        mProgress.setCancelable(false);
+        mProgress.setIndeterminate(true);
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -77,6 +83,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void login(final String email, String password) {
+        mProgress.show();
         AndroidNetworking.post(CONSTANT.BASE_URL + "login")
                 .addBodyParameter("email", email)
                 .addBodyParameter("password", password)
@@ -88,11 +95,13 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(LoginDao response) {
                         String token = response.getToken();
                         getAkunId(email, response.getToken());
+                        mProgress.dismiss();
                         Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_LONG).show();
                     }
 
                     @Override
                     public void onError(ANError anError) {
+                        mProgress.dismiss();
                         Toast.makeText(getApplicationContext(), "Login Failed: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
                     }
                 });

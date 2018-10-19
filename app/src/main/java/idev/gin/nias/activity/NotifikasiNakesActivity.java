@@ -1,4 +1,5 @@
 package idev.gin.nias.activity;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,7 @@ public class NotifikasiNakesActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ArrayList<RiwayatClass> tbList;
     private NotifikasiNakesAdapter adapter;
+    private ProgressDialog mProgress;
     int lastpages;
     public int pages;
     String emailpass;
@@ -37,9 +39,15 @@ public class NotifikasiNakesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notifikasi_nakes);
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Loading..");
+        mProgress.setMessage("Mohon Tunggu...");
+        mProgress.setCancelable(false);
+        mProgress.setIndeterminate(true);
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
+        mProgress.show();
         AndroidNetworking.get(CONSTANT.BASE_URL + "penilaianriwayat")
                 .addHeaders("Authorization", "bearer " + tokenpass)
                 .addHeaders("page", "1")
@@ -50,12 +58,14 @@ public class NotifikasiNakesActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(RiwayatDao response) {
                         lastpages = response.getResult().getLastPage();
+                        mProgress.dismiss();
                         Log.i("halakhirlastt",Integer.toString(lastpages));
 
                     }
 
                     @Override
                     public void onError(ANError anError) {
+                        mProgress.dismiss();
                         Toast.makeText(getApplicationContext(), "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
                     }
                 });

@@ -1,4 +1,5 @@
 package idev.gin.nias.activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -44,6 +46,7 @@ public class KasusTbActivity extends AppCompatActivity {
     private KasusTbAdapter adapter;
     private EndlessRecyclerOnScrollListener scrollListener;
     public int pages;
+    private ProgressDialog mProgress;
     public int lastpages;
     String emailpass;
     String tokenpass;
@@ -53,10 +56,16 @@ public class KasusTbActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Loading..");
+        mProgress.setMessage("Mohon Tunggu...");
+        mProgress.setCancelable(false);
+        mProgress.setIndeterminate(true);
         setContentView(R.layout.activity_kasus_tb);
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
+        mProgress.show();
         AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
                 .addHeaders("Authorization", "bearer " + tokenpass)
                 .addHeaders("page", "1")
@@ -68,11 +77,13 @@ public class KasusTbActivity extends AppCompatActivity {
                     public void onResponse(FaskesDao response) {
                         lastpages = response.getResult().getLastPage();
                         Log.i("halakhirlastt",Integer.toString(lastpages));
+                        mProgress.dismiss();
 
                     }
 
                     @Override
                     public void onError(ANError anError) {
+                        mProgress.dismiss();
                         Toast.makeText(getApplicationContext(), "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
                     }
                 });
