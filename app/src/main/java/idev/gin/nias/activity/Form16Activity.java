@@ -70,8 +70,8 @@ public class Form16Activity extends AppCompatActivity {
         final TextInputEditText resistanEt= (TextInputEditText) findViewById(R.id.sensitifResistan);
         final TextInputEditText alamatEt = (TextInputEditText) findViewById(R.id.alamatxx);
         final TextInputEditText namaKontakEt = (TextInputEditText) findViewById(R.id.namaKontakx);
-        final TextInputEditText umurKontakEt = (TextInputEditText) findViewById(R.id.umurx);
         final Spinner spgender = (Spinner) findViewById(R.id.spgender2);
+        final Spinner spumur = (Spinner) findViewById(R.id.spumurform16);
         final TextInputEditText alamatKontakEt = (TextInputEditText) findViewById(R.id.alamatKontakx);
         final Spinner hasilAkhirsp = (Spinner) findViewById(R.id.sphasilakhir);
         final Spinner tindaklanjutsp = (Spinner) findViewById(R.id.sptindaklanjut);
@@ -129,7 +129,7 @@ public class Form16Activity extends AppCompatActivity {
                 String resistan = resistanEt.getText().toString().trim();
                 String alamat = alamatEt.getText().toString().trim();
                 String namaKontak = namaKontakEt.getText().toString().trim();
-                String umurKontak = umurKontakEt.getText().toString().trim();
+                String umurKontak = spumur.getSelectedItem().toString().trim();
                 String spGender = spgender.getSelectedItem().toString().trim();
                 String alamatKontak = alamatKontakEt.getText().toString().trim();
                 String hasilAkhir = hasilAkhirsp.getSelectedItem().toString().trim();
@@ -207,6 +207,11 @@ public class Form16Activity extends AppCompatActivity {
         ArrayAdapter<String> adapterid = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.gender));
         adapterid.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spGendera.setAdapter(adapterid);
+
+        Spinner spumur16 = (Spinner) findViewById(R.id.spumurform16);
+        ArrayAdapter<String> adapterumur16 = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.usia));
+        adapterumur16.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spumur16.setAdapter(adapterumur16);
 
         Spinner spAkhir = (Spinner) findViewById(R.id.sphasilakhir);
         ArrayAdapter<String> adapterha = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.hasilakhirkontak));

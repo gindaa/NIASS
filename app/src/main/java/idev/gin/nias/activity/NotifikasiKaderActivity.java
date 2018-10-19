@@ -43,15 +43,15 @@ public class NotifikasiKaderActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         emailpass = extras.getString("email");
         tokenpass = extras.getString("token");
-        AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
+        AndroidNetworking.get(CONSTANT.BASE_URL + "penilaianriwayat")
                 .addHeaders("Authorization", "bearer " + tokenpass)
                 .addHeaders("page", "1")
                 .setTag("Faskes")
                 .setPriority(Priority.MEDIUM)
                 .build()
-                .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
+                .getAsObject(RiwayatDao.class, new ParsedRequestListener<RiwayatDao>() {
                     @Override
-                    public void onResponse(FaskesDao response) {
+                    public void onResponse(RiwayatDao response) {
                         lastpages = response.getResult().getLastPage();
                         Log.i("halakhirlastt",Integer.toString(lastpages));
 
@@ -105,17 +105,21 @@ public class NotifikasiKaderActivity extends AppCompatActivity {
                             return;
                         }
                         for (int i = 0; i < response.getResult().getData().size(); i++) {
-                            RiwayatClassKader isikasus = new RiwayatClassKader(
-                                    response.getResult().getData().get(i).getId(),
-                                    response.getResult().getData().get(i).getNama_kader(),
-                                    response.getResult().getData().get(i).getDesa(),
-                                    response.getResult().getData().get(i).getTanggal(),
-                                    response.getResult().getData().get(i).getNama_orantua(),
-                                    response.getResult().getData().get(i).getNama_anak(),
-                                    response.getResult().getData().get(i).getUsia_anak(),
-                                    response.getResult().getData().get(i).getFk_faskes());
-                            if (response.getResult().getData().get(i).getStatus() == "nakesdone"){
-                                tbList.add(isikasus);
+                            if (response.getResult().getData().get(i).getStatus() != null) {
+                                String cekstatus = response.getResult().getData().get(i).getStatus();
+                                Log.i("Status",cekstatus);
+                                if (cekstatus.equals("nakesdone")) {
+                                    RiwayatClassKader isikasus = new RiwayatClassKader(
+                                            response.getResult().getData().get(i).getId(),
+                                            response.getResult().getData().get(i).getNama_kader(),
+                                            response.getResult().getData().get(i).getDesa(),
+                                            response.getResult().getData().get(i).getTanggal(),
+                                            response.getResult().getData().get(i).getNama_orantua(),
+                                            response.getResult().getData().get(i).getNama_anak(),
+                                            response.getResult().getData().get(i).getUsia_anak(),
+                                            response.getResult().getData().get(i).getFk_faskes());
+                                    tbList.add(isikasus);
+                                }
                             }
                         }
                         adapter.notifyDataSetChanged();

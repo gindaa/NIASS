@@ -6,8 +6,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.androidnetworking.AndroidNetworking;
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.ParsedRequestListener;
 
 import idev.gin.nias.R;
+import idev.gin.nias.dao.AkunidDao;
+import idev.gin.nias.utils.CONSTANT;
 
 public class MenuKaderActivity extends AppCompatActivity {
 
@@ -26,6 +35,8 @@ public class MenuKaderActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         String emailpass = extras.getString("email");
         String tokenpass = extras.getString("token");
+        final TextView namamenu = (TextView) findViewById(R.id.namakadermenu);
+        final TextView rolemenu = (TextView) findViewById(R.id.rolekadermenu);
         sharedPref = getApplicationContext().getSharedPreferences("MyPrefs", MODE_PRIVATE);
         SharedPreferences.Editor edit = sharedPref.edit();
         edit.putString("email", emailpass);
@@ -34,10 +45,27 @@ public class MenuKaderActivity extends AppCompatActivity {
 
         Button btnprofil = (Button)findViewById(R.id.btnprofilkdr);
         Button btnkasustb = (Button)findViewById(R.id.btnkasuskdr);
-        Button btinvestigasi = (Button)findViewById(R.id.btninveskdr);
         Button btnotifikasi = (Button)(findViewById(R.id.btnnotifkdr));
-        Button btgps = (Button)(findViewById(R.id.btngpskdr));
         Button btpoin = (Button)(findViewById(R.id.btnpoinkdr));
+
+        AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
+                .addHeaders("Authorization", "bearer " + tokenpass)
+                .addHeaders("email", emailpass)
+                .setTag("test")
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getAsObject(AkunidDao.class, new ParsedRequestListener<AkunidDao>() {
+                    @Override
+                    public void onResponse(AkunidDao response) {
+                        namamenu.setText(response.getResult().get(0).getNama());
+                        rolemenu.setText(response.getResult().get(0).getRole());
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                        Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+                    }
+                });
 
 
         btnprofil.setOnClickListener(new View.OnClickListener() {
@@ -59,28 +87,10 @@ public class MenuKaderActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btinvestigasi.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuKaderActivity.this,RiwayatTbActivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
-                startActivity(intent);
-            }
-        });
         btnotifikasi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MenuKaderActivity.this,NotifikasiKaderActivity.class);
-                intent.putExtra("email",emailpass);
-                intent.putExtra("token",tokenpass);
-                startActivity(intent);
-            }
-        });
-        btgps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MenuKaderActivity.this,MapsActivity.class);
                 intent.putExtra("email",emailpass);
                 intent.putExtra("token",tokenpass);
                 startActivity(intent);

@@ -4,7 +4,7 @@
     <!-- LOGIN -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">SIGN IN</string>
+    <string name="action_sign_in">MASUK</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
@@ -166,10 +166,10 @@
         <item>Idala Jaya</item>
         <item>Hilifalawu</item>
         <item>Hiliaurifa</item>
-        <item>Soto'o</item>
+        <item>Soto o</item>
         <item>Bonia</item>
         <item>Ndraso Maenamolo</item>
-        <item>Pekan So'onogeu</item>
+        <item>Pekan So onogeu</item>
         <item>Samadaya</item>
         <item>Bawohosi</item>
         <item>Bawogosali</item>
@@ -258,6 +258,9 @@
     </string-array>
     <string-array name="kab">
         <item>Nias Selatan</item>
+    </string-array>
+    <string-array name="pilihkec">
+        <item>Pilih Kelurahan</item>
     </string-array>
 
 

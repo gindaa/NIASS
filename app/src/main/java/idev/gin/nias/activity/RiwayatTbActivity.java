@@ -380,6 +380,11 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
         ArrayAdapter<String> adapterkec = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kecamatan));
         adapterkec.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spkecamatan.setAdapter((adapterkec));
+
+        Spinner spkelurahan = (Spinner) findViewById(R.id.spkelurahanriwayat);
+        ArrayAdapter<String> adapterkel = new ArrayAdapter<String>(RiwayatTbActivity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.pilihkec));
+        adapterkel.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spkelurahan.setAdapter((adapterkel));
     }
     @Override
     protected void onStart() {

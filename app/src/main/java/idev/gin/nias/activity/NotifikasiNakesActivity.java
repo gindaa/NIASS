@@ -46,9 +46,9 @@ public class NotifikasiNakesActivity extends AppCompatActivity {
                 .setTag("Faskes")
                 .setPriority(Priority.MEDIUM)
                 .build()
-                .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
+                .getAsObject(RiwayatDao.class, new ParsedRequestListener<RiwayatDao>() {
                     @Override
-                    public void onResponse(FaskesDao response) {
+                    public void onResponse(RiwayatDao response) {
                         lastpages = response.getResult().getLastPage();
                         Log.i("halakhirlastt",Integer.toString(lastpages));
 
@@ -102,22 +102,24 @@ public class NotifikasiNakesActivity extends AppCompatActivity {
                             return;
                         }
                         for (int i = 0; i < response.getResult().getData().size(); i++) {
-                            RiwayatClass isikasus = new RiwayatClass(
-                                    response.getResult().getData().get(i).getId(),
-                                    response.getResult().getData().get(i).getNama_kader(),
-                                    response.getResult().getData().get(i).getDesa(),
-                                    response.getResult().getData().get(i).getTanggal(),
-                                    response.getResult().getData().get(i).getNama_orantua(),
-                                    response.getResult().getData().get(i).getNama_anak(),
-                                    response.getResult().getData().get(i).getUsia_anak(),
-                                    response.getResult().getData().get(i).getJumlah_anak(),
-                                    response.getResult().getData().get(i).getAlamat_desa(),
-                                    response.getResult().getData().get(i).getKeluarahan(),
-                                    response.getResult().getData().get(i).getKecamatan(),
-                                    response.getResult().getData().get(i).getKabupaten(),
-                                    response.getResult().getData().get(i).getProvinsi(),
-                                    response.getResult().getData().get(i).getFk_faskes());
-                            tbList.add(isikasus);
+                            if (response.getResult().getData().get(i).getStatus() == null) {
+                                RiwayatClass isikasus = new RiwayatClass(
+                                        response.getResult().getData().get(i).getId(),
+                                        response.getResult().getData().get(i).getNama_kader(),
+                                        response.getResult().getData().get(i).getDesa(),
+                                        response.getResult().getData().get(i).getTanggal(),
+                                        response.getResult().getData().get(i).getNama_orantua(),
+                                        response.getResult().getData().get(i).getNama_anak(),
+                                        response.getResult().getData().get(i).getUsia_anak(),
+                                        response.getResult().getData().get(i).getJumlah_anak(),
+                                        response.getResult().getData().get(i).getAlamat_desa(),
+                                        response.getResult().getData().get(i).getKeluarahan(),
+                                        response.getResult().getData().get(i).getKecamatan(),
+                                        response.getResult().getData().get(i).getKabupaten(),
+                                        response.getResult().getData().get(i).getProvinsi(),
+                                        response.getResult().getData().get(i).getFk_faskes());
+                                tbList.add(isikasus);
+                            }
                         }
                         adapter.notifyDataSetChanged();
                     }

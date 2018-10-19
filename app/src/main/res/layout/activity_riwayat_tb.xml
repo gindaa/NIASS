@@ -68,17 +68,20 @@
         <Spinner
             android:id="@+id/spusia"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary">
         </Spinner>
             <TextView
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Jumlah Anak Lain"
+
                 android:textSize="19sp"/>
             <Spinner
                 android:id="@+id/spjumlahanak"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="match_parent">
             </Spinner>
 
@@ -96,7 +99,8 @@
             <Spinner
                 android:id="@+id/spprovinsiriwayat"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"/>
             <TextView
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
@@ -106,6 +110,7 @@
             <Spinner
                 android:id="@+id/spkabupatenriwayat"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -116,6 +121,7 @@
             <Spinner
                 android:id="@+id/spkecamatanriwayat"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -126,6 +132,7 @@
             <Spinner
                 android:id="@+id/spkelurahanriwayat"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
         <TextView
             android:layout_marginTop="10dp"
@@ -136,6 +143,7 @@
             <Spinner
                 android:id="@+id/spkontak"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
 
         <TextView
@@ -147,6 +155,7 @@
         <Spinner
             android:id="@+id/spberat59"
             android:layout_width="wrap_content"
+            android:background="@color/colorPrimary"
             android:layout_height="wrap_content"/>
 
             <TextView
@@ -158,6 +167,7 @@
             <Spinner
                 android:id="@+id/spberat14"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -168,6 +178,7 @@
             <Spinner
                 android:id="@+id/spdemam"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -178,6 +189,7 @@
             <Spinner
                 android:id="@+id/spbatuk"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -188,6 +200,7 @@
             <Spinner
                 android:id="@+id/sppembesarankelenjar"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
             <TextView
                 android:layout_marginTop="10dp"
@@ -198,11 +211,13 @@
             <Spinner
                 android:id="@+id/sppembekakan"
                 android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
                 android:layout_height="wrap_content"/>
             <Button
                 android:id="@+id/selectmap"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="12dp"
+                android:padding="12dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
@@ -224,7 +239,7 @@
                 android:layout_gravity="center"
                 android:background="@color/colorPrimary"
                 android:textColor="@android:color/white"
-                android:text="SUMBIT"/>
+                android:text="KIRIM"/>
         </LinearLayout>
     </ScrollView>
 

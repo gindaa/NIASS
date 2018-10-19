@@ -34,43 +34,19 @@ import idev.gin.nias.utils.CONSTANT;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
-    // TODO: Usahain pake variabel global secukupnya aja. Lebih baik pake variabel lokal.
-    private UserLoginTask mAuthTask = null;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
     public Button mSignUpButton;
-    private String tokens;
     SharedPreferences sharedPref;
-    String emaildefault;
 
-    /**
-     * Kalo bingung, dao dipisah aja setiap endpointnya
-     * Dao masih kotlin, ubah aja ke java kl maum gua gada pojo converter
-     *
-     * Login dikasih overlay item aga transparan, ga keliatan soalnya teksnya
-     *
-     * Dokumentasi dan penggunaan FAN: https://github.com/amitshekhariitbhu/Fast-Android-Networking
-     * Pake yang getAsObject jangan yang JSON, biar rapih dan ga bingung, tapi kalo mau juga gapapa.
-     *
-     * Refrensi clean code: https://github.com/ryanmcdermott/clean-code-javascript
-     *
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setBackgroundDrawableResource(R.drawable.bg);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mSignUpButton = (Button) findViewById(R.id.singup);
-        mSignUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(LoginActivity.this, SignUpActivity.class);
-                startActivity(intent);
-            }
-        });
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
 
@@ -179,9 +155,6 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
         mEmailView.setError(null);
@@ -214,13 +187,6 @@ public class LoginActivity extends AppCompatActivity {
             cancel = true;
         }
 
-        if (cancel) {
-            focusView.requestFocus();
-        } else {
-            showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
-        }
 
     }
 
@@ -297,7 +263,6 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
             showProgress(false);
 
             if (success) {
@@ -310,7 +275,6 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-            mAuthTask = null;
             showProgress(false);
         }
     }

@@ -8,73 +8,139 @@
     tools:context=".activity.MenuNakesActivity"
     android:background="@drawable/ce"
     android:orientation="vertical">
-
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="12"
+        android:src="@drawable/png"/>
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginStart="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Halo , "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:id="@+id/namanakesmenu" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="!" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_marginStart="20sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Anda Sebagai "/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:id="@+id/rolenakesmenu" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnprofilnks"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="1"
                 android:layout_margin="20dp"
                 android:background="@color/colorPrimary"
                 android:drawableTop="@drawable/profile"
                 android:text="@string/PROFIL"
                 android:textColor="@android:color/white"/>
 
-            <Button
-                android:id="@+id/btnnotifnks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableTop="@drawable/notif"
-                android:text="@string/notifikasi"
-                android:textColor="@android:color/white"/>
+        <Button
+            android:id="@+id/btnskrnks"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/kasus"
+            android:text="@string/skoringtb"
+            android:textColor="@android:color/white"/>
 
-            <Button
-                android:id="@+id/btnskrnks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableTop="@drawable/kasus"
-                android:text="@string/skoringtb"
-                android:textColor="@android:color/white"/>
+
 
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnkasusnks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableTop="@drawable/kasus"
-                android:text="@string/kasustb"
-                android:textColor="@android:color/white"/>
 
-
-            <Button
+        <Button
                 android:id="@+id/btnpoinnks"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="100dp"
+                android:layout_weight="1"
                 android:layout_margin="20dp"
                 android:background="@color/colorPrimary"
                 android:drawableTop="@drawable/poin"
                 android:textColor="@android:color/white"
                 android:text="@string/poin"/>
-
-
+        <Button
+            android:id="@+id/btnnotifnks"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_weight="1"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/notif"
+            android:text="@string/notifikasi"
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnsettingkdr"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/setting"
+            android:layout_weight="1"
+            android:text="PENGATURAN"
+            android:textColor="@android:color/white"/>
 
+        <Button
+            android:id="@+id/btnexitkdr"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:drawableTop="@drawable/exit"
+            android:layout_weight="1"
+            android:text="KELUAR"
+            android:textColor="@android:color/white"/>
+
+</LinearLayout>
 </LinearLayout>

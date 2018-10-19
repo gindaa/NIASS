@@ -93,44 +93,17 @@
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
-            <TextView
+        </LinearLayout>
+        <RelativeLayout
+            android:id="@+id/loadingPanel"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center" >
+
+            <ProgressBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="15dp"
-                android:text="@string/or"
-                android:textColor="@android:color/white"
-                android:textSize="16sp" />
-            <Button
-                android:id="@+id/google"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:background="@android:color/white"
-                android:text="@string/gglogin"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/facebook"
-                style="?android:textAppearanceSmall"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:background="@color/fb"
-                android:text="@string/fblogin"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
-            <Button
-                android:id="@+id/singup"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_up"
-                android:background="@color/colorPrimary"
-                android:layout_marginTop="5dp"
-                android:textColor="@android:color/white"/>
-
-        </LinearLayout>
+                android:indeterminate="true" />
+        </RelativeLayout>
     </ScrollView>
 </LinearLayout>

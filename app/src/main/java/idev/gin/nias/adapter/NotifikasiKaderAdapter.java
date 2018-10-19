@@ -1,4 +1,5 @@
 package idev.gin.nias.adapter;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -21,6 +22,7 @@ import idev.gin.nias.KasusDetailClass;
 import idev.gin.nias.R;
 import idev.gin.nias.RiwayatClassKader;
 import idev.gin.nias.activity.Form16Activity;
+import idev.gin.nias.activity.NotifikasiKaderActivity;
 import idev.gin.nias.dao.AddPoinDao;
 import idev.gin.nias.utils.CONSTANT;
 
@@ -56,22 +58,23 @@ public class NotifikasiKaderAdapter extends RecyclerView.Adapter<NotifikasiKader
         holder.namaOrangtua.setText(listRiwayatTB.get(position).getNamaOrangtuariwayat());
         holder.namaAnaknakes.setText(listRiwayatTB.get(position).getNamaAnakriwayat());
         holder.usiaAnak.setText(listRiwayatTB.get(position).getUsiaAnakriwayat().toString());
+        holder.idfaskes.setText(listRiwayatTB.get(position).getIdfaskes().toString());
         holder.btIdkasus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 idkasustb = listRiwayatTB.get(position).getIdriwayat();
                 String idKasus = sharedPref.getString("idKasus", "kosong");
-//                Toast.makeText(context, "ID KASUS:" + idkasustb, Toast.LENGTH_LONG).show();
                 SharedPreferences pref = context.getSharedPreferences("MyPrefs",MODE_PRIVATE);
+                String tokenpass = pref.getString("token", "token");
+                String emailpass = pref.getString("email", "mail");
                 SharedPreferences.Editor edit = sharedPref.edit();
                 edit.putString("idKasus", listRiwayatTB.get(position).getIdriwayat());
                 edit.putString("idFaskes",listRiwayatTB.get(position).getIdfaskes().toString());
                 edit.apply();
-                Toast.makeText(context, "ID KASUS Adalah:" + pref.getString("idKasus", "Id tidak Ketemu"), Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(context, Form16Activity.class);
+                Toast.makeText(context, "ID KASUS " + pref.getString("idKasus", "Id tidak Ketemu")+" Berhasil dikonfirmasi", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(context, NotifikasiKaderActivity.class);
                 intent.putExtra("email",pref.getString("email", "email"));
                 intent.putExtra("token",pref.getString("token", "email"));
-                intent.putExtra("idKasus" , idKasus);
                 AndroidNetworking.put(CONSTANT.BASE_URL + "penilaianriwayat")
                         .addHeaders("Authorization", "bearer " + pref.getString("token", "0"))
                         .addBodyParameter("fk_faskes", pref.getString("idFaskes", "0"))
@@ -90,7 +93,7 @@ public class NotifikasiKaderAdapter extends RecyclerView.Adapter<NotifikasiKader
                                 Toast.makeText(context, "Error Happen" + anError.getErrorBody(), Toast.LENGTH_LONG).show();
                             }
                         });
-
+                ((Activity)context).finish();
                 context.startActivity(intent);
             }
         });
