@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +19,10 @@ import com.androidnetworking.common.Priority;
 import com.androidnetworking.error.ANError;
 import com.androidnetworking.interfaces.ParsedRequestListener;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import idev.gin.nias.KasusClass;
 import idev.gin.nias.R;
@@ -35,12 +40,14 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
     private Context context;
     SharedPreferences sharedPref;
     private ArrayList<KasusClass> listKasusClassTB;
+    private ArrayList<KasusClass> listKasusClassTbFull;
     private String idkasustb;
 
 
     public KasusTbAdapter(Context context, ArrayList<KasusClass> listKasusClassTB) {
         this.context = context;
         this.listKasusClassTB = listKasusClassTB;
+        listKasusClassTbFull = new ArrayList<>(listKasusClassTB);
         sharedPref = context.getSharedPreferences("MyPrefs", MODE_PRIVATE);
     }
 
@@ -61,6 +68,8 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         holder.namaProvinsi.setText(listKasusClassTB.get(position).getmTextProvinsi());
         holder.noReg.setText(listKasusClassTB.get(position).getmTextregis());
         holder.noRegTb.setText(listKasusClassTB.get(position).getmTextregisTbKota());
+        holder.kecamatan.setText(listKasusClassTB.get(position).getmTextKecamatan());
+        holder.kelurahan.setText(listKasusClassTB.get(position).getmTextKelurahan());
         holder.namaPasien.setText(listKasusClassTB.get(position).getmTextNamaPasien());
         holder.Nik.setText(listKasusClassTB.get(position).getmTextNik());
         holder.Jk.setText(listKasusClassTB.get(position).getMtextjk());
@@ -84,6 +93,7 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
                 intent.putExtra("token",pref.getString("token", "email"));
                 intent.putExtra("idKasus" , idKasus);
                 context.startActivity(intent);
+                ((Activity)context).finish();
             }
         });
         holder.btSelesai.setOnClickListener(new View.OnClickListener() {
@@ -134,6 +144,8 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
         public TextView namaProvinsi;
         public TextView noReg;
         public TextView noRegTb;
+        public TextView kecamatan;
+        public TextView kelurahan;
         public TextView namaPasien;
         public TextView Nik;
         public TextView Jk;
@@ -152,6 +164,8 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
             namaProvinsi = itemView.findViewById(R.id.namaprovinsikasus);
             noReg = itemView.findViewById(R.id.noregfaskeskasus);
             noRegTb = itemView.findViewById(R.id.noregtbkasus);
+            kecamatan = itemView.findViewById(R.id.kecamatankasustb);
+            kelurahan = itemView.findViewById(R.id.kelurahankasustb);
             namaPasien = itemView.findViewById(R.id.namapasienkasus);
             Nik = itemView.findViewById(R.id.nikkasus);
             Jk = itemView.findViewById(R.id.jeniskelaminkasus);
@@ -166,4 +180,33 @@ public class KasusTbAdapter extends RecyclerView.Adapter<KasusTbAdapter.ViewHold
 
 
     }
+//    private Filter kasusfilter = new Filter() {
+//        @Override
+//        protected FilterResults performFiltering(CharSequence constraint) {
+//            List<KasusClass> filteredlist = new ArrayList<>();
+//            if (constraint == null || constraint.length() == 0){
+//                filteredlist.addAll(listKasusClassTbFull);
+//            } else {
+//                String filterPattern = constraint.toString().toLowerCase().trim();
+//
+//                for (KasusClass item : listKasusClassTbFull){
+//                    if(item.getmTextKecamatan().toLowerCase().contains(filterPattern) || item.getmTextKelurahan().toLowerCase().contains(filterPattern)){
+//                        filteredlist.add(item);
+//                    }
+//                }
+//            }
+//            FilterResults results = new FilterResults();
+//            results.values = filteredlist;
+//
+//            return results;
+//        }
+//
+//        @Override
+//        protected void publishResults(CharSequence constraint, FilterResults results) {
+//            listKasusClassTB.clear();
+//            listKasusClassTB.addAll((List)results.values);
+//            notifyDataSetChanged();
+//
+//        }
+//    };
 }

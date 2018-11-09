@@ -64,6 +64,7 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_margin="20dp"
+                android:textSize="20dp"
                 android:background="@color/colorPrimary"
                 android:drawableTop="@drawable/profile"
                 android:text="@string/PROFIL"
@@ -71,6 +72,7 @@
 
         <Button
             android:id="@+id/btnskrnks"
+            android:textSize="16dp"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
             android:layout_weight="1"
@@ -98,6 +100,7 @@
                 android:layout_height="100dp"
                 android:layout_weight="1"
                 android:layout_margin="20dp"
+                android:textSize="20dp"
                 android:background="@color/colorPrimary"
                 android:drawableTop="@drawable/poin"
                 android:textColor="@android:color/white"
@@ -110,6 +113,7 @@
             android:layout_margin="20dp"
             android:background="@color/colorPrimary"
             android:drawableTop="@drawable/notif"
+            android:textSize="16dp"
             android:text="@string/notifikasi"
             android:textColor="@android:color/white"/>
 
@@ -124,6 +128,7 @@
             android:id="@+id/btnsettingkdr"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
+            android:textSize="14dp"
             android:layout_margin="20dp"
             android:background="@color/colorPrimary"
             android:drawableTop="@drawable/setting"
@@ -138,6 +143,7 @@
             android:layout_margin="20dp"
             android:background="@color/colorPrimary"
             android:drawableTop="@drawable/exit"
+            android:textSize="20dp"
             android:layout_weight="1"
             android:text="KELUAR"
             android:textColor="@android:color/white"/>

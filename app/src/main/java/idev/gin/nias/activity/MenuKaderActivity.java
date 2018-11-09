@@ -26,6 +26,8 @@ public class MenuKaderActivity extends AppCompatActivity {
     private Button btnotifikasi;
     private Button btgps;
     private Button btpoin;
+    private Button btexit;
+    private Button btsetting;
     SharedPreferences sharedPref;
 
     @Override
@@ -47,6 +49,7 @@ public class MenuKaderActivity extends AppCompatActivity {
         Button btnkasustb = (Button)findViewById(R.id.btnkasuskdr);
         Button btnotifikasi = (Button)(findViewById(R.id.btnnotifkdr));
         Button btpoin = (Button)(findViewById(R.id.btnpoinkdr));
+        Button btexit = (Button)(findViewById(R.id.btnexitkdr));
 
         AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
                 .addHeaders("Authorization", "bearer " + tokenpass)
@@ -103,6 +106,14 @@ public class MenuKaderActivity extends AppCompatActivity {
                 intent.putExtra("email",emailpass);
                 intent.putExtra("token",tokenpass);
                 startActivity(intent);
+            }
+        });
+
+        btexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
             }
         });
 

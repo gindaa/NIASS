@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +8,59 @@
     tools:context=".activity.KasusTbActivity"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="8dp"
+        android:layout_weight="2"
+        tools:layout_editor_absoluteY="279dp">
 
+        <android.support.design.widget.TextInputEditText
+            android:id="@+id/searchfield"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Pencarian"/>
+    </android.support.design.widget.TextInputLayout>
+            <Button
+                android:id="@+id/searchfilter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Cari"
+                android:background="@color/colorPrimary"
+                android:drawableLeft="@drawable/ic_search_black_24dp"
+                android:gravity="center"
+                android:textColor="@android:color/white" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <Spinner
+        android:id="@+id/filterbykecamatan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
+        <Spinner
+            android:id="@+id/filterbykelurahan"
+            android:layout_gravity="right"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <Button
+            android:id="@+id/btnfilter"
+            android:layout_width="120dp"
+            android:layout_height="match_parent"
+            android:text="FILTER"
+            android:textColor="@android:color/white"
+            android:background="@color/colorPrimary"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
     <android.support.v7.widget.RecyclerView
         android:id="@+id/reckasustb"
         android:layout_width="match_parent"

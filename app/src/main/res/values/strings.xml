@@ -142,40 +142,42 @@
     </string-array>
     <string-array name="fanayama">
         <item>Pilih Kelurahan</item>
+        <item>Bawofanayama</item>
         <item>Bawomataluo</item>
-        <item>Hilisalawa</item>
-        <item>Orahili Fau</item>
+        <item>Bawonahono</item>
         <item>Eho Orahili Fau</item>
-        <item>Orahili Gito</item>
+        <item>Ete Batu</item>
+        <item>Hilifarokhalawa</item>
+        <item>Hilikaramaha</item>
+        <item>Hilinawalo Fau</item>
+        <item>Hiliofonaluo</item>
+        <item>Hilisalawa</item>
+        <item>Hilizihono</item>
         <item>Lahusa Fau</item>
+        <item>Orahili Fau</item>
+        <item>Orahili Gito</item>
+        <item>Onohondro</item>
         <item>Siwalawa</item>
         <item>Siliwulawa</item>
-        <item>Hilikaramaha</item>
-        <item>Hilifarokhalawa</item>
-        <item>Onohondro</item>
-        <item>Hilinawalo Fau</item>
-        <item>Ete Batu</item>
-        <item>Bawofanayama</item>
-        <item>Bawonahono</item>
-        <item>Hilizihono</item>
-        <item>Hiliofonaluo</item>
+
     </string-array>
     <string-array name="miniamolo">
         <item>Pilih Kelurahan</item>
-        <item>Hilisimaetano</item>
-        <item>Idala Jaya</item>
-        <item>Hilifalawu</item>
-        <item>Hiliaurifa</item>
-        <item>Soto o</item>
-        <item>Bonia</item>
-        <item>Ndraso Maenamolo</item>
-        <item>Pekan So onogeu</item>
-        <item>Samadaya</item>
         <item>Bawohosi</item>
         <item>Bawogosali</item>
         <item>Bawosaodano</item>
+        <item>Bonia</item>
         <item>Eho</item>
         <item>Faomasi</item>
+        <item>Hiliaurifa</item>
+        <item>Hilifalawu</item>
+        <item>Hilisimaetano</item>
+        <item>Idala Jaya</item>
+        <item>Ndraso Maenamolo</item>
+        <item>Pekan So onogeu</item>
+        <item>Samadaya</item>
+        <item>Soto o</item>
+
     </string-array>
     <string-array name="usia">
         <item>0</item>

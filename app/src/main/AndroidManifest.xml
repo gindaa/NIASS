@@ -62,6 +62,7 @@
             android:label="REGISTRASI KONTAK TUBERKOLOSIS" />
         <activity
             android:name=".activity.KasusTbActivity"
+            android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar"
             android:label="KASUS TB" />
         <activity
             android:name=".activity.NotifikasiNakesActivity"

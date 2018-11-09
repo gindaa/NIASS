@@ -7,6 +7,8 @@ public class KasusClass {
     private String mTextProvinsi;
     private String mTextregis;
     private String mTextregisTbKota;
+    private String mTextKecamatan;
+    private String mTextKelurahan;
     private String mTextNamaPasien;
     private String mTextNik;
     private String mtextjk;
@@ -114,13 +116,33 @@ public class KasusClass {
         this.mTextdiagnosistb = mTextdiagnosistb;
     }
 
-    public KasusClass(String idKasus, String mTextnamafaskes, String mTextKota, String mTextProvinsi, String mTextregis, String mTextregiskota, String mTextNamaPasien, String mTextNik, String mtextjk, String mTextUmur, String mTextAlamat, String mTextRujuk, String mTextdiagnosistb) {
+    public void setmTextKecamatan(String mTextKecamatan) {
+        this.mTextKecamatan = mTextKecamatan;
+    }
+
+    public void setmTextKelurahan(String mTextKelurahan) {
+        this.mTextKelurahan = mTextKelurahan;
+    }
+
+    public String getmTextKecamatan() {
+
+        return mTextKecamatan;
+    }
+
+    public String getmTextKelurahan() {
+        return mTextKelurahan;
+    }
+
+    public KasusClass(String idKasus, String mTextnamafaskes, String mTextKota, String mTextProvinsi, String mTextregis, String mTextregiskota, String mTextKecamatan , String mTextKelurahan, String mTextNamaPasien, String mTextNik, String mtextjk, String mTextUmur, String mTextAlamat, String mTextRujuk, String mTextdiagnosistb) {
         this.idKasus= idKasus;
         this.mTextnamafaskes = mTextnamafaskes;
         this.mTextKota = mTextKota;
         this.mTextProvinsi = mTextProvinsi;
         this.mTextregis = mTextregis;
         this.mTextregisTbKota = mTextregiskota;
+        this.mTextKecamatan = mTextKecamatan;
+        this.mTextKelurahan = mTextKelurahan;
+
         this.mTextNamaPasien = mTextNamaPasien;
         this.mTextNik = mTextNik;
         this.mtextjk = mtextjk;

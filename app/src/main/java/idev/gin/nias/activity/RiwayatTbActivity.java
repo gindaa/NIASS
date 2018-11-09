@@ -220,6 +220,7 @@ public class RiwayatTbActivity extends AppCompatActivity implements GoogleApiCli
                 {
                     sendriwayat(namaKader,desa,tanggal,nama_orangtua,nama_anak,usia_anak,jumlah_anak,alamat_desa,provinsisp,kabupatensp,kelurahansp,kecamatansp,kontak_tb,Berat59,Berat14,Demam,Batuk,Kelenjar,Pembengkakan);
                 }
+                else {Toast.makeText(getApplicationContext(), "Mohon Lengkapi Form", Toast.LENGTH_LONG).show();}
             }
             private void sendriwayat(String namaKader,String desa,String tanggal,String namaOrangtua,String namaAnak,String usiaAnak,String jumlahAnak,String alamatDesa,String provinsi,String kabupaten,String kelurahan, String kecamatan,String kontakTb,String berat59,String berat4,String demam,String batuk ,String kelenjar,String bengkak) {
 

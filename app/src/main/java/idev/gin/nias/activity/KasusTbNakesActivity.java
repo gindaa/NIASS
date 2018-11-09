@@ -87,46 +87,46 @@ public class KasusTbNakesActivity extends AppCompatActivity {
     }
 
     private void callkasustb(String page) {
-        pages = pages + 1;
-        String pagestr = Integer.toString(pages);
-        AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
-                    .addHeaders("Authorization", "bearer " + tokenpass)
-                    .addHeaders("page", pagestr)
-                    .setTag("Faskes")
-                    .setPriority(Priority.MEDIUM)
-                    .build()
-                    .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
-                        @Override
-                        public void onResponse(FaskesDao response) {
-                            for (int i = 0; i < response.getResult().getData().size(); i++) {
-                                KasusClass isikasus = new KasusClass(
-                                        response.getResult().getData().get(i).getId(),
-                                        response.getResult().getData().get(i).getNo_registrasi_faskes(),
-                                        response.getResult().getData().get(i).getNo_registrasi_tbkota(),
-                                        response.getResult().getData().get(i).getProvinsi(),
-                                        response.getResult().getData().get(i).getNo_registrasi_faskes(),
-                                        response.getResult().getData().get(i).getNo_registrasi_tbkota(),
-                                        response.getResult().getData().get(i).getNama_pasien(),
-                                        response.getResult().getData().get(i).getNik(),
-                                        response.getResult().getData().get(i).getJenis_kelamin(),
-                                        response.getResult().getData().get(i).getUmur(),
-                                        response.getResult().getData().get(i).getAlamat(),
-                                        response.getResult().getData().get(i).getPerujuk(),
-                                        response.getResult().getData().get(i).getTipe_diagnosis_tb());
-                                if (response.getResult().getData().get(i).getStatus() == null){
-                                    tbList.add(isikasus);
-                                }
-                            }
-                            lastpages = response.getResult().getLastPage();
-                            adapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onError(ANError anError) {
-                            Toast.makeText(getApplicationContext(), "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
-                        }
-
-                    });
-//        } else Toast.makeText(getApplicationContext(), "Last Page", Toast.LENGTH_LONG).show();
+//        pages = pages + 1;
+//        String pagestr = Integer.toString(pages);
+//        AndroidNetworking.get(CONSTANT.BASE_URL + "faskes")
+//                    .addHeaders("Authorization", "bearer " + tokenpass)
+//                    .addHeaders("page", pagestr)
+//                    .setTag("Faskes")
+//                    .setPriority(Priority.MEDIUM)
+//                    .build()
+//                    .getAsObject(FaskesDao.class, new ParsedRequestListener<FaskesDao>() {
+//                        @Override
+//                        public void onResponse(FaskesDao response) {
+//                            for (int i = 0; i < response.getResult().getData().size(); i++) {
+//                                KasusClass isikasus = new KasusClass(
+//                                        response.getResult().getData().get(i).getId(),
+//                                        response.getResult().getData().get(i).getNo_registrasi_faskes(),
+//                                        response.getResult().getData().get(i).getNo_registrasi_tbkota(),
+//                                        response.getResult().getData().get(i).getProvinsi(),
+//                                        response.getResult().getData().get(i).getNo_registrasi_faskes(),
+//                                        response.getResult().getData().get(i).getNo_registrasi_tbkota(),
+//                                        response.getResult().getData().get(i).getNama_pasien(),
+//                                        response.getResult().getData().get(i).getNik(),
+//                                        response.getResult().getData().get(i).getJenis_kelamin(),
+//                                        response.getResult().getData().get(i).getUmur(),
+//                                        response.getResult().getData().get(i).getAlamat(),
+//                                        response.getResult().getData().get(i).getPerujuk(),
+//                                        response.getResult().getData().get(i).getTipe_diagnosis_tb());
+//                                if (response.getResult().getData().get(i).getStatus() == null){
+//                                    tbList.add(isikasus);
+//                                }
+//                            }
+//                            lastpages = response.getResult().getLastPage();
+//                            adapter.notifyDataSetChanged();
+//                        }
+//
+//                        @Override
+//                        public void onError(ANError anError) {
+//                            Toast.makeText(getApplicationContext(), "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+//                        }
+//
+//                    });
+////        } else Toast.makeText(getApplicationContext(), "Last Page", Toast.LENGTH_LONG).show();
     }
 }

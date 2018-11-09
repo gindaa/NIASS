@@ -97,6 +97,7 @@ public class LoginActivity extends AppCompatActivity {
                         getAkunId(email, response.getToken());
                         mProgress.dismiss();
                         Toast.makeText(getApplicationContext(), "Login Berhasil", Toast.LENGTH_LONG).show();
+                        finish();
                     }
 
                     @Override

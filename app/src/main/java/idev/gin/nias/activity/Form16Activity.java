@@ -1,6 +1,7 @@
 package idev.gin.nias.activity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -53,11 +55,17 @@ public class Form16Activity extends AppCompatActivity {
     private String tokenpassnakes;
     private String idKasus;
     private String fkFaskes;
+    private ProgressDialog mProgress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_16);
+        mProgress = new ProgressDialog(this);
+        mProgress.setTitle("Loading..");
+        mProgress.setMessage("Mohon Tunggu...");
+        mProgress.setCancelable(false);
+        mProgress.setIndeterminate(true);
         Bundle extras = getIntent().getExtras();
         emailpassnakes = extras.getString("email");
         tokenpassnakes = extras.getString("token");
@@ -68,36 +76,65 @@ public class Form16Activity extends AppCompatActivity {
         final TextInputEditText nikEt = (TextInputEditText) findViewById(R.id.nikKontakr);
         final TextInputEditText namaEt = (TextInputEditText) findViewById(R.id.namakk);
         final TextInputEditText resistanEt= (TextInputEditText) findViewById(R.id.sensitifResistan);
+        final Spinner provk = (Spinner) findViewById(R.id.spprovinsikontak);
+        final Spinner kabk = (Spinner) findViewById(R.id.spkabupatenkontak);
+        final Spinner keck = (Spinner) findViewById(R.id.spkecamatankontak);
+        final Spinner kelk = (Spinner) findViewById(R.id.spkelurahankontak);
+        final TextInputEditText rtrwet = (TextInputEditText) findViewById(R.id.rtrwkontak);
         final TextInputEditText alamatEt = (TextInputEditText) findViewById(R.id.alamatxx);
         final TextInputEditText namaKontakEt = (TextInputEditText) findViewById(R.id.namaKontakx);
         final Spinner spgender = (Spinner) findViewById(R.id.spgender2);
-        final Spinner spumur = (Spinner) findViewById(R.id.spumurform16);
+        final Spinner spumurl = (Spinner) findViewById(R.id.spumurlform16);
+        final Spinner spumurp =  (Spinner) findViewById(R.id.spumurpform16);
         final TextInputEditText alamatKontakEt = (TextInputEditText) findViewById(R.id.alamatKontakx);
         final Spinner hasilAkhirsp = (Spinner) findViewById(R.id.sphasilakhir);
         final Spinner tindaklanjutsp = (Spinner) findViewById(R.id.sptindaklanjut);
         final TextView tanggalPpInh = (TextView) findViewById(R.id.tanggalppinh);
         final Spinner hasilppinhsp = (Spinner) findViewById(R.id.spppinh);
 
+        ArrayAdapter<String> adapterfana = new ArrayAdapter<String>(Form16Activity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.fanayama));
+        adapterfana.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adaptermin = new ArrayAdapter<String>(Form16Activity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.miniamolo));
+        adaptermin.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        keck.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String kecamatans = keck.getSelectedItem().toString().toLowerCase();
+                if (kecamatans.equals("fanayama")){
+                    kelk.setAdapter(adapterfana);
+                }
+                else if(kecamatans.equals("maniamolo")){
+                    kelk.setAdapter(adaptermin);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+
         Button submitfaskes = (Button) findViewById(R.id.submitfaskes);
         mAPIServiceKontak = ApiUtils.getAPIKontak();
-        AndroidNetworking.get(CONSTANT.BASE_URL + "faskesid")
-                .addHeaders("Authorization", "bearer " + tokenpassnakes)
-                .addHeaders("id",idKasus)
-                .setTag("Faskesid")
-                .setPriority(Priority.MEDIUM)
-                .build()
-                .getAsObject(FaskesIdDao.class, new ParsedRequestListener<FaskesIdDao>() {
-                    @Override
-                    public void onResponse(FaskesIdDao response) {
-                        kabupatenEt.setText(response.getResult().get(0).getKabupaten());
-                    }
-
-                    @Override
-                    public void onError(ANError anError) {
-                        Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
-                    }
-
-                });
+        mProgress.show();
+//        AndroidNetworking.get(CONSTANT.BASE_URL + "faskesid")
+//                .addHeaders("Authorization", "bearer " + tokenpassnakes)
+//                .addHeaders("id",idKasus)
+//                .setTag("Faskesid")
+//                .setPriority(Priority.MEDIUM)
+//                .build()
+//                .getAsObject(FaskesIdDao.class, new ParsedRequestListener<FaskesIdDao>() {
+//                    @Override
+//                    public void onResponse(FaskesIdDao response) {
+//                        kabupatenEt.setText(response.getResult().get(0).getKabupaten());
+//                    }
+//
+//                    @Override
+//                    public void onError(ANError anError) {
+//                        Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
+//                    }
+//
+//                });
         AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
                 .addHeaders("Authorization", "bearer " + tokenpassnakes)
                 .addHeaders("email", emailpassnakes)
@@ -115,7 +152,7 @@ public class Form16Activity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(),  "Error: " + anError.getErrorBody(), Toast.LENGTH_LONG).show();
                     }
                 });
-
+        mProgress.dismiss();
 
 
         submitfaskes.setOnClickListener(new View.OnClickListener() {
@@ -127,16 +164,21 @@ public class Form16Activity extends AppCompatActivity {
                 String nik = nikEt.getText().toString().trim();
                 String nama = namaEt.getText().toString().trim();
                 String resistan = resistanEt.getText().toString().trim();
+                String provinsi = provk.getSelectedItem().toString().trim();
+                String kabupatena = kabk.getSelectedItem().toString().trim();
+                String kecamatan = keck.getSelectedItem().toString().trim();
+                String kelurahan = kelk.getSelectedItem().toString().trim();
+                String rtrwk = rtrwet.getText().toString().trim();
                 String alamat = alamatEt.getText().toString().trim();
                 String namaKontak = namaKontakEt.getText().toString().trim();
-                String umurKontak = spumur.getSelectedItem().toString().trim();
+                String umurKontakl = spumurl.getSelectedItem().toString().trim();
+                String umurKontakp = spumurp.getSelectedItem().toString().trim();
                 String spGender = spgender.getSelectedItem().toString().trim();
                 String alamatKontak = alamatKontakEt.getText().toString().trim();
                 String hasilAkhir = hasilAkhirsp.getSelectedItem().toString().trim();
                 String tindakLanjut = tindaklanjutsp.getSelectedItem().toString().trim();
                 String tanggalppinh = tanggalPpInh.getText().toString().trim();
                 String hasilPPinh = hasilppinhsp.getSelectedItem().toString().trim();
-                String lokasi = "maps".toString().trim();
 
                 if(!TextUtils.isEmpty(nama) &&
                         !TextUtils.isEmpty(unitPelayanan)&&
@@ -145,9 +187,15 @@ public class Form16Activity extends AppCompatActivity {
                         !TextUtils.isEmpty(nik) &&
                         !TextUtils.isEmpty(nama) &&
                         !TextUtils.isEmpty(resistan) &&
+                        !TextUtils.isEmpty(provinsi) &&
+                        !TextUtils.isEmpty(kabupatena) &&
+                        !TextUtils.isEmpty(kelurahan) &&
+                        !TextUtils.isEmpty(kecamatan) &&
                         !TextUtils.isEmpty(alamat) &&
+                        !TextUtils.isEmpty(rtrwk) &&
                         !TextUtils.isEmpty(namaKontak) &&
-                        !TextUtils.isEmpty(umurKontak) &&
+                        !TextUtils.isEmpty(umurKontakp) &&
+                        !TextUtils.isEmpty(umurKontakl) &&
                         !TextUtils.isEmpty(spGender) &&
                         !TextUtils.isEmpty(alamatKontak) &&
                         !TextUtils.isEmpty(hasilAkhir) &&
@@ -155,28 +203,32 @@ public class Form16Activity extends AppCompatActivity {
                         !TextUtils.isEmpty(tanggalppinh) &&
                         !TextUtils.isEmpty(hasilPPinh))
                 {
-                        sendPost(unitPelayanan,kabupaten,tanggalRegis,nik,nama,resistan,alamat,namaKontak,umurKontak,spGender,alamat,hasilAkhir,tindakLanjut,tanggalppinh,hasilAkhir,lokasi);
+                        sendPost(unitPelayanan,kabupaten,tanggalRegis,nik,nama,resistan,provinsi,kabupatena,kelurahan,kecamatan,rtrwk,alamat,namaKontak,umurKontakp,umurKontakl,spGender,alamat,hasilAkhir,tindakLanjut,tanggalppinh,hasilAkhir);
                 }
             }
-            private void sendPost(String unitPelayanan,String kabupaten,String tanggalRegis,String nik,String nama,String resisten,String alamat,String namaKontak,String umurKontak,String spGender,String alamatKontak,String hasilAkhir,String tindakLanjut,String tanggalPpInh,String hasilPpInh,String lokasi) {
+            private void sendPost(String unitPelayanan,String kabupaten,String tanggalRegis,String nik,String nama,String resisten,String provinsi,String kabupatenkontak, String kelurahan,String kecamatan,String rtrw,String alamat,String namaKontak,String umurKontakp,String umurKontakl,String alamatKontak,String hasilAkhir,String tindakLanjut,String tanggalPpInh,String hasilPpInh,String lokasi) {
                 AndroidNetworking.post(CONSTANT.BASE_URL + "kontak")
                         .addHeaders("Authorization", "bearer " + tokenpassnakes)
-                        .addBodyParameter("unit_pelayanan",unitPelayanan)
+                        .addBodyParameter("tanggal",tanggalRegis)
+                        .addBodyParameter("unitpelayanan",unitPelayanan)
                         .addBodyParameter("kabupaten",kabupaten)
-                        .addBodyParameter("tanggal_wawancara",tanggalRegis)
                         .addBodyParameter("nik",nik)
                         .addBodyParameter("nama",nama)
                         .addBodyParameter("resisten",resisten)
+                        .addBodyParameter("rtrw",rtrw)
+                        .addBodyParameter("kelurahan",kelurahan)
+                        .addBodyParameter("kecamatan",kecamatan)
+                        .addBodyParameter("kabupatenkontak",kabupatenkontak)
+                        .addBodyParameter("provinsi_alamat",provinsi)
                         .addBodyParameter("alamat",alamat)
                         .addBodyParameter("nama_kontak",namaKontak)
-                        .addBodyParameter("umurkontak_l",umurKontak)
-                        .addBodyParameter("umurKontak_p",umurKontak)
+                        .addBodyParameter("umurkontak_l",umurKontakl)
+                        .addBodyParameter("umurKontak_p",umurKontakp)
                         .addBodyParameter("alamat_kontak",alamatKontak)
                         .addBodyParameter("hasil_akhir",hasilAkhir)
                         .addBodyParameter("tindak_lanjut",tindakLanjut)
                         .addBodyParameter("tanggalmulai",tanggalPpInh)
                         .addBodyParameter("hasil_pp_inh",hasilPpInh)
-                        .addBodyParameter("lokasi","lokasi sekarang")
                         .addBodyParameter("fk_faskes",idKasus)
                         .setTag("pelacakan")
                         .setPriority(Priority.MEDIUM)
@@ -208,10 +260,15 @@ public class Form16Activity extends AppCompatActivity {
         adapterid.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spGendera.setAdapter(adapterid);
 
-        Spinner spumur16 = (Spinner) findViewById(R.id.spumurform16);
-        ArrayAdapter<String> adapterumur16 = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.usia));
-        adapterumur16.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spumur16.setAdapter(adapterumur16);
+        Spinner spumurpe = (Spinner) findViewById(R.id.spumurpform16);
+        ArrayAdapter<String> adapterumurp = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.usia));
+        adapterumurp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spumurp.setAdapter(adapterumurp);
+
+        Spinner spumurla = (Spinner) findViewById(R.id.spumurlform16);
+        ArrayAdapter<String> adapterumurl = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.usia));
+        adapterumurl.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spumurl.setAdapter(adapterumurl);
 
         Spinner spAkhir = (Spinner) findViewById(R.id.sphasilakhir);
         ArrayAdapter<String> adapterha = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.hasilakhirkontak));
@@ -227,6 +284,26 @@ public class Form16Activity extends AppCompatActivity {
         ArrayAdapter<String> adapterpp = new ArrayAdapter<String>(Form16Activity.this,android.R.layout.simple_list_item_1,getResources().getStringArray(R.array.hasilppinh));
         adapterpp.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spPpinh.setAdapter(adapterpp);
+
+        Spinner spprovk = (Spinner) findViewById(R.id.spprovinsikontak);
+        ArrayAdapter<String> adaptereprovk = new ArrayAdapter<String>(Form16Activity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.provinsi));
+        adaptereprovk.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spprovk.setAdapter((adaptereprovk));
+
+        Spinner spkabk = (Spinner) findViewById(R.id.spkabupatenkontak);
+        ArrayAdapter<String> adapterkabk = new ArrayAdapter<String>(Form16Activity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kab));
+        adapterkabk.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spkabk.setAdapter((adapterkabk));
+
+        Spinner spkecamatank = (Spinner) findViewById(R.id.spkecamatankontak);
+        ArrayAdapter<String> adapterkeck = new ArrayAdapter<String>(Form16Activity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.kecamatan));
+        adapterkeck.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spkecamatank.setAdapter((adapterkeck));
+
+        Spinner spkelurahank = (Spinner) findViewById(R.id.spkelurahankontak);
+        ArrayAdapter<String> adapterkelk = new ArrayAdapter<String>(Form16Activity.this, android.R.layout.simple_list_item_1, getResources().getStringArray(R.array.pilihkec));
+        adapterkelk.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spkelurahank.setAdapter((adapterkelk));
 
 
         mDisplayDate = (TextView) findViewById(R.id.tanggalppinh);
