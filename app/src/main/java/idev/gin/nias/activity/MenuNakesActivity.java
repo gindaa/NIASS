@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +40,11 @@ public class MenuNakesActivity extends AppCompatActivity {
         edit.putString("token", tokenpassnakes);
         edit.apply();
 
-        Button btnprofil =  (Button)(findViewById(R.id.btnprofilnks));
-        Button btnotifikasi =  (Button)(findViewById(R.id.btnnotifnks));
-        Button skoringtb =  (Button)(findViewById(R.id.btnskrnks));
-        Button btpoin =  (Button)(findViewById(R.id.btnpoinnks));
+        ImageButton btnprofil =  (ImageButton)(findViewById(R.id.btnprofilnks));
+        ImageButton btnotifikasi =  (ImageButton)(findViewById(R.id.btnnotifnks));
+        ImageButton skoringtb =  (ImageButton)(findViewById(R.id.btnskrnks));
+        ImageButton btpoin =  (ImageButton)(findViewById(R.id.btnpoinnks));
+        ImageButton btexit = (ImageButton)(findViewById(R.id.btnexitnks));
 
         AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
                 .addHeaders("Authorization", "bearer " + tokenpassnakes)
@@ -98,6 +100,13 @@ public class MenuNakesActivity extends AppCompatActivity {
                 intent.putExtra("email",emailpassnakes);
                 intent.putExtra("token",tokenpassnakes);
                 startActivity(intent);
+            }
+        });
+        btexit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+
             }
         });
     }

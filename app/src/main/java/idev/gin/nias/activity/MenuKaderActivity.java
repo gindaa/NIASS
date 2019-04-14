@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,11 +38,11 @@ public class MenuKaderActivity extends AppCompatActivity {
         edit.putString("token", tokenpass);
         edit.apply();
 
-        Button btnprofil = (Button)findViewById(R.id.btnprofilkdr);
-        Button btnkasustb = (Button)findViewById(R.id.btnkasuskdr);
-        Button btnotifikasi = (Button)(findViewById(R.id.btnnotifkdr));
-        Button btpoin = (Button)(findViewById(R.id.btnpoinkdr));
-        Button btexit = (Button)(findViewById(R.id.btnexitkdr));
+        ImageButton btnprofil = (ImageButton)findViewById(R.id.btnprofilkdr);
+        ImageButton btnkasustb = (ImageButton)findViewById(R.id.btnkasuskdr);
+        ImageButton btnotifikasi = (ImageButton)(findViewById(R.id.btnnotifkdr));
+        ImageButton btpoin = (ImageButton)(findViewById(R.id.btnpoinkdr));
+        ImageButton btexit = (ImageButton)(findViewById(R.id.btnexitkdr));
 
         AndroidNetworking.get(CONSTANT.BASE_URL + "akunid")
                 .addHeaders("Authorization", "bearer " + tokenpass)

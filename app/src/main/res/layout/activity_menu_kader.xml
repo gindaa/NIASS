@@ -12,10 +12,11 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:layout_weight="12"
+        android:layout_weight="3"
         android:src="@drawable/png"/>
     <LinearLayout
         android:layout_width="wrap_content"
+        android:layout_marginTop="20dp"
         android:layout_height="wrap_content">
 
     <TextView
@@ -37,7 +38,8 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        >
 
         <TextView
             android:layout_marginStart="20sp"
@@ -55,96 +57,147 @@
 
 
     <LinearLayout
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-            <Button
-                android:id="@+id/btnprofilkdr"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableTop="@drawable/profile"
-                android:text="@string/PROFIL"
-                android:textSize="20dp"
-                android:layout_weight="1"
-                android:textColor="@android:color/white"/>
+            <!--<Button-->
+                <!--android:id="@+id/btnprofilkdr"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:drawableTop="@drawable/profile"-->
+                <!--android:text="@string/PROFIL"-->
+                <!--android:textSize="20dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="@android:color/white"/>-->
 
-            <Button
-                android:id="@+id/btnkasuskdr"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="20dp"
-                android:textSize="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableTop="@drawable/kasus"
-                android:text="@string/kasustb"
-                android:layout_weight="1"
-                android:textColor="@android:color/white"/>
+            <!--<Button-->
+                <!--android:id="@+id/btnkasuskdr"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:textSize="20dp"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:drawableTop="@drawable/kasus"-->
+                <!--android:text="@string/kasustb"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="@android:color/white"/>-->
+        <ImageButton
+            android:id="@+id/btnprofilkdr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nprofile"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="@null"/>
+        <ImageButton
+            android:id="@+id/btnkasuskdr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nkasus"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="@null"/>
 
     </LinearLayout>
 
 
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-            <Button
-                android:id="@+id/btnnotifkdr"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary"
-                android:drawableTop="@drawable/notif"
-                android:layout_weight="1"
-                android:text="@string/notifikasi"
-                android:textSize="16dp"
-                android:textColor="@android:color/white"/>
+            <!--<Button-->
+                <!--android:id="@+id/btnnotifkdr"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:drawableTop="@drawable/notif"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/notifikasi"-->
+                <!--android:textSize="16dp"-->
+                <!--android:textColor="@android:color/white"/>-->
 
-            <Button
-                android:id="@+id/btnpoinkdr"
-                android:layout_width="wrap_content"
-                android:layout_height="100dp"
-                android:layout_margin="20dp"
-                android:background="@color/colorPrimary"
-                android:textSize="20dp"
-                android:drawableTop="@drawable/poin"
-                android:layout_weight="1"
-                android:text="@string/poin"
-                android:textColor="@android:color/white"/>
+            <!--<Button-->
+                <!--android:id="@+id/btnpoinkdr"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="100dp"-->
+                <!--android:layout_margin="20dp"-->
+                <!--android:background="@color/colorPrimary"-->
+                <!--android:textSize="20dp"-->
+                <!--android:drawableTop="@drawable/poin"-->
+                <!--android:layout_weight="1"-->
+                <!--android:text="@string/poin"-->
+                <!--android:textColor="@android:color/white"/>-->
+        <ImageButton
+            android:id="@+id/btnpoinkdr"
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/npoin"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="@null"/>
+        <ImageButton
+            android:id="@+id/btnnotifkdr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/npemberitahuan"
+            android:scaleType="fitCenter"
+            android:layout_weight="1"
+            android:background="@null"/>
 
     </LinearLayout>
     <LinearLayout
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="110dp"
         android:layout_weight="1"
         android:orientation="horizontal">
-        <Button
+        <!--<Button-->
+            <!--android:id="@+id/btnsettingkdr"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:layout_margin="20dp"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:drawableTop="@drawable/setting"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="PENGATURAN"-->
+            <!--android:textColor="@android:color/white"/>-->
+
+        <!--<Button-->
+            <!--android:id="@+id/btnexitkdr"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:layout_margin="20dp"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--android:drawableTop="@drawable/exit"-->
+            <!--android:textSize="20dp"-->
+            <!--android:layout_weight="1"-->
+            <!--android:text="KELUAR"-->
+            <!--android:textColor="@android:color/white"/>-->
+        <ImageButton
             android:id="@+id/btnsettingkdr"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:background="@color/colorPrimary"
-            android:drawableTop="@drawable/setting"
+            android:layout_height="wrap_content"
+            android:src="@drawable/npengaturan"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:text="PENGATURAN"
-            android:textColor="@android:color/white"/>
-
-        <Button
+            android:background="@null"/>
+        <ImageButton
             android:id="@+id/btnexitkdr"
             android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:layout_margin="20dp"
-            android:background="@color/colorPrimary"
-            android:drawableTop="@drawable/exit"
-            android:textSize="20dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/nkeluar"
+            android:scaleType="fitCenter"
             android:layout_weight="1"
-            android:text="KELUAR"
-            android:textColor="@android:color/white"/>
+            android:background="@null"/>
 
     </LinearLayout>
 
