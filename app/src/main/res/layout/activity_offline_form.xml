@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.OfflineForm"
+    android:orientation="vertical">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_marginTop="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="FORM OFFLINE RIWAYAT TB
+"
+                android:textSize="25sp"/>
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/namaortuasuhof"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Orang Tua / Pengasuh" />
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/namaAnakof"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama Anak" />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Usia Anak"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spusiaof"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorPrimary">
+            </Spinner>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jumlah Anak Lain"
+
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spjumlahanakof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="match_parent">
+            </Spinner>
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/alamatdesaof"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alamat Desa / Kecamatan " />
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Provinsi"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spprovinsiriwayatof"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kabupaten"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spkabupatenriwayatof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kecamatan"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spkecamatanriwayatof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kelurahan"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spkelurahanriwayatof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kontak TB"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spkontakof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Berat Badan 3 bulan Terakhir 0-59 Bulan"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spberat59of"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Berat Badan 3 bulan Terakhir 6-14 Tahun"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spberat14of"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Demam"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spdemamof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Batuk"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/spbatukof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pembesaran Kelenjar limfie"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/sppembesarankelenjarof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Pembengkakan Tulang"
+                android:textSize="19sp"/>
+            <Spinner
+                android:id="@+id/sppembekakanof"
+                android:layout_width="wrap_content"
+                android:background="@color/colorPrimary"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/lokasitvof"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="19sp"/>
+
+            <Button
+                android:id="@+id/submitrwytof"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:textColor="@android:color/white"
+                android:text="SIMPAN"/>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

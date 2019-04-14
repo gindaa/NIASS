@@ -22,11 +22,6 @@ import idev.gin.nias.utils.CONSTANT;
 public class MenuNakesActivity extends AppCompatActivity {
 
     SharedPreferences sharedPref;
-    private Button btnprofil;
-    private Button btnotifikasi;
-    private Button skoringtb;
-    private Button btnkasustb;
-    private Button btpoin;
 
 
     @Override

@@ -6,6 +6,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
@@ -54,6 +55,16 @@ public class LoginActivity extends AppCompatActivity {
         mProgress.setMessage("Mohon Tunggu...");
         mProgress.setCancelable(false);
         mProgress.setIndeterminate(true);
+        TextView offline = (TextView) findViewById(R.id.tooffline);
+        offline.setPaintFlags(offline.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        offline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this,OfflineListActivity.class);
+                Toast.makeText(getApplicationContext(),"Anda masuk ke Offline Mode", Toast.LENGTH_LONG).show();
+                startActivity(intent);
+            }
+        });
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);

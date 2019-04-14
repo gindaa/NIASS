@@ -20,14 +20,6 @@ import idev.gin.nias.utils.CONSTANT;
 
 public class MenuKaderActivity extends AppCompatActivity {
 
-    private Button btnprofil;
-    private Button btnkasustb;
-    private Button btinvestigasi;
-    private Button btnotifikasi;
-    private Button btgps;
-    private Button btpoin;
-    private Button btexit;
-    private Button btsetting;
     SharedPreferences sharedPref;
 
     @Override

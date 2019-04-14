@@ -24,6 +24,7 @@
     <string name="unit_pelayanan_kesehatan">Unit Pelayanan Kesehatan</string>
     <string name="nama_lengkap">Nama Lengkap</string>
     <string name="kab_kota">Kab/Kota</string>
+    <string name="oflinesentence"><b><u> Anda sedang offline? Klik Disini </u></b>.</string>
     <string-array name="gender">
         <item>Jenis Kelamin</item>
         <item>L</item>
@@ -136,12 +137,12 @@
         <item>Lebih dari 1 cm</item>
     </string-array>
     <string-array name="kecamatan">
-        <item>Pilih Kecamatan</item>
+        <item>Kecamatan</item>
         <item>Fanayama</item>
         <item>Maniamolo</item>
     </string-array>
     <string-array name="fanayama">
-        <item>Pilih Kelurahan</item>
+        <item>Kelurahan</item>
         <item>Bawofanayama</item>
         <item>Bawomataluo</item>
         <item>Bawonahono</item>
@@ -162,7 +163,7 @@
 
     </string-array>
     <string-array name="miniamolo">
-        <item>Pilih Kelurahan</item>
+        <item>Kelurahan</item>
         <item>Bawohosi</item>
         <item>Bawogosali</item>
         <item>Bawosaodano</item>
@@ -264,7 +265,6 @@
     <string-array name="pilihkec">
         <item>Pilih Kelurahan</item>
     </string-array>
-
 
 
 </resources>
